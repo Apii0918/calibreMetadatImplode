@@ -10,6 +10,11 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 PROJECTS = [
     {
+        "name": "Export Folder",
+        "source": ROOT / "exportFolder" / "src",
+        "output": ROOT / "dist" / "Export Folder-zh_TW-release.zip",
+    },
+    {
         "name": "Goodreads Sync",
         "source": ROOT / "Goodreads Sync" / "src",
         "output": ROOT / "dist" / "Goodreads Sync-zh_TW-release.zip",

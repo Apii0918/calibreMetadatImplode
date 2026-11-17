@@ -1,6 +1,6 @@
 # calibreMetadatImplode
 
-本專案將十七個 calibre 外掛並排維護，整合上游程式、正體中文資源與本地修正。各外掛可獨立使用；操作、設定、限制、安裝與打包方式請點各外掛名稱閱讀其 README。
+本專案將十八個 calibre 外掛並排維護，整合上游程式、正體中文資源與本地修正。各外掛可獨立使用；操作、設定、限制、安裝與打包方式請點各外掛名稱閱讀其 README。
 
 外掛首次加入、歷次升級與整合發行紀錄見 [CHANGELOG](./CHANGELOG.md)。
 
@@ -9,12 +9,9 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.19（2026-11-12）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.19)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
-| 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十七個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync 與 Hardcover Sync 的翻譯在打包時分別編譯。 |
-| 新增外掛 | Goodreads Sync 1.17.6.1、真正的 Hardcover Sync 0.4.0.1、Markdown Output 1.0.3.1，直接中文化並附回歸測試。 |
-| 本次變更 | Generate Cover 2.5.4.1、Modify ePub 1.8.14.1、Traditional Chinese Supplement 1.1.3。 |
-| 前次變更 | v1.3.16：Enhanced Search and Replace 更新至 1.2.0，支援原始碼逐字取代與錯誤摘要。 |
-| 上次發行變更 | v1.3.15：Generate Cover 更新至 2.5.0.1。 |
+| 整合發行版號 | **[v1.3.20（2026-11-17）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.20)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十八個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync 與 Hardcover Sync 的翻譯在打包時分別編譯。 |
+| 本次新增 | Export Folder 1.2.2，從書庫右鍵選單將選取的書匯出到預設資料夾。 |
 
 ## 各外掛簡介、來源與版號
 
@@ -28,6 +25,7 @@
 | --- | --- | --- | --- |
 | [Embed Metadata Safe](./Embed%20Metadata%20Safe/README.md) | 清理 EPUB 的特定損壞自訂欄位資料，再嵌入書庫中繼資料。 | [本倉庫自有外掛](./Embed%20Metadata%20Safe/)，作者為 SamLiao 及 codex；沒有獨立上游。 | **1.0.1**；修正 ZIP 安裝層級並縮短按鈕名稱。 |
 | [Enhanced Search and Replace](./Enhanced%20Search%20and%20Replace/README.md) | Edit Book 全書文字類型勾選搜尋、定位與取代。 | 本倉庫自行開發；SamLiao & Codex，API 查核 Calibre v9.0.0／v9.17.0。 | **1.2.0**；原始碼逐字取代、錯誤摘要；原始碼搜尋、背景進度與取消、篩選排序，預設十五行並附操作截圖。 |
+| [Export Folder](./exportFolder/README.md) | 從書庫右鍵選單直接匯出到預設資料夾。 | 本倉庫自行開發，SamLiao & Codex。 | **1.2.2**。 |
 | [Toolbar Manager](./Toolbar%20Manager/README.md) | 右鍵調整工具列按鈕，開啟外掛首頁、選項或移除外掛。 | 本倉庫自行開發；SamLiao & Codex。 | **1.0.0**。 |
 | [Traditional Chinese Supplement](./Traditional%20Chinese%20Supplement/README.md) | 補齊指定官方與第三方外掛視窗的正體中文顯示文字。 | 本倉庫自行開發；SamLiao & Codex，核對 calibre 9.18.0 與本機外掛。 | **1.1.3**，補齊 Edit Book 無障礙、拼字與其他指定文字，無工具列按鈕。 |
 | [AZW6 Image Merge](./AZW6%20Image%20Merge/README.md) | 將 Amazon AZW6 sidecar 高畫質圖片合併至主書檔。 | Andrew Timson；[HamsterExAstris/calibre-azw6-image-merge，提交 `63f76d4`](https://github.com/HamsterExAstris/calibre-azw6-image-merge/tree/63f76d46e19de901536b9bc7c1a02998f26c439b)，基準 **1.0.0**。 | **1.0.0**，含本地相容性修改。 |
@@ -52,6 +50,7 @@
 | --- | --- |
 | Embed Metadata Safe | 本倉庫自行實作：先移除可解析 JSON 物件中缺少 `datatype` 的 `calibre:user_metadata` 項目，再呼叫 calibre 嵌入流程；加入正體中文介面、進度與取消、錯誤摘要及處理格式設定；工具列按鈕簡稱「嵌入資料」。 |
 | Enhanced Search and Replace | 1.1.0 新增 HTML 原始碼搜尋、背景進度／取消及結果篩選／排序，通過 Windows 儲存重開驗收。1.2.0 修正：HTML 原始碼允許逐字取代不完整標籤，失敗訊息縮為摘要。原有功能：全書文字類型勾選搜尋、Regex 群組、即時預覽、純文字保格式／HTML 片段、逐筆／批次取代、狀態保留、定位及復原保護；附測試與操作限制。 |
+| Export Folder | 自動加入書庫右鍵選單，提供正體中文範本編輯與格式候選清單，逐本匯出第一個可用格式。 |
 | Toolbar Manager | 加入專用圖示及正體中文工具列右鍵管理；移除外掛前確認，保護必要入口並保留原有選單。 |
 | Traditional Chinese Supplement | 不顯示工具列／選單按鈕，自動補翻；新增 317 條指定範圍及 12 條共用對照，保留已有中文與設定識別值；15 組自動化及 13 個實際外掛面板驗證，附測試限制及 2026-11-09 驗證歸因更正。 |
 | AZW6 Image Merge | 以 calibre 內建 Pillow 取代已移除的 `imghdr`，保留 JPEG 位元特徵備援及 TIFF／WDP 對應；補上中文說明與統一打包。合併主流程沿用上游。 |

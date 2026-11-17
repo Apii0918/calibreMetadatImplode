@@ -23,6 +23,12 @@
 | Hardcover Sync | v1.3.17 | 2026-11-09 | 0.3.1.1 |
 | Markdown Output | v1.3.17 | 2026-11-09 | 1.0.3.1 |
 | Traditional Chinese Supplement | v1.3.17 | 2026-11-09 | 1.1.1 |
+| Export Folder | v1.3.20 | 2026-11-17 | 1.2.2 |
+
+## [v1.3.20] — 2026-11-17
+
+- 新增 **Export Folder 1.2.2**。從書庫右鍵選單選取固定目的地，沿用 calibre 原生匯出。每個目的地可設定命名範本及格式優先順序，預設為 `{title} - {authors}` 與 `EPUB > PDF`。
+- 範本編輯視窗採正體中文，提供三行高的輸入區、即時預覽及可雙擊插入的變數清單。
 
 ## [v1.3.19] — 2026-11-12
 
@@ -168,3 +174,5 @@
 [v1.3.17]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.17
 
 [v1.3.19]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.19
+
+[v1.3.20]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.20
