@@ -1,4 +1,6 @@
 # Find Duplicates Plugin
+
+本倉庫版本 **1.10.11**；作者 **Grant Drake**；GPL v3；最低 calibre **2.0.0**。依書目規則或格式檔案的二進位內容找重複項目，包含正體中文語系。操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Find%20Duplicates)。以下保留上游原始說明。
 [![MobileRead][mobileread-image]][mobileread-url]
 [![History][changelog-image]][changelog-url] 
 [![License][license-image]][license-url]

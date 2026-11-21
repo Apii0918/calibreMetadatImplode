@@ -2,6 +2,8 @@
 
 在 calibre 書庫右鍵選「匯出到…」，將選取的書直接儲存到預設資料夾。適用於 Windows 版 calibre 9.18 以上。
 
+版本：**1.2.2**；作者：**SamLiao & Codex**；授權：GPL v3。本倉庫自行開發；整合紀錄見[根目錄 CHANGELOG](../CHANGELOG.md)。
+
 1. 在「偏好設定 → 外掛」從檔案載入 [Export Folder 安裝包](https://github.com/SamLaio/calibreMetadatImplode/releases/download/v1.3.20/Export.Folder-zh_TW-release.zip)，重新啟動 calibre。
 2. 在書庫右鍵選「匯出到… → 管理輸出資料夾…」。按「新增」並輸入名稱，例如「小說」。雙擊路徑欄貼上完整路徑，或選取該列後按「瀏覽…」。可編輯或刪除多筆，按「儲存」套用。
 3. 選取一本或多本書，右鍵選「匯出到… → 小說」，直接匯出到該路徑。可從「偏好設定 → 工具列與選單」調整入口位置。

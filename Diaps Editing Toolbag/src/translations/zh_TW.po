@@ -1,0 +1,216 @@
+# 正體中文翻譯：SamLiao & Codex；原作者：DiapDealer
+msgid ""
+msgstr "Project-Id-Version: Diaps Editing Toolbag 0.5.0.1\nLanguage: zh_TW\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nLast-Translator: SamLiao & Codex\n"
+
+msgid "(em|en)-dash settings"
+msgstr "破折號（em／en dash）設定"
+
+msgid "-- = emdash (no endash support)"
+msgstr "-- 轉為 em dash（不處理 en dash）"
+
+msgid "-- = emdash | --- = endash"
+msgstr "-- 轉為 em dash；--- 轉為 en dash"
+
+msgid "--- = emdash | -- = endash"
+msgstr "--- 轉為 em dash；-- 轉為 en dash"
+
+msgid "<b>Choices to change \"{}\" elements to:</b>"
+msgstr "<b>可將「{}」元素轉換為：</b>"
+
+msgid "<b>HTML attributes available to search for:</b>"
+msgstr "<b>可搜尋的 HTML 屬性：</b>"
+
+msgid "<b>Tags available to search for:</b>"
+msgstr "<b>可搜尋的標籤：</b>"
+
+msgid "Action type:"
+msgstr "操作類型："
+
+msgid "Are you sure?"
+msgstr "確定要執行嗎？"
+
+msgid "Before: Convert CM to EM"
+msgstr "CSS 公分轉 em 之前"
+
+msgid "Before: Smarten Punctuation"
+msgstr "智慧標點轉換之前"
+
+msgid "Before: Span Div Edit"
+msgstr "編輯 span／div 之前"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cannot Process"
+msgstr "無法處理"
+
+msgid "Change tag to:"
+msgstr "將標籤轉換為："
+
+msgid "Changed Files"
+msgstr "已修改的檔案"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Comma separated list of html attribute names (no quotes)."
+msgstr "以逗號分隔 HTML 屬性名稱（不加引號）。"
+
+msgid "Comma separated list of html elements (no quotes, no angle \"&lt;\" brackets)."
+msgstr "以逗號分隔 HTML 元素名稱（不加引號或「&lt;」角括號）。"
+
+msgid "Comma separated list of html tag names (no quotes)."
+msgstr "以逗號分隔 HTML 標籤名稱（不加引號）。"
+
+msgid "Convert CSS cm to em"
+msgstr "將 CSS 的 cm 轉為 em"
+
+msgid "Convert current CSS file only"
+msgstr "只轉換目前 CSS 檔案"
+
+msgid "Copy existing attribute string"
+msgstr "複製原有屬性字串"
+
+msgid "Customize"
+msgstr "自訂設定"
+
+msgid "Delete"
+msgstr "移除標籤"
+
+msgid "Do not educate dashes"
+msgstr "不轉換破折號"
+
+msgid "Edit Spans & Divs"
+msgstr "編輯 span 與 div"
+
+msgid "Edit Spans & Divs Customization"
+msgstr "span／div 編輯設定"
+
+msgid "Edit Spans && Divs"
+msgstr "編輯 span 與 div"
+
+msgid "Edit current file only"
+msgstr "只編輯目前檔案"
+
+msgid "Educate with unicode characters (instead of entities)"
+msgstr "輸出 Unicode 字元（而非字元實體）"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Failed"
+msgstr "處理失敗"
+
+msgid "Failed to convert CMs to EMs, click \"Show details\" for more info"
+msgstr "無法將 cm 轉為 em，請按「顯示詳細資料」查看原因"
+
+msgid "Failed to process divs or spans, click \"Show details\" for more info"
+msgstr "無法處理 div 或 span，請按「顯示詳細資料」查看原因"
+
+msgid "Failed to smarten punctuation, click \"Show details\" for more info"
+msgstr "無法轉換智慧標點，請按「顯示詳細資料」查看原因"
+
+msgid "Having the attribute:"
+msgstr "具有屬性："
+
+msgid "Modify"
+msgstr "修改標籤"
+
+msgid "Must enter a value for the attribute selected"
+msgstr "請輸入所選屬性要比對的值"
+
+msgid "Must select a custom exception file"
+msgstr "請選擇自訂撇號例外詞檔案"
+
+msgid "Need to have a book open first."
+msgstr "請先開啟一本書。"
+
+msgid "New attribute string to insert (entire):"
+msgstr "要寫入的新屬性字串（完整內容）："
+
+msgid "No CM dimensions were found to convert."
+msgstr "未找到可轉換的 cm 尺寸。"
+
+msgid "No attributes (\"naked\" tag)"
+msgstr "沒有任何屬性（純標籤）"
+
+msgid "No book open"
+msgstr "尚未開啟書籍"
+
+msgid "No change"
+msgstr "不變更"
+
+msgid "No file open for editing or the current file is not a CSS file."
+msgstr "未開啟編輯檔案，或目前檔案不是 CSS。"
+
+msgid "No file open for editing or the current file is not an (x)html file."
+msgstr "未開啟編輯檔案，或目前檔案不是 HTML／XHTML。"
+
+msgid "No punctuation meeting your criteria was found to smarten."
+msgstr "未找到符合條件的標點可供轉換。"
+
+msgid "Nothing Converted"
+msgstr "沒有轉換任何尺寸"
+
+msgid "Nothing changed"
+msgstr "沒有變更"
+
+msgid "Nothing matching your criteria was found."
+msgstr "未找到符合條件的內容。"
+
+msgid "Nothing smartened"
+msgstr "沒有轉換任何標點"
+
+msgid "Parsing"
+msgstr "正在解析"
+
+msgid "Plugin Help"
+msgstr "外掛說明"
+
+msgid "Regex"
+msgstr "正規表示式"
+
+msgid "Reset all customizable options to their original defaults?"
+msgstr "將所有自訂選項還原為原始預設值？"
+
+msgid "Reset all defaults"
+msgstr "還原所有預設值"
+
+msgid "Reset all settings to original defaults."
+msgstr "將所有設定還原為原始預設值。"
+
+msgid "See what changed"
+msgstr "查看變更差異"
+
+msgid "Select custom apostrophe exceptions file"
+msgstr "選擇自訂撇號例外詞檔案"
+
+msgid "Smarten Punctuation (the sequel)"
+msgstr "進階智慧標點"
+
+msgid "Smarten Quotation marks"
+msgstr "轉換智慧引號"
+
+msgid "Smarten current file only"
+msgstr "只轉換目前檔案的標點"
+
+msgid "Smarten ellipses"
+msgstr "轉換省略號"
+
+msgid "Smartening"
+msgstr "正在轉換標點"
+
+msgid "Tag name:"
+msgstr "標籤名稱："
+
+msgid "Tools for editing HTML tags, smart punctuation and CSS units."
+msgstr "編輯 HTML 標籤、轉換智慧標點與 CSS 單位的工具組。"
+
+msgid "Use custom apostrophe exceptions file"
+msgstr "使用自訂撇號例外詞檔案"
+
+msgid "What--exactly--would that achieve?"
+msgstr "未選取任何有效變更，請指定新標籤或新的屬性字串。"
+
+msgid "Whose value is (no quotes):"
+msgstr "屬性值為（不加引號）："

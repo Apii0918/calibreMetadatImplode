@@ -1,4 +1,6 @@
 # Modify ePub Plugin
+
+本倉庫版本 **1.8.14.1**；作者 **Grant Drake、Robert L. Hood、Leigh Parry 與 Charles Haley**；GPL v3；最低 calibre **3.48.0**。包含正體中文、封面處理與 CSS 邊距修正。操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Modify%20ePub)。以下保留上游原始說明。
 [![MobileRead][mobileread-image]][mobileread-url]
 [![History][changelog-image]][changelog-url] 
 [![License][license-image]][license-url]

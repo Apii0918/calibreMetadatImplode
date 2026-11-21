@@ -7,7 +7,7 @@
 
 ## 總覽
 
-最低 calibre：**3.48.0**。從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `Count Pages-zh_TW-release.zip` 安裝。
+作者：**Grant Drake**；授權：GPL v3；最低 calibre：**3.48.0**。從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `Count Pages-zh_TW-release.zip` 安裝。
 
 目前為 **1.15.3 正體中文整合版（2026-10-23）**：整合官方 Goodreads `.xml` 下載修正與語系更新，保留本倉庫修改，補齊正體中文提示，並修復英文斷句模型的 Windows 換行問題。正體中文涵蓋全部 119 個介面字串。
 
@@ -18,7 +18,7 @@
 - 根據書籍格式內容估算
 - 從 Goodreads 之類的網頁下載
 
-此外，還可以計算字數，以及各種可讀性統計，例如 [Flesch-Kincaid](http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test) 和 [Gunning Fog](http://en.wikipedia.org/wiki/Gunning_fog_index) 指數。
+網站下載只提供頁數；字數與可讀性由本機計算。此外，還可以計算字數，以及各種可讀性統計，例如 [Flesch-Kincaid](http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test) 和 [Gunning Fog](http://en.wikipedia.org/wiki/Gunning_fog_index) 指數。
 
 更多資訊請參考 [Wiki](https://github.com/kiwidude68/calibre_plugins/wiki/Count-Pages)
 

@@ -31,8 +31,13 @@
 
 功能參考 [shiratori3/calibre-plugins v1.0.0](https://gitee.com/shiratori3/calibre-plugins/releases/tag/v1.0.0) 及 [Bilibili 原文](https://www.bilibili.com/opus/781451729027727384)。原版作者欄為 Billy Zhou，採 BSD 3-Clause 授權，著作權標示為白鳥。
 
-本倉庫重寫版作者為 SamLiao & Codex，採 GPL v3。原版授權全文見 `UPSTREAM_LICENSE.txt`，重寫版授權見 `LICENSE`。
+本倉庫重寫版作者為 SamLiao & Codex，採 GPL v3。原版授權全文見 `src/UPSTREAM_LICENSE.txt`，重寫版授權見 `src/LICENSE`。
 
 ## 自行打包
 
 在專案根目錄執行 `python -B build_release.py`，安裝包會輸出至 `dist/Skip ASCII Text Plugin-zh_TW-release.zip`。
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄與暫存資料驗證。10 項隔離測試通過，涵蓋 Unicode、位元組輸入、重複切換與函式還原。實際裝置傳輸與所有第三方外掛組合尚待驗證。

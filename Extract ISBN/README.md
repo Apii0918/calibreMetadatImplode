@@ -66,4 +66,4 @@ ISBN 校驗僅確認號碼結構，無法辨認精裝、平裝或電子版。一
 - [使用說明](https://github.com/kiwidude68/calibre_plugins/wiki/Extract-ISBN)
 - 匯入提交：`2a2dbb2469ec6e68179cd71ba943db240045d097`；經 2026-11-01 直接核對 GitHub 固定提交原始碼，該提交程式宣告為 1.6.7。本次核對後，將本地修訂版號由 1.6.6.1 更正為 1.6.7.1，以對應實際上游基準。本地版號 1.6.7.1 不是上游正式發行版。
 - 共用模組取自同一提交的 `common/`，只調整外掛匯入路徑。
-- 上游歷史更新紀錄保留於 `CHANGELOG.md`，授權見 `LICENSE.md`。
+- [CHANGELOG](./CHANGELOG.md) 同時保留本地修訂與上游歷史，授權見 [LICENSE](./LICENSE.md)。

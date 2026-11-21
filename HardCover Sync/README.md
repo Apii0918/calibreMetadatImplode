@@ -1,6 +1,6 @@
 # Hardcover Sync
 
-版本：**0.4.0.1**；原作者：**Juan York**。基於上游 **0.4.0**，隨整合版 v1.3.18 發布。
+版本：**0.4.0.1**；原作者：**Juan York**；授權：GPL v3；最低 calibre：**7.7.0**。基於上游 **0.4.0**，隨整合版 v1.3.18 發布。
 
 ## 用途
 
@@ -14,7 +14,7 @@
 2. 在 calibre「偏好設定 → 外掛 → 從檔案載入外掛」安裝並重新啟動。
 3. 在「偏好設定 → 外掛」自訂此外掛；依需要從「工具列與選單」加入按鈕，再設定帳號、欄位與同步方向。
 
-若目前有兩個 Goodreads Sync，請先核對版本：移除原本誤標為 HardCover 的 **Goodreads Sync 1.16.11**，保留正常的 Goodreads Sync，再安裝真正的 Hardcover Sync。勿將兩個服務的帳號或 API 金鑰混用；本次沒有更動您日常 calibre 的外掛或設定。
+若舊安裝出現兩個 Goodreads Sync，先核對並移除誤標為 HardCover 的 **Goodreads Sync 1.16.11**，再安裝真正的 Hardcover Sync。勿將兩個服務的帳號或 API 金鑰混用。
 
 此外掛直接提供中文，不依賴「正體中文補強」外掛。
 

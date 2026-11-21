@@ -1,4 +1,6 @@
 # Goodreads Sync Plugin
+
+本倉庫版本 **1.17.6.1**；作者 **Grant Drake**；GPL v3；最低 calibre **5.0.0**。加入原生正體中文，支援書架、標籤、評分、書評與閱讀日期同步。操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Goodreads%20Sync)。以下保留上游原始說明。
 [![MobileRead][mobileread-image]][mobileread-url]
 [![History][changelog-image]][changelog-url] 
 [![License][license-image]][license-url]

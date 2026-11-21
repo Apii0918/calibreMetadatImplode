@@ -1,0 +1,972 @@
+# 正體中文翻譯：SamLiao & Codex；上游作者：Comfy.n
+msgid ""
+msgstr "Project-Id-Version: Columns Helper 2.1.1.1\nLanguage: zh_TW\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\nLast-Translator: SamLiao & Codex\n"
+
+msgid "\nPacks provide suggestions and known defaults. Choose the final lookup names and column headings that best fit your library and interface language."
+msgstr "\n欄位套組提供建議與預設值。請依書庫需求與介面語言，選擇適合的查詢名稱和欄位標題。"
+
+msgid "% Read"
+msgstr "已讀百分比"
+
+msgid "% Read (#percent_read)"
+msgstr "已讀百分比 (#percent_read)"
+
+msgid "% Read (#percentage)"
+msgstr "已讀百分比 (#percentage)"
+
+msgid "%d columns"
+msgstr "%d 個欄位"
+
+msgid "%d of %d"
+msgstr "%d / %d"
+
+msgid "About"
+msgstr "關於"
+
+msgid "About Columns Helper"
+msgstr "關於欄位助手"
+
+msgid "Already exists: {0}"
+msgstr "已存在：{0}"
+
+msgid "Annotation Count"
+msgstr "註記數量"
+
+msgid "Annotation Count (#ac)"
+msgstr "註記數量 (#ac)"
+
+msgid "Apply pack"
+msgstr "套用套組"
+
+msgid "Author & Web Research"
+msgstr "作者與網路資料查詢"
+
+msgid "Author N"
+msgstr "作者人數"
+
+msgid "Author N (#an)"
+msgstr "作者人數 (#an)"
+
+msgid "Author sort"
+msgstr "作者排序"
+
+msgid "Author sort (#as)"
+msgstr "作者排序 (#as)"
+
+msgid "BLP"
+msgstr "BLP"
+
+msgid "BLP cover grid second field (#blp)"
+msgstr "BLP 封面格狀檢視第二欄 (#blp)"
+
+msgid "BLP cover grid second field: pages, file size, and annotation count."
+msgstr "BLP 封面格狀檢視第二欄：頁數、檔案大小與註記數量。"
+
+msgid "Bio"
+msgstr "作者簡介"
+
+msgid "Bio (#bio)"
+msgstr "作者簡介 (#bio)"
+
+msgid "Book Catalogs, Blurb & Review Finders"
+msgstr "書籍目錄、簡介與書評搜尋工具"
+
+msgid "Book Details on left panel"
+msgstr "在左側面板顯示書本詳細資料"
+
+msgid "Book genre"
+msgstr "書籍文類"
+
+msgid "Book list view with covers"
+msgstr "顯示封面的書籍清單"
+
+msgid "Browse column packs, preview templates, and create selected items."
+msgstr "瀏覽欄位套組、預覽範本並建立選取項目。"
+
+msgid "Browse sections, then packs (reusable sets), then preview a preset before creating it."
+msgstr "依序瀏覽分類、套組（可重複使用的欄位組合），再預覽並建立預設欄位。"
+
+msgid "Calibre Config Reports is not installed."
+msgstr "尚未安裝 Calibre Config Reports。"
+
+msgid "Calibre Viewer"
+msgstr "calibre 閱讀器"
+
+msgid "Calibre Viewer annotation count."
+msgstr "calibre 閱讀器的註記數量。"
+
+msgid "Cannot access library view. Please ensure calibre is running properly."
+msgstr "無法存取書庫檢視。請確認 calibre 正常運作。"
+
+msgid "Clear history"
+msgstr "清除歷史紀錄"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Collapse"
+msgstr "收合"
+
+msgid "Collapse all packs"
+msgstr "收合所有套組"
+
+msgid "Column"
+msgstr "欄位"
+
+msgid "Column Pack Browser"
+msgstr "欄位套組瀏覽器"
+
+msgid "Column data"
+msgstr "欄位資料"
+
+msgid "Column data copied to the clipboard."
+msgstr "已將欄位資料複製到剪貼簿。"
+
+msgid "Column header"
+msgstr "欄位標題"
+
+msgid "Column heading"
+msgstr "欄位標題"
+
+msgid "Column preset: create this column only"
+msgstr "預設欄位：只建立此欄位"
+
+msgid "Columns Helper"
+msgstr "欄位助手"
+
+msgid "Preview, create, and manage custom columns and column packs"
+msgstr "預覽、建立及管理自訂欄位與欄位套組"
+
+msgid "Columns Helper v.{}"
+msgstr "欄位助手 v.{}"
+
+msgid "Columns Helper: open Column Pack Browser"
+msgstr "欄位助手：開啟欄位套組瀏覽器"
+
+msgid "Columns Helper: open main window"
+msgstr "欄位助手：開啟主視窗"
+
+msgid "Columns designed for {0} cover grid layouts — composite columns that combine pages, file sizes, annotation counts, and other metadata into compact display fields."
+msgstr "供 {0} 封面格狀檢視使用的欄位：將頁數、檔案大小、註記數量等中繼資料合併為精簡的顯示欄位。"
+
+msgid "Columns for author notes, Goodreads identifiers, and web-search helpers that connect metadata to external research workflows."
+msgstr "作者註記、Goodreads 識別碼與網路搜尋欄位，方便查詢相關資料。"
+
+msgid "Columns for lightweight reading-goal workflows such as progress, status date, page totals, and genres."
+msgstr "用於閱讀目標的進度、狀態日期、總頁數與文類欄位。"
+
+msgid "Columns for manual reading logs, start/finish dates, progress, ratings, and review notes."
+msgstr "用於手動記錄閱讀日誌、開始／完成日期、進度、評分與心得的欄位。"
+
+msgid "Columns for writing your own book reviews directly in calibre — a long-text review, a personal rating, the date you reviewed it, a recommend flag, and free-form review tags."
+msgstr "直接在 calibre 撰寫書評的欄位：長篇心得、個人評分、書評日期、推薦標記與自訂書評標籤。"
+
+msgid "Columns management tools"
+msgstr "欄位管理工具"
+
+msgid "Columns that integrate with {0} functions and viewer-derived data such as annotations, progress, and last viewed timestamps."
+msgstr "整合 {0} 函式與閱讀器資料的欄位，例如註記、進度和上次檢視時間。"
+
+msgid "Columns used by {0} for pages, words, and readability metrics."
+msgstr "供 {0} 儲存頁數、字數與可讀性指標的欄位。"
+
+msgid "Columns used by {0} to store cover image dimensions and a small-cover flag."
+msgstr "供 {0} 儲存封面圖片尺寸與封面過小標記的欄位。"
+
+msgid "Columns used by {0} to store device-side reading position, dates, ratings, and time estimates."
+msgstr "供 {0} 儲存裝置閱讀位置、日期、評分與預估時間的欄位。"
+
+msgid "Composite"
+msgstr "複合欄位"
+
+msgid "Configurable toolbar button"
+msgstr "可自訂的工具列按鈕"
+
+msgid "Configuration reporting tool"
+msgstr "設定報告工具"
+
+msgid "Copy column data"
+msgstr "複製欄位資料"
+
+msgid "Copy template to clipboard"
+msgstr "複製範本到剪貼簿"
+
+msgid "Copy web search template to clipboard"
+msgstr "複製網路搜尋範本到剪貼簿"
+
+msgid "Count Pages: Gunning Fog readability index."
+msgstr "Count Pages：Gunning Fog 可讀性指數。"
+
+msgid "Count Pages: page count."
+msgstr "Count Pages：頁數。"
+
+msgid "Count Pages: word count."
+msgstr "Count Pages：字數。"
+
+msgid "Cover Height"
+msgstr "封面高度"
+
+msgid "Cover Height (#cover_height)"
+msgstr "封面高度 (#cover_height)"
+
+msgid "Cover Size Checker: cover image height in pixels."
+msgstr "Cover Size Checker：封面圖片高度，單位為像素。"
+
+msgid "Cover Size Checker: cover image width in pixels."
+msgstr "Cover Size Checker：封面圖片寬度，單位為像素。"
+
+msgid "Cover Size Checker: flagged Yes when cover width is below 450 px."
+msgstr "Cover Size Checker：封面寬度小於 450 像素時標記為「是」。"
+
+msgid "Cover Small"
+msgstr "封面過小"
+
+msgid "Cover Small (#cover_small)"
+msgstr "封面過小 (#cover_small)"
+
+msgid "Cover Width"
+msgstr "封面寬度"
+
+msgid "Cover Width (#cover_width)"
+msgstr "封面寬度 (#cover_width)"
+
+msgid "Cover display"
+msgstr "封面顯示"
+
+msgid "Create VLs from selection"
+msgstr "依選取書籍建立虛擬書庫"
+
+msgid "Create all"
+msgstr "全部建立"
+
+msgid "Create and manage reminders"
+msgstr "建立與管理提醒"
+
+msgid "Create custom columns with ease, find the best presets for your needs, and manage them on a user-friendly interface."
+msgstr "輕鬆建立自訂欄位，尋找符合需求的預設欄位，並在方便操作的介面中管理。"
+
+msgid "Create selected"
+msgstr "建立選取項目"
+
+msgid "Created: {0}"
+msgstr "已建立：{0}"
+
+msgid "Current Reading Location (#kobo_reading_location)"
+msgstr "目前閱讀位置 (#kobo_reading_location)"
+
+msgid "Current zoom percent"
+msgstr "目前縮放百分比"
+
+msgid "Custom column"
+msgstr "自訂欄位"
+
+msgid "Cycle output format"
+msgstr "循環切換輸出格式"
+
+msgid "Data type"
+msgstr "資料類型"
+
+msgid "Dedicated identifier for Goodreads"
+msgstr "Goodreads 專用識別碼"
+
+msgid "Description"
+msgstr "說明"
+
+msgid "Device sync"
+msgstr "裝置同步"
+
+msgid "Display settings"
+msgstr "顯示設定"
+
+msgid "Downloads metadata and covers from DELFI"
+msgstr "從 DELFI 下載中繼資料與封面"
+
+msgid "Enable color coding for columns containing templates (composite or web search templates)"
+msgstr "以色彩標示含有範本的欄位（複合欄位或網路搜尋範本）"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Expand"
+msgstr "展開"
+
+msgid "Expand all packs"
+msgstr "展開所有套組"
+
+msgid "FTS with additional features"
+msgstr "提供額外功能的全文搜尋"
+
+msgid "Filter packs and presets"
+msgstr "篩選套組與預設欄位"
+
+msgid "Filter rows in the custom columns dialog.\n\nExamples:\n  pages            match anywhere in the row\n  lookup:#status   match lookup name\n  type:text        match type\n  desc:progress    match description\n  websearch:phind  match web search template\n  status:edited    match status\n  hidden:yes       only hidden columns\n  custom:yes       only custom columns\n  -text            exclude matches\n  not desc:date    exclude description contains date\nUse quotes for phrases. Press Ctrl+F to focus this box."
+msgstr "篩選自訂欄位對話框中的項目。\n\n範例：\n  pages            比對此列任何位置\n  lookup:#status   比對查詢名稱\n  type:text        比對類型\n  desc:progress    比對說明\n  websearch:phind  比對網路搜尋範本\n  status:edited    比對狀態\n  hidden:yes       只顯示隱藏欄位\n  custom:yes       只顯示自訂欄位\n  -text            排除符合項目\n  not desc:date    排除說明含有 date 的項目\n詞組請加引號。按 Ctrl+F 移到此搜尋框。篩選語法的關鍵字維持英文。"
+
+msgid "Filter:"
+msgstr "篩選："
+
+msgid "Finish Date"
+msgstr "完成日期"
+
+msgid "Finish Date (#finish_date)"
+msgstr "完成日期 (#finish_date)"
+
+msgid "Flag whether you would recommend this book."
+msgstr "標記是否推薦這本書。"
+
+msgid "Format"
+msgstr "格式"
+
+msgid "Format (#format)"
+msgstr "格式 (#format)"
+
+msgid "Format type: ebook, audio, or print"
+msgstr "格式類型：ebook（電子書）、audio（有聲書）或 print（紙本）"
+
+msgid "Formats"
+msgstr "格式"
+
+msgid "Free-form tags for your review, e.g. favourite, re-read, disappointing."
+msgstr "自訂書評標籤，例如最愛、重讀或令人失望。"
+
+msgid "GR"
+msgstr "Goodreads 識別碼"
+
+msgid "GR (#gr)"
+msgstr "Goodreads 識別碼 (#gr)"
+
+msgid "GR Author Notes plugin - Author Bio column"
+msgstr "GR Author Notes 外掛的作者簡介欄位"
+
+msgid "GR Rating"
+msgstr "Goodreads 評分"
+
+msgid "GR Votes"
+msgstr "Goodreads 評分人數"
+
+msgid "GR rating (#grrating)"
+msgstr "Goodreads 評分 (#grrating)"
+
+msgid "GR votes (#grvotes)"
+msgstr "Goodreads 評分人數 (#grvotes)"
+
+msgid "General Counts"
+msgstr "一般計數"
+
+msgid "Genres"
+msgstr "文類"
+
+msgid "Genres (#genres)"
+msgstr "文類 (#genres)"
+
+msgid "Goodreads Plugin rating column"
+msgstr "Goodreads 外掛的評分欄位"
+
+msgid "Goodreads Plugin vote-count column"
+msgstr "Goodreads 外掛的評分人數欄位"
+
+msgid "Gunning Fog"
+msgstr "Gunning Fog 指數"
+
+msgid "Gunning Fog (#gfog)"
+msgstr "Gunning Fog 指數 (#gfog)"
+
+msgid "Highlight templates"
+msgstr "標示範本"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Info:"
+msgstr "資訊："
+
+msgid "Is Composite"
+msgstr "複合欄位"
+
+msgid "Is multiple"
+msgstr "允許多個值"
+
+msgid "Keep your own book reviews in calibre"
+msgstr "在 calibre 保存自己的書評"
+
+msgid "Kobo % Read"
+msgstr "Kobo 閱讀百分比"
+
+msgid "Kobo Last Read"
+msgstr "Kobo 上次閱讀時間"
+
+msgid "Kobo Rating"
+msgstr "Kobo 評分"
+
+msgid "Kobo Reading Location"
+msgstr "Kobo 閱讀位置"
+
+msgid "Kobo Rest Estimate"
+msgstr "Kobo 預估剩餘時間"
+
+msgid "Kobo Time Spent"
+msgstr "Kobo 已閱讀時間"
+
+msgid "Kobo Utilities: current percentage read."
+msgstr "Kobo Utilities：目前已讀百分比。"
+
+msgid "Kobo Utilities: current reading location link. Recommended text column."
+msgstr "Kobo Utilities：目前閱讀位置連結，建議使用文字欄位。"
+
+msgid "Kobo Utilities: device rating."
+msgstr "Kobo Utilities：裝置上的評分。"
+
+msgid "Kobo Utilities: estimated time left to finish, in seconds."
+msgstr "Kobo Utilities：預估讀完剩餘時間，單位為秒。"
+
+msgid "Kobo Utilities: last read timestamp."
+msgstr "Kobo Utilities：上次閱讀時間。"
+
+msgid "Kobo Utilities: time spent reading, in seconds."
+msgstr "Kobo Utilities：已閱讀時間，單位為秒。"
+
+msgid "Last Read Timestamp (#kobo_last_read)"
+msgstr "上次閱讀時間 (#kobo_last_read)"
+
+msgid "Last Viewed"
+msgstr "上次檢視時間"
+
+msgid "Last Viewed (#last_viewed)"
+msgstr "上次檢視時間 (#last_viewed)"
+
+msgid "Learn: "
+msgstr "說明文件："
+
+msgid "Legend:"
+msgstr "圖例："
+
+msgid "Lookup name"
+msgstr "查詢名稱"
+
+msgid "MR help thread"
+msgstr "MobileRead 說明討論串"
+
+msgid "Manage and organise templates"
+msgstr "管理與整理範本"
+
+msgid "Mark which books appear in the Reading Tracker (set to Yes)"
+msgstr "標記要在 Reading Tracker 顯示的書籍（設為「是」）"
+
+msgid "Metadata and covers from BERTRAND"
+msgstr "從 BERTRAND 取得中繼資料與封面"
+
+msgid "More plugins"
+msgstr "更多外掛"
+
+msgid "Move selected column to bottom"
+msgstr "將選取欄位移到最下方"
+
+msgid "Move selected column to top"
+msgstr "將選取欄位移到最上方"
+
+msgid "Multiple dictionary local lookup"
+msgstr "本機多字典查詢"
+
+msgid "My Rating"
+msgstr "我的評分"
+
+msgid "My Rating (#my_rating)"
+msgstr "我的評分 (#my_rating)"
+
+msgid "My Rating (#review_rating)"
+msgstr "我的評分 (#review_rating)"
+
+msgid "My Review"
+msgstr "我的書評"
+
+msgid "My Review (#my_review)"
+msgstr "我的書評 (#my_review)"
+
+msgid "My Review (#review)"
+msgstr "我的書評 (#review)"
+
+msgid "My Series"
+msgstr "我的系列"
+
+msgid "My Tags"
+msgstr "我的標籤"
+
+msgid "My Title"
+msgstr "我的標題"
+
+msgid "Names"
+msgstr "姓名"
+
+msgid "No"
+msgstr "否"
+
+msgid "No book selected"
+msgstr "未選取書籍"
+
+msgid "No composite template for this column."
+msgstr "此欄位沒有複合欄位範本。"
+
+msgid "No composite template for this preset."
+msgstr "此預設欄位沒有複合欄位範本。"
+
+msgid "No template is available to test for this preset."
+msgstr "此預設欄位沒有可測試的範本。"
+
+msgid "No web search template for this column."
+msgstr "此欄位沒有網路搜尋範本。"
+
+msgid "No web search template for this preset."
+msgstr "此預設欄位沒有網路搜尋範本。"
+
+msgid "Number of Authors"
+msgstr "作者人數"
+
+msgid "Number of books by publisher"
+msgstr "同一出版社的書籍數量"
+
+msgid "Open Column Pack Browser"
+msgstr "開啟欄位套組瀏覽器"
+
+msgid "Open Columns Helper"
+msgstr "開啟欄位助手"
+
+msgid "Open config folder"
+msgstr "開啟設定資料夾"
+
+msgid "Open in Calibre Config Reports"
+msgstr "在 Calibre Config Reports 開啟"
+
+msgid "Open the Column Pack Browser window."
+msgstr "開啟欄位套組瀏覽器視窗。"
+
+msgid "Open the Columns Helper window."
+msgstr "開啟欄位助手視窗。"
+
+msgid "Order"
+msgstr "順序"
+
+msgid "Pack"
+msgstr "套組"
+
+msgid "Pack: reusable set of related column presets"
+msgstr "套組：可重複使用的相關預設欄位組合"
+
+msgid "Page count"
+msgstr "頁數"
+
+msgid "Pages"
+msgstr "頁數"
+
+msgid "Pages (#pages)"
+msgstr "頁數 (#pages)"
+
+msgid "Pages (#pp)"
+msgstr "頁數 (#pp)"
+
+msgid "People"
+msgstr "人物"
+
+msgid "Percent Read (#kobo_percent_read)"
+msgstr "已讀百分比 (#kobo_percent_read)"
+
+msgid "Percentage of the book you have read (0-100)"
+msgstr "這本書已讀的百分比（0–100）"
+
+msgid "Personal Review"
+msgstr "個人書評"
+
+msgid "Phind"
+msgstr "Phind"
+
+msgid "Phind (#phind)"
+msgstr "Phind (#phind)"
+
+msgid "Please select a book in calibre first to test the template against."
+msgstr "請先在 calibre 選取一本書，以測試範本。"
+
+msgid "Powerful document summarizer"
+msgstr "文件摘要工具"
+
+msgid "Preview column packs and inspect lookup names, types, descriptions, templates, and display settings before creating anything."
+msgstr "建立前可先預覽欄位套組，檢查查詢名稱、類型、說明、範本與顯示設定。"
+
+msgid "Preview metadata providers"
+msgstr "預覽中繼資料來源"
+
+msgid "Preview, create, and manage custom columns faster with quick-create links, curated column packs and template-aware tools"
+msgstr "透過快速建立連結、欄位套組與範本工具，預覽、建立及管理自訂欄位"
+
+msgid "Publisher count"
+msgstr "出版社書籍數量"
+
+msgid "Publisher count (#pc)"
+msgstr "出版社書籍數量 (#pc)"
+
+msgid "Quick access to AI settings"
+msgstr "快速開啟 AI 設定"
+
+msgid "Quick access to Kobo config"
+msgstr "快速開啟 Kobo 設定"
+
+msgid "Quick access to Look & Feel"
+msgstr "快速開啟介面外觀設定"
+
+msgid "Quick access to Shortcuts"
+msgstr "快速開啟快捷鍵設定"
+
+msgid "Quick access to Toolbars and Menus"
+msgstr "快速開啟工具列和選單設定"
+
+msgid "Quick access to palette config"
+msgstr "快速開啟調色盤設定"
+
+msgid "Quick create:"
+msgstr "快速建立："
+
+msgid "Quick-switch Calibre language"
+msgstr "快速切換 calibre 語言"
+
+msgid "Quickly create columns from curated packs."
+msgstr "從欄位套組快速建立欄位。"
+
+msgid "Rating"
+msgstr "評分"
+
+msgid "Rating (#kobo_rating)"
+msgstr "評分 (#kobo_rating)"
+
+msgid "Read RSS/Atom feeds inside calibre"
+msgstr "在 calibre 閱讀 RSS／Atom 訂閱"
+
+msgid "Read progress"
+msgstr "閱讀進度"
+
+msgid "Read progress (#read_progress)"
+msgstr "閱讀進度 (#read_progress)"
+
+msgid "Reading Goal"
+msgstr "Reading Goal"
+
+msgid "Reading Tracker"
+msgstr "Reading Tracker"
+
+msgid "Reading progress"
+msgstr "閱讀進度"
+
+msgid "Reading progress date"
+msgstr "閱讀進度日期"
+
+msgid "Reading status: Reading, Finished, TBR, Paused, or DNF"
+msgstr "閱讀狀態：Reading（閱讀中）、Finished（已讀完）、TBR（待讀）、Paused（暫停）或 DNF（棄讀）"
+
+msgid "Reading workflows"
+msgstr "閱讀流程"
+
+msgid "Ready. Use the quick-create links or open the packs dialog to add curated columns.\nPacks provide suggestions and known defaults; choose the final lookup names and column headings that best fit your library and interface language."
+msgstr "就緒。使用快速建立連結或開啟套組視窗，新增預設欄位。\n套組提供建議與預設值；請依書庫需求與介面語言，選擇適合的查詢名稱和欄位標題。"
+
+msgid "Recommend"
+msgstr "推薦"
+
+msgid "Recommend (#recommend)"
+msgstr "推薦 (#recommend)"
+
+msgid "Requires the Job Spy plugin to be installed and configured so this timestamp is captured and updated."
+msgstr "需安裝並設定 Job Spy 外掛，才能擷取與更新此時間。"
+
+msgid "Research & web"
+msgstr "研究與網路"
+
+msgid "Reset zoom (Ctrl+0)"
+msgstr "重設縮放 (Ctrl+0)"
+
+msgid "Rest of Book Estimate (#kobo_rest_estimate)"
+msgstr "預估剩餘閱讀時間 (#kobo_rest_estimate)"
+
+msgid "Restore calibre's default main-library column layout for this screen.\n\nSpecifically, this reloads the default column visibility and the default left-to-right column order used by the library view.\n\nIt does not delete custom columns or reset their definitions, names, types, templates, or descriptions.\n\nClick Apply to actually save the restored layout."
+msgstr "還原此畫面的 calibre 主書庫預設欄位配置。\n\n重新載入書庫檢視的預設欄位顯示狀態與由左至右的順序。\n\n不會刪除自訂欄位，也不會重設欄位定義、名稱、類型、範本或說明。\n\n按「套用」才會儲存還原後的配置。"
+
+msgid "Reusable count columns such as tag, publisher, author, and similar library statistics."
+msgstr "可重複使用的計數欄位，例如標籤、出版社、作者等書庫統計。"
+
+msgid "Review Tags"
+msgstr "書評標籤"
+
+msgid "Review Tags (#review_tags)"
+msgstr "書評標籤 (#review_tags)"
+
+msgid "Reviewed On"
+msgstr "書評日期"
+
+msgid "Reviewed On (#review_date)"
+msgstr "書評日期 (#review_date)"
+
+msgid "Search columns…  Examples: not desc:date  type:text  not hidden:yes"
+msgstr "搜尋欄位… 範例：not desc:date  type:text  not hidden:yes"
+
+msgid "Search template"
+msgstr "搜尋範本"
+
+msgid "Section"
+msgstr "分類"
+
+msgid "Section / pack / column"
+msgstr "分類／套組／欄位"
+
+msgid "Select a column to inspect its data, templates, and current library tooltip."
+msgstr "選取欄位以查看資料、範本與目前書庫的工具提示。"
+
+msgid "Selected column"
+msgstr "選取的欄位"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Short text"
+msgstr "短文字"
+
+msgid "Show appreciation"
+msgstr "支持作者"
+
+msgid "Show config/library paths"
+msgstr "顯示設定與書庫路徑"
+
+msgid "Show or hide the column details panel on the right"
+msgstr "顯示或隱藏右側欄位詳細資訊面板"
+
+msgid "Showing column: {0}"
+msgstr "目前顯示欄位：{0}"
+
+msgid "Some of the changes you made require a restart. Please restart calibre as soon as possible."
+msgstr "部分變更需要重新啟動。請儘早重新啟動 calibre。"
+
+msgid "Start Date"
+msgstr "開始日期"
+
+msgid "Start Date (#start_date)"
+msgstr "開始日期 (#start_date)"
+
+msgid "Statistics & counts"
+msgstr "統計與計數"
+
+msgid "Status"
+msgstr "狀態"
+
+msgid "Status (#status)"
+msgstr "狀態 (#status)"
+
+msgid "Status date"
+msgstr "狀態日期"
+
+msgid "Status date (#read_date)"
+msgstr "狀態日期 (#read_date)"
+
+msgid "Swap top two input formats"
+msgstr "交換前兩個輸入格式"
+
+msgid "Tag N"
+msgstr "標籤數量"
+
+msgid "Tag N (#tn)"
+msgstr "標籤數量 (#tn)"
+
+msgid "Tag count test"
+msgstr "標籤計數測試"
+
+msgid "Tags"
+msgstr "標籤"
+
+msgid "Template"
+msgstr "範本"
+
+msgid "Template copied"
+msgstr "已複製範本"
+
+msgid "Template reference"
+msgstr "範本參考"
+
+msgid "Test"
+msgstr "測試"
+
+msgid "Test Template: {0} ({1})"
+msgstr "測試範本：{0} ({1})"
+
+msgid "Test web"
+msgstr "測試網路搜尋"
+
+msgid "The columns window is not available. Reopen Columns Helper to apply packs."
+msgstr "欄位視窗無法使用。請重新開啟欄位助手以套用套組。"
+
+msgid "The columns window is not available. Reopen Columns Helper to create presets."
+msgstr "欄位視窗無法使用。請重新開啟欄位助手以建立預設欄位。"
+
+msgid "The columns window was closed. Reopen Columns Helper and try again."
+msgstr "欄位視窗已關閉。請重新開啟欄位助手再試一次。"
+
+msgid "The columns window was closed. Reopen Columns Helper to create presets again."
+msgstr "欄位視窗已關閉。請重新開啟欄位助手以重新建立預設欄位。"
+
+msgid "The date you finished reading"
+msgstr "讀完的日期"
+
+msgid "The date you started reading"
+msgstr "開始閱讀的日期"
+
+msgid "The date you wrote the review."
+msgstr "撰寫書評的日期。"
+
+msgid "This calibre version does not expose the template tester dialog."
+msgstr "此 calibre 版本未提供範本測試對話框。"
+
+msgid "This pack (reusable set) contains {0} helper presets."
+msgstr "此套組（可重複使用的組合）包含 {0} 個預設欄位。"
+
+msgid "This row does not have a lookup name."
+msgstr "此列沒有查詢名稱。"
+
+msgid "Time Spent Reading (#kobo_time_spent)"
+msgstr "已閱讀時間 (#kobo_time_spent)"
+
+msgid "Timestamp for when the book was last viewed in calibre."
+msgstr "上次在 calibre 檢視這本書的時間。"
+
+msgid "Title by author Phind"
+msgstr "在 Phind 搜尋書名與作者"
+
+msgid "To customize this, read the help for the reading_progress() template function in the calibre User Manual"
+msgstr "如需自訂，請參閱 calibre 使用者手冊中 reading_progress() 範本函式的說明"
+
+msgid "Toggle light/dark theme"
+msgstr "切換淺色／深色主題"
+
+msgid "Toolkit for all things OPF"
+msgstr "OPF 處理工具組"
+
+msgid "Tooltip template"
+msgstr "工具提示範本"
+
+msgid "Tooltip template (current library setting)"
+msgstr "工具提示範本（目前書庫設定）"
+
+msgid "Tooltip template (pack preset)"
+msgstr "工具提示範本（套組預設）"
+
+msgid "Tooltip template preview only.\n\nIf this preset defines a tooltip template, or your library already has one for the same lookup name, it will appear here.\n\nTemplate globals include \"{0}\" for the column lookup name and \"{1}\" for the original tooltip text. Tooltip templates are available in calibre 8.10+."
+msgstr "此處僅預覽工具提示範本。\n\n若預設欄位已定義工具提示範本，或目前書庫已有相同查詢名稱的範本，就會顯示在這裡。\n\n範本全域變數「{0}」代表欄位查詢名稱，「{1}」代表原始工具提示文字。工具提示範本需要 calibre 8.10 以上版本。"
+
+msgid "Total page count of the book"
+msgstr "這本書的總頁數"
+
+msgid "Tracked"
+msgstr "追蹤閱讀"
+
+msgid "Tracked (#tracked)"
+msgstr "追蹤閱讀 (#tracked)"
+
+msgid "Type"
+msgstr "類型"
+
+msgid "Type (#type)"
+msgstr "類型 (#type)"
+
+msgid "Unavailable"
+msgstr "無法使用"
+
+msgid "Version: {0}"
+msgstr "版本：{0}"
+
+msgid "Viewer read progress using calibre's reading_progress() template function."
+msgstr "使用 calibre 的 reading_progress() 範本函式顯示閱讀器的閱讀進度。"
+
+msgid "Visible"
+msgstr "顯示"
+
+msgid "Web search"
+msgstr "網路搜尋"
+
+msgid "Web search template"
+msgstr "網路搜尋範本"
+
+msgid "Web search template copied"
+msgstr "已複製網路搜尋範本"
+
+msgid "Words"
+msgstr "字數"
+
+msgid "Words (#words)"
+msgstr "字數 (#words)"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "Yes/No"
+msgstr "是／否"
+
+msgid "Your personal rating on a 0-5 scale (supports half stars)"
+msgstr "您的個人評分，範圍 0–5（支援半顆星）"
+
+msgid "Your personal review or notes"
+msgstr "您的書評或筆記"
+
+msgid "Your personal star rating (supports half stars)."
+msgstr "個人星等評分（支援半顆星）。"
+
+msgid "Your personal written review of the book."
+msgstr "您對這本書撰寫的個人書評。"
+
+msgid "Zoom in (Ctrl++)"
+msgstr "放大 (Ctrl++)"
+
+msgid "Zoom out (Ctrl+-)"
+msgstr "縮小 (Ctrl+-)"
+
+msgid "builtin"
+msgstr "內建"
+
+msgid "calibre 9.5: reading_progress()"
+msgstr "calibre 9.5：reading_progress()"
+
+msgid "custom"
+msgstr "自訂"
+
+msgid "get_note() docs"
+msgstr "get_note() 說明"
+
+msgid "hidden"
+msgstr "隱藏"
+
+msgid "make_url() docs"
+msgstr "make_url() 說明"
+
+msgid "reading_progress() docs"
+msgstr "reading_progress() 說明"
+
+msgid "reusable set of related column presets"
+msgstr "可重複使用的相關預設欄位組合"
+
+msgid "single preset you can create individually"
+msgstr "可單獨建立的預設欄位"
+
+msgid "urls_from_identifiers() docs"
+msgstr "urls_from_identifiers() 說明"
+
+msgid "visible"
+msgstr "顯示"
+
+msgid "{0} v.{1} | calibre {2}"
+msgstr "{0} v.{1} | calibre {2}"
+
+msgid "{0} — {1}"
+msgstr "{0} — {1}"
+
+msgid "{0} — {1} — {2}"
+msgstr "{0} — {1} — {2}"
+
+msgid " Browse packs…"
+msgstr " 瀏覽套組…"
+
+msgid " Details"
+msgstr " 詳細資訊"
+
+msgid " Quick Create"
+msgstr " 快速建立"

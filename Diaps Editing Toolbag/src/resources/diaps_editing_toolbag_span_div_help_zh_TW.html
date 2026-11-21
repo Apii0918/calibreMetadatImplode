@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>span／div 編輯說明</title></head><body>
+<h1>編輯 span 與 div</h1>
+<p>Diaps Editing Toolbag 0.5.0.1；原作者 DiapDealer，正體中文修訂 SamLiao &amp; Codex。</p>
+<h2>選擇處理範圍</h2>
+<p>在 calibre「編輯書本」開啟 EPUB／AZW3，從「外掛」選單執行本工具。工具列按鈕的下拉選單可切換「只編輯目前檔案」；勾選時必須開啟 HTML／XHTML，取消勾選時處理全書的 HTML／XHTML。</p>
+<h2>篩選條件</h2>
+<ol><li>選擇「移除標籤」或「修改標籤」。</li>
+<li>指定標籤，例如 <code>span</code>、<code>div</code> 或 <code>i</code>。</li>
+<li>選擇屬性與屬性值，例如 <code>class</code> 等於 <code>junk</code>。一般模式比對整個屬性值；「正規表示式」由值的開頭開始比對。如需包含比對，可使用 <code>.*junk.*</code>。</li>
+<li>「沒有任何屬性」只選取完全沒有屬性的標籤，不代表忽略屬性條件。</li></ol>
+<h2>移除與修改</h2>
+<p>移除標籤會去掉符合條件的開啟與結束標籤，保留其中的文字與子元素。例如 <code>&lt;span class="junk"&gt;文字&lt;/span&gt;</code> 會變成「文字」。這可能改變顯示樣式。</p>
+<p>修改時可選擇新標籤，例如將 <code>i</code> 轉成 <code>em</code>。勾選「複製原有屬性字串」可保留既有屬性；否則新屬性字串會取代原有屬性，留白會移除全部屬性。新屬性請使用完整、正確的 HTML 語法及雙引號，例如 <code>class="emphasis"</code>。</p>
+<p>移除或改寫 <code>id</code>、<code>href</code> 可能影響目錄、註腳與連結；處理前請確認用途。請先修復嚴重損壞或標籤未正確配對的原始碼。</p>
+<h2>自訂設定</h2>
+<p>從工具列下拉選單開啟「自訂設定」，可修改各標籤允許轉換的元素，以及可搜尋的標籤／屬性清單。以英文逗號分隔，不加引號或角括號。工具內部名稱與 HTML 語法維持英文。</p>
+<h2>檢查與儲存</h2>
+<p>執行前會建立編輯器檢查點。結果視窗的「查看變更差異」開啟差異檢視；「關閉」只關閉結果視窗，並不還原修改。請利用編輯器的檢查點還原不需要的變更。全書處理按「取消」會停止後續檔案，已完成的檔案仍保留修改；發生處理錯誤時則還原至執行前檢查點。最後另按編輯器「儲存」寫入書檔。</p>
+</body></html>

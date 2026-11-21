@@ -2,6 +2,8 @@
 
 版本：**v1.1.1_r.1**；calibre 外掛清單顯示的數字版本為 **1.1.1**，最低 calibre 為 **2.0.0**。
 
+作者：**BookFere（bookfere.com）**；授權：GPL v3。本倉庫保留上游作者與下述寄送檔名修正。
+
 這個外掛會把選取的電子書透過 calibre 的電子郵件設定寄到 Kindle，並讓你在送出前修改書名與附件檔名。
 
 ![寄送書名示意](src/images/sample.png)
@@ -38,6 +40,6 @@
 
 ## 上游與授權
 
-- [bookfere/Send-to-Kindle-Calibre-Plugin](https://github.com/bookfere/Send-to-Kindle-Calibre-Plugin)，截至 2026-10-23 官方最新正式版為 1.1.1。
+- [bookfere/Send-to-Kindle-Calibre-Plugin](https://github.com/bookfere/Send-to-Kindle-Calibre-Plugin/tree/e57861e85fcddded1344d784e3c1d4cc4306520c)，本倉庫上游基準為官方 1.1.1。
 - [作者說明](https://bookfere.com/post/1042.html)
 - [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)

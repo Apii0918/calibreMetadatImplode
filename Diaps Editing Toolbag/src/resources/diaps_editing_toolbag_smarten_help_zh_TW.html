@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><title>進階智慧標點說明</title></head><body>
+<h1>進階智慧標點</h1>
+<p>Diaps Editing Toolbag 0.5.0.1；原作者 DiapDealer，正體中文修訂 SamLiao &amp; Codex。</p>
+<h2>用途與範圍</h2>
+<p>此工具以 SmartyPants 處理西文排印標點，並非中文引號校正器。可分別設定智慧引號、破折號與省略號；工具列下拉選單可選擇只處理目前 HTML／XHTML 或全書的 HTML／XHTML。</p>
+<h2>選項</h2>
+<ul><li><strong>轉換智慧引號：</strong>依上下文將直引號轉成彎引號及撇號。</li>
+<li><strong>破折號設定：</strong>可不轉換，或指定 <code>--</code>、<code>---</code> 分別轉為 em dash（—）或 en dash（–）。</li>
+<li><strong>轉換省略號：</strong>把三個句點轉為省略號（…）；不勾選就保留原有句點形式。</li>
+<li><strong>輸出 Unicode 字元：</strong>直接輸出彎引號等字元。不勾選時，新增的標點以數字字元實體輸出，例如 <code>&amp;#8220;</code>。書中原有的字元實體會保留。</li></ul>
+<h2>自訂撇號例外詞</h2>
+<p>開啟智慧引號後，可選擇自訂文字檔，協助辨認以撇號開頭的英文省略詞，如 <code>'tis</code> 或 <code>'cept</code>，避免誤判為開引號。每行一個詞，檔案中不含撇號，例如一行 <code>tis</code>。建議使用 UTF-8 編碼；可在不同段落重複使用同一例外詞。</p>
+<h2>檢查與儲存</h2>
+<p>執行前會建立編輯器檢查點。請從結果視窗查看差異，確認沒有改壞引號、程式範例或特殊排印。「關閉」結果視窗不會還原修改；如需取消已完成的變更，請用編輯器檢查點還原。</p>
+<p>全書處理中按「取消」會停止後續檔案，已完成的變更仍保留。處理錯誤會還原至執行前檢查點。確認結果後，再用編輯器「儲存」寫入原書檔。</p>
+</body></html>

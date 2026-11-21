@@ -10,6 +10,23 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 PROJECTS = [
     {
+        "name": "Plugin Backup",
+        "source": ROOT / "Plugin Backup" / "src",
+        "output": ROOT / "dist" / "Plugin Backup-zh_TW-release.zip",
+    },
+    {
+        "name": "Diaps Editing Toolbag",
+        "source": ROOT / "Diaps Editing Toolbag" / "src",
+        "output": ROOT / "dist" / "Diaps Editing Toolbag-zh_TW-release.zip",
+        "compile_translations": True,
+    },
+    {
+        "name": "Columns Helper",
+        "source": ROOT / "Columns Helper" / "src",
+        "output": ROOT / "dist" / "Columns Helper-zh_TW-release.zip",
+        "compile_translations": True,
+    },
+    {
         "name": "Manage Series",
         "source": ROOT / "Manage Series" / "src",
         "output": ROOT / "dist" / "Manage Series-zh_TW-release.zip",

@@ -2,7 +2,7 @@
 
 This is a repository for the EpubSplit Calibre Plugin.
 
-本倉庫修訂版：**3.12.0**；最低 calibre：**3.48.0**。安裝包為 `EpubSplit-zh_TW-release.zip`，由 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載。官方 3.12.0 不含下述 EPUB3 修改。
+本倉庫修訂版：**3.12.0**；作者：**Jim Miller**；GPL v3；最低 calibre：**3.48.0**。安裝包為 `EpubSplit-zh_TW-release.zip`，由 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載。官方 3.12.0 不含下述 EPUB3 修改。
 
 ## 中文摘要
 
