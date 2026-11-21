@@ -25,6 +25,10 @@
 | Traditional Chinese Supplement | v1.3.17 | 2026-11-09 | 1.1.1 |
 | Export Folder | v1.3.20 | 2026-11-17 | 1.2.2 |
 
+## [v1.3.21] — 2026-11-21
+
+- 2026-11-21 核對各外掛上游，Generate Cover **2.5.4.1 → 2.5.4.2** 同步上游同版號的塞爾維亞拉丁語翻譯修訂（`cd41919`），保留正體中文與本倉庫功能修正。其他既有上游沒有新版。
+
 ## [v1.3.20] — 2026-11-17
 
 - 新增 **Export Folder 1.2.2**。從書庫右鍵選單選取固定目的地，沿用 calibre 原生匯出。每個目的地可設定命名範本及格式優先順序，預設為 `{title} - {authors}` 與 `EPUB > PDF`。
@@ -176,3 +180,5 @@
 [v1.3.19]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.19
 
 [v1.3.20]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.20
+
+[v1.3.21]: https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.21

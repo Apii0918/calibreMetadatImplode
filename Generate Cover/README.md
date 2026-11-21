@@ -1,6 +1,6 @@
 # Generate Cover（產生封面）
 
-版本：**2.5.4.1**；作者：**Grant Drake**；授權：GPL v3。基於上游 2.5.4（2026-11-10），本倉庫補上正體中文與修正。
+版本：**2.5.4.2**；作者：**Grant Drake**；授權：GPL v3。基於上游 2.5.4，於 2026-11-21 同步上游 11 月 15 日的塞爾維亞拉丁語翻譯更新，保留正體中文與本倉庫修正。
 
 ## 用途
 
@@ -8,7 +8,7 @@
 
 ## 安裝與使用
 
-1. 從 [v1.3.19 發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.19) 下載安裝包，或執行 `python -B build_release.py` 自行打包。
+1. 從 [v1.3.21 發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.21) 下載安裝包，或執行 `python -B build_release.py` 自行打包。
 2. 在 calibre「偏好設定 → 外掛 → 從檔案載入外掛」安裝下載的 ZIP（自行打包時為 `dist/Generate Cover-zh_TW-release.zip`），重新啟動 calibre。
 3. 從「偏好設定 → 工具列與選單」加入「產生封面」，選取一本或多本書後執行。
 4. 選擇圖片與樣式，在「尺寸」「內容」調整排版，檢視預覽後確認產生。
@@ -34,7 +34,7 @@
 
 ## 來源
 
-- [上游專案](https://github.com/kiwidude68/calibre_plugins/tree/683c9968aa0302212ee88d769eb598788c88a8b1/generate_cover)，固定提交 `683c9968aa0302212ee88d769eb598788c88a8b1`。
+- [上游專案](https://github.com/kiwidude68/calibre_plugins/tree/cd41919f50ce650c45f652f05bbb4327f243a171/generate_cover)，固定提交 `cd41919f50ce650c45f652f05bbb4327f243a171`。
 - [官方功能與範例](https://github.com/kiwidude68/calibre_plugins/wiki/Generate-Cover)。
 - 最低 calibre 宣告沿用上游 2.85.1；本次在 Windows、calibre 9.18.0 驗證，未逐版測試。
 

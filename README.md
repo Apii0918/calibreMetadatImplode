@@ -9,9 +9,9 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.20（2026-11-17）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.20)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 整合發行版號 | **[v1.3.21（2026-11-21）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.21)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十八個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync 與 Hardcover Sync 的翻譯在打包時分別編譯。 |
-| 本次新增 | Export Folder 1.2.2，從書庫右鍵選單將選取的書匯出到預設資料夾。 |
+| 本次變更 | Generate Cover 2.5.4.2 同步上游語系修訂，保留正體中文與本倉庫功能修正。 |
 
 ## 各外掛簡介、來源與版號
 
@@ -19,7 +19,7 @@
 
 以下先列本倉庫自有外掛，再列有上游來源的外掛，各組依名稱字母升序排列；修改摘要採相同順序。
 
-核對日期：**2026-11-02**；Generate Cover 與 Modify ePub 於 **2026-11-08** 更新核對；新加入三個外掛於 **2026-11-09** 核對。下表的「上游基準」是本倉庫採用或本次比對的固定版本／提交，並非宣稱所有上游目前的最新版。版號以原始碼宣告為準；同版號也可能含有本地修改。
+核對日期：**2026-11-21**。已核對各既有上游，Generate Cover 同版號新增語系修訂，已整合為本倉庫 2.5.4.2；其他外掛沒有新版。GitHub 來源另比對固定基準至目前提交的差異，Markdown Output 核對官方索引，Skip ASCII Text Plugin 核對原專案發行。
 
 | 外掛及完整說明 | 簡介 | 上游來源與比對基準 | 本倉庫版號 |
 | --- | --- | --- | --- |
@@ -33,7 +33,7 @@
 | [EpubSplit](./EpubSplit/README.md) | 按目錄或章節將 EPUB 拆成多本新書。 | Jim Miller；[JimmXinu/EpubSplit，標籤 `v3.12.0`](https://github.com/JimmXinu/EpubSplit/tree/a0b31ea9c0c9b439329574c4752b24eaaab67f72)，基準 **3.12.0**。 | **3.12.0**，含本地 EPUB3 修改。 |
 | [Extract ISBN](./Extract%20ISBN/README.md) | 從電子書內文擷取 ISBN，確認後更新書庫識別碼。 | Grant Drake；[kiwidude68/calibre_plugins/extract_isbn，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/extract_isbn)，程式宣告 **1.6.7**。 | **1.6.7.1**，基於上游 1.6.7 的本倉庫修訂版。 |
 | [Find Duplicates](./Find%20Duplicates/README.md) | 依設定的書目比對規則找出可能重複的書籍。 | Grant Drake；[kiwidude68/calibre_plugins/find_duplicates，提交 `91b0f23`](https://github.com/kiwidude68/calibre_plugins/tree/91b0f23da54fa8f020ba387e1f13a1321706c0ff/find_duplicates)，基準 **1.10.11**；早期來源為 JimmXinu 分支。 | **1.10.11**，正體中文整合版。 |
-| [Generate Cover](./Generate%20Cover/README.md) | 用圖片與書目資料製作自訂封面。 | Grant Drake；[kiwidude68/calibre_plugins/generate_cover](https://github.com/kiwidude68/calibre_plugins/tree/683c9968aa0302212ee88d769eb598788c88a8b1/generate_cover)，基準 2.5.4。 | **2.5.4.1**，正體中文修訂版。 |
+| [Generate Cover](./Generate%20Cover/README.md) | 用圖片與書目資料製作自訂封面。 | Grant Drake；[kiwidude68/calibre_plugins/generate_cover](https://github.com/kiwidude68/calibre_plugins/tree/cd41919f50ce650c45f652f05bbb4327f243a171/generate_cover)，基準 2.5.4。 | **2.5.4.2**，正體中文修訂版。 |
 | [Goodreads](./Goodreads/README.md) | 從 Goodreads 下載書籍中繼資料與封面。 | Grant Drake；最初由使用者提供的 1.10.0 安裝包匯入，已對照 [kiwidude68/calibre_plugins/goodreads，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/goodreads)，基準 **1.10.0**。 | **1.10.1**，本倉庫修正版。 |
 | [Goodreads Sync](./Goodreads%20Sync/README.md) | 同步 Goodreads 書架、評分、書評與閱讀進度。 | Grant Drake；[上游](https://github.com/kiwidude68/calibre_plugins/tree/main/goodreads_sync)，本機安裝包基準 **1.17.6**。 | **1.17.6.1**，直接正體中文化，保留原同步核心。 |
 | [Hardcover Sync](./HardCover%20Sync/README.md) | 同步 Hardcover 清單與閱讀資料，擷取書籍 ISBN。 | Juan York；[jojuyo/calibre-hardcover-sync-plugin](https://github.com/jojuyo/calibre-hardcover-sync-plugin)，上游 GitHub 發行基準 **0.4.0**。 | **0.4.0.1**，真正的 Hardcover 外掛，直接正體中文化。 |
@@ -58,7 +58,7 @@
 | EpubSplit | 解除 EPUB3 阻擋，加入 EPUB3 導覽解析及 EPUB3 輸出，依來源保留 EPUB2／EPUB3；加入 HTML 解析器備援、正體中文翻譯與說明。 |
 | Extract ISBN | 修正 ISBN-10 小寫 `x` 校驗、PDF 書尾掃描範圍與方向、缺少格式的錯誤摘要；新增 65 個正體中文介面翻譯、中文說明及 9 組測試，納入共用模組與統一打包。 |
 | Find Duplicates | 更新上游至 1.10.11 並整合語系；保留 179 個正體中文介面翻譯、語系別名、中文說明與描述調整。重複書籍比對核心未自行改寫。 |
-| Generate Cover | 同步上游 2.5.4 文字量測、字重及圖片內距遷移；保留正體中文、自動縮字、背景切換、批次取消、設定匯入與路徑保護、封面 API 及三頁捲動區；補齊旋轉文字匯入與新增翻譯。 |
+| Generate Cover | 同步上游塞爾維亞拉丁語翻譯與 2.5.4 文字量測、字重及圖片內距遷移；保留正體中文、自動縮字、背景切換、批次取消、設定匯入與路徑保護、封面 API 及三頁捲動區；補齊旋轉文字匯入與新增翻譯。 |
 | Goodreads | 補強書名／作者詞比對、ISBN／ASIN 詳細頁核對與搜尋備援；按引用關係取得系列與作品；修正封面缺少長度標頭、ISBN-13 空值、缺漏日期／評分及重試／逾時處理，加入 8 組離線測試。 |
 | Goodreads Sync | 匯入 1.17.6，直接加入正體中文與語系別名；驗證自訂欄位 helper、同步選項內部值與設定儲存，保留原核心。 |
 | Hardcover Sync | 更新至上游 0.4.0，保留 ISBN 版本連結與 API 錯誤提示，獨立名稱空間與直接中文翻譯；驗證 API 設定儲存及與 Goodreads Sync 共存，未使用誤標的舊 Goodreads 包。 |
