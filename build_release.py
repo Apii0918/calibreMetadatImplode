@@ -10,6 +10,12 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 PROJECTS = [
     {
+        "name": "Manage Series",
+        "source": ROOT / "Manage Series" / "src",
+        "output": ROOT / "dist" / "Manage Series-zh_TW-release.zip",
+        "compile_translations": True,
+    },
+    {
         "name": "Export Folder",
         "source": ROOT / "exportFolder" / "src",
         "output": ROOT / "dist" / "Export Folder-zh_TW-release.zip",

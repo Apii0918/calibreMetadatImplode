@@ -1,0 +1,206 @@
+# Manage Series 正體中文語言包。
+# Copyright (C) 2026 SamLiao & Codex
+# 與此外掛採用相同的 GPL v3 授權。
+msgid ""
+msgstr "Project-Id-Version: Manage Series 1.5.5.1\nLanguage: zh_TW\nLanguage-Team: Traditional Chinese\nLast-Translator: SamLiao & Codex\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nPlural-Forms: nplurals=1; plural=0;\n"
+
+msgid "&Assign this index value to all remaining books"
+msgstr "將此編號套用至其餘所有書本(&A)"
+
+msgid "&Help"
+msgstr "說明(&H)"
+
+msgid "&Restore Original Series"
+msgstr "還原原有系列編號(&R)"
+
+msgid "&Start At:"
+msgstr "起始編號(&S)："
+
+msgid "Add empty book to the series list"
+msgstr "在系列清單加入空白書本"
+
+msgid "Add empty books"
+msgstr "加入空白書本"
+
+msgid "All settings for this plugin in this library have been cleared."
+msgstr "已清除此書庫中此外掛的所有設定。"
+
+msgid "Alt+Down"
+msgstr "Alt+Down"
+
+msgid "Alt+Left"
+msgstr "Alt+Left"
+
+msgid "Alt+Right"
+msgstr "Alt+Right"
+
+msgid "Alt+Up"
+msgstr "Alt+Up"
+
+msgid "Any settings in other libraries or stored in a JSON file in your calibre plugins folder will not be touched."
+msgstr "其他書庫的設定，以及儲存在 calibre 外掛資料夾 JSON 檔案中的設定，都不會受到影響。"
+
+msgid "Are you sure you want to change your settings in this library for this plugin?"
+msgstr "確定要變更此書庫中此外掛的設定嗎？"
+
+msgid "Are you sure you want to clear your settings in this library for this plugin?"
+msgstr "確定要清除此書庫中此外掛的設定嗎？"
+
+msgid "Are you sure?"
+msgstr "確定要繼續嗎？"
+
+msgid "Author(s)"
+msgstr "作者"
+
+msgid "Cannot manage series"
+msgstr "無法管理系列"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Clear all settings for this plugin"
+msgstr "清除此外掛的所有設定"
+
+msgid "Copy to clipboard"
+msgstr "複製到剪貼簿"
+
+msgid "Create new column"
+msgstr "建立新欄位"
+
+msgid "Create or Modify Series"
+msgstr "建立或修改系列"
+
+msgid "Ctrl+Shift+E"
+msgstr "Ctrl+Shift+E"
+
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "編輯此外掛的鍵盤快捷鍵"
+
+msgid "Empty book added to series"
+msgstr "已加入系列的空白書本"
+
+msgid "Keyboard shortcuts"
+msgstr "鍵盤快捷鍵"
+
+msgid "Lock Series Index"
+msgstr "鎖定系列編號"
+
+msgid "Lock old series index"
+msgstr "鎖定原有系列編號"
+
+msgid "Lock series index"
+msgstr "鎖定系列編號"
+
+msgid "Lock to index value"
+msgstr "鎖定為指定編號"
+
+msgid "Manage Series"
+msgstr "系列管理"
+
+msgid "Move book down in series (Alt+Down)"
+msgstr "將書本在系列中下移（Alt+Down）"
+
+msgid "Move book up in series (Alt+Up)"
+msgstr "將書本在系列中上移（Alt+Up）"
+
+msgid "Move series index to left of decimal point (Alt+Left)"
+msgstr "減少系列編號的小數層級（Alt+Left）"
+
+msgid "Move series index to right of decimal point (Alt+Right)"
+msgstr "增加系列編號的小數層級（Alt+Right）"
+
+msgid "New"
+msgstr "修改後"
+
+msgid "New Series"
+msgstr "新系列編號"
+
+msgid "No books selected"
+msgstr "尚未選取書本"
+
+msgid "Old"
+msgstr "原有"
+
+msgid "Original Series Index"
+msgstr "原有系列編號"
+
+msgid "Original Series Name"
+msgstr "原有系列名稱"
+
+msgid "Please restart calibre now."
+msgstr "請立即重新啟動 calibre。"
+
+msgid "Preferences for:"
+msgstr "偏好設定："
+
+msgid "PubDate"
+msgstr "出版日期"
+
+msgid "Remove book from the series list"
+msgstr "將書本移出本次系列整理清單"
+
+msgid "Remove the selected book(s) from the series list?"
+msgstr "要將選取的書本移出本次系列整理清單嗎？"
+
+msgid "Restart calibre now"
+msgstr "立即重新啟動 calibre"
+
+msgid "Restart required"
+msgstr "需要重新啟動"
+
+msgid "Series"
+msgstr "系列"
+
+msgid "Series &Column:"
+msgstr "系列欄位(&C)："
+
+msgid "Series &Name:"
+msgstr "系列名稱(&N)："
+
+msgid "Series index for book:"
+msgstr "書本的系列編號："
+
+msgid "Settings changed"
+msgstr "設定已變更"
+
+msgid "Settings deleted"
+msgstr "設定已刪除"
+
+msgid "Settings for this plugin in this library have been changed."
+msgstr "此書庫中此外掛的設定已變更。"
+
+msgid "Sort by"
+msgstr "排序依據"
+
+msgid "The book data has been changed"
+msgstr "書本資料已修改"
+
+msgid "The series data is unchanged"
+msgstr "系列資料未變更"
+
+msgid "Title"
+msgstr "書名"
+
+msgid "Title image not found - you must restart Calibre before using this plugin!"
+msgstr "找不到標題圖片，請重新啟動 calibre 後再使用此外掛！"
+
+msgid "Undefined"
+msgstr "未設定"
+
+msgid "Unknown"
+msgstr "未知"
+
+msgid "Unlock all series index"
+msgstr "解除所有系列編號鎖定"
+
+msgid "Unlock series index"
+msgstr "解除系列編號鎖定"
+
+msgid "Value assigned by user"
+msgstr "使用者指定的編號"
+
+msgid "You have conflicting or out of sequence series indexes"
+msgstr "系列編號有重複或順序不正確的情形"
+
+msgid "You must restart calibre afterwards."
+msgstr "完成後必須重新啟動 calibre。"

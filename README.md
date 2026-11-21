@@ -1,6 +1,6 @@
 # calibreMetadatImplode
 
-本專案將十八個 calibre 外掛並排維護，整合上游程式、正體中文資源與本地修正。各外掛可獨立使用；操作、設定、限制、安裝與打包方式請點各外掛名稱閱讀其 README。
+本專案將十九個 calibre 外掛並排維護，整合上游程式、正體中文資源與本地修正。各外掛可獨立使用；操作、設定、限制、安裝與打包方式請點各外掛名稱閱讀其 README。
 
 外掛首次加入、歷次升級與整合發行紀錄見 [CHANGELOG](./CHANGELOG.md)。
 
@@ -9,11 +9,13 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.23（2026-11-21）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.23)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
-| 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十八個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync 與 Hardcover Sync 的翻譯在打包時分別編譯。 |
-| 本次變更 | 正體中文補強更新至 1.2.0，補翻偏好設定、動態視窗、快捷鍵、範本與編輯器診斷，並通過資料保護測試。 |
+| 整合發行版號 | **[v1.3.24（2026-11-21）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.24)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十九個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync、Hardcover Sync 與 Manage Series 的翻譯在打包時分別編譯。 |
+| 本次變更 | 新增系列管理 Manage Series 1.5.5.1，包含原生正體中文語言包、calibre 9.19 相容性修正及系列編號／寫回驗證。 |
 
 ## 各外掛簡介、來源與版號
+
+本次新增 Manage Series 1.5.5.1，包含原生正體中文語言包與 calibre 9.19 相容性修正，發行附件增為十九個獨立安裝包。
 
 正體中文補強 1.2.0 擴充偏好設定、快捷鍵、範本與編輯器翻譯，包含書本檢查及 CSS 診斷；使用方式與限制見其 README。
 
@@ -37,6 +39,7 @@
 | [Goodreads](./Goodreads/README.md) | 從 Goodreads 下載書籍中繼資料與封面。 | Grant Drake；最初由使用者提供的 1.10.0 安裝包匯入，已對照 [kiwidude68/calibre_plugins/goodreads，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/goodreads)，基準 **1.10.0**。 | **1.10.1**，本倉庫修正版。 |
 | [Goodreads Sync](./Goodreads%20Sync/README.md) | 同步 Goodreads 書架、評分、書評與閱讀進度。 | Grant Drake；[上游](https://github.com/kiwidude68/calibre_plugins/tree/main/goodreads_sync)，本機安裝包基準 **1.17.6**。 | **1.17.6.1**，直接正體中文化，保留原同步核心。 |
 | [Hardcover Sync](./HardCover%20Sync/README.md) | 同步 Hardcover 清單與閱讀資料，擷取書籍 ISBN。 | Juan York；[jojuyo/calibre-hardcover-sync-plugin](https://github.com/jojuyo/calibre-hardcover-sync-plugin)，上游 GitHub 發行基準 **0.4.0**。 | **0.4.0.1**，真正的 Hardcover 外掛，直接正體中文化。 |
+| [Manage Series](./Manage%20Series/README.md) | 集中調整系列名稱、順序、整數及小數編號，支援鎖定與自訂系列欄位。 | Grant Drake；[kiwidude68/calibre_plugins/manage_series，提交 `c01cf614`](https://github.com/kiwidude68/calibre_plugins/tree/c01cf614f0c6da3c996d7010a0fbba4a68623f66/manage_series)，基準 **1.5.5**。 | **1.5.5.1**；原生正體中文語言包與 calibre 9.19 相容性修訂。 |
 | [Markdown Output](./Markdown%20Output/README.md) | 將書籍轉為 Markdown，保留連結與圖片參照。 | The_book；[原始討論串](https://www.mobileread.com/forums/showthread.php?t=328999)，本機安裝包基準 **1.0.3**。 | **1.0.3.1**，獨立中文設定頁，修正新版 calibre 相容性。 |
 | [Modify ePub](./Modify%20ePub/README.md) | 直接清理與修改 EPUB，免經轉檔流程。 | Grant Drake 等；[kiwidude68/calibre_plugins/modify_epub，提交 `683c996`](https://github.com/kiwidude68/calibre_plugins/tree/683c9968aa0302212ee88d769eb598788c88a8b1/modify_epub)，基準 **1.8.14**。 | **1.8.14.1**，正體中文修訂版。 |
 | [Send to Kindle](./Send%20to%20Kindle/README.md) | 透過 calibre 電子郵件設定寄書到 Kindle，可指定寄送書名與檔名。 | BookFere／bookfere.com；[bookfere/Send-to-Kindle-Calibre-Plugin，標籤 `v1.1.1`](https://github.com/bookfere/Send-to-Kindle-Calibre-Plugin/tree/e57861e85fcddded1344d784e3c1d4cc4306520c)，基準 **1.1.1**。 | **v1.1.1_r.1**；calibre 數字版號顯示 **1.1.1**。 |
@@ -62,6 +65,7 @@
 | Goodreads | 補強書名／作者詞比對、ISBN／ASIN 詳細頁核對與搜尋備援；按引用關係取得系列與作品；修正封面缺少長度標頭、ISBN-13 空值、缺漏日期／評分及重試／逾時處理，加入 8 組離線測試。 |
 | Goodreads Sync | 匯入 1.17.6，直接加入正體中文與語系別名；驗證自訂欄位 helper、同步選項內部值與設定儲存，保留原核心。 |
 | Hardcover Sync | 更新至上游 0.4.0，保留 ISBN 版本連結與 API 錯誤提示，獨立名稱空間與直接中文翻譯；驗證 API 設定儲存及與 Goodreads Sync 共存，未使用誤標的舊 Goodreads 包。 |
+| Manage Series | 保留上游系列管理功能；新增 67 條原生正體中文語系對照，修正 Qt 6、自訂系列欄位選取與小數累加精度，通過七項隔離測試及實際安裝包的 GUI 寫回、關閉重開驗證。 |
 | Markdown Output | 改用獨立中文設定頁，解除對舊 TXT 輸出版面的依賴；保留內部參數，通過實際 EPUB 轉 Markdown 測試。 |
 | Modify ePub | 同步上游 1.8.14 的 calibre 9.18 封面替換及移除修正，保護原封面頁樣式與標題；保留邊距修正、正體中文語系、中文說明與描述，加入封面回歸測試。 |
 | Send to Kindle | 寄送檔名改用 calibre `mtp_devices.send_template` 與書庫欄位，套用寄送視窗書名並保留 Unicode；修正偏好格式設定鍵為 `preferred_format`，移除介面未使用的格式查詢，保留正體中文與中文說明。 |
@@ -70,7 +74,7 @@
 
 ## calibre 9.19 相容性
 
-2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄和暫存書庫驗證六支自製外掛。
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄和暫存書庫驗證六支自製外掛，另驗證 Manage Series。
 
 | 外掛 | 驗證範圍 |
 | --- | --- |
@@ -79,6 +83,7 @@
 | Export Folder 1.2.2 | 實際匯出 EPUB／PDF、逐本格式優先選擇與範本編輯。 |
 | Toolbar Manager 1.0.0 | 19 項隔離測試通過，涵蓋工具列配置與失敗回復。 |
 | Traditional Chinese Supplement 1.2.0 | 12 支隔離測試程式通過，涵蓋原生元件、動態視窗、完整診斷目錄、設定值與輸入保護。 |
+| Manage Series 1.5.5.1 | 七項隔離測試及實際安裝包的原生 GUI 寫回、關閉重開驗證通過，涵蓋系列編號、自訂欄位、取消及資料保護。 |
 | Skip ASCII Text Plugin 1.0.1 | 10 項隔離測試通過，涵蓋 Unicode、切換與函式還原。 |
 
 驗證涵蓋上述操作；實際裝置傳輸及所有第三方外掛組合尚待驗證。
