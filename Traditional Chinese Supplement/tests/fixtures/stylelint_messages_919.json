@@ -1,0 +1,182 @@
+[
+  {
+    "rule": "annotation-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown annotation \"ARG1\" (annotation-no-unknown)"
+  },
+  {
+    "rule": "at-rule-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown at-rule \"ARG1\" (at-rule-no-unknown)"
+  },
+  {
+    "rule": "block-no-empty",
+    "kind": "rejected",
+    "text": "Unexpected empty block (block-no-empty)"
+  },
+  {
+    "rule": "color-no-invalid-hex",
+    "kind": "rejected",
+    "text": "Unexpected invalid hex color \"ARG1\" (color-no-invalid-hex)"
+  },
+  {
+    "rule": "comment-no-empty",
+    "kind": "rejected",
+    "text": "Unexpected empty comment (comment-no-empty)"
+  },
+  {
+    "rule": "custom-property-no-missing-var-function",
+    "kind": "rejected",
+    "text": "Unexpected missing var function for \"ARG1\" (custom-property-no-missing-var-function)"
+  },
+  {
+    "rule": "declaration-block-no-duplicate-custom-properties",
+    "kind": "rejected",
+    "text": "Unexpected duplicate \"ARG1\" (declaration-block-no-duplicate-custom-properties)"
+  },
+  {
+    "rule": "declaration-block-no-duplicate-properties",
+    "kind": "rejected",
+    "text": "Unexpected duplicate \"ARG1\" (declaration-block-no-duplicate-properties)"
+  },
+  {
+    "rule": "declaration-block-no-shorthand-property-overrides",
+    "kind": "rejected",
+    "text": "Unexpected shorthand \"ARG1\" after \"ARG2\" (declaration-block-no-shorthand-property-overrides)"
+  },
+  {
+    "rule": "font-family-no-duplicate-names",
+    "kind": "rejected",
+    "text": "Unexpected duplicate name ARG1 (font-family-no-duplicate-names)"
+  },
+  {
+    "rule": "font-family-no-missing-generic-family-keyword",
+    "kind": "rejected",
+    "text": "Unexpected missing generic font family (font-family-no-missing-generic-family-keyword)"
+  },
+  {
+    "rule": "function-calc-no-unspaced-operator",
+    "kind": "expectedBefore",
+    "text": "Expected single space before \"ARG1\" operator (function-calc-no-unspaced-operator)"
+  },
+  {
+    "rule": "function-calc-no-unspaced-operator",
+    "kind": "expectedAfter",
+    "text": "Expected single space after \"ARG1\" operator (function-calc-no-unspaced-operator)"
+  },
+  {
+    "rule": "function-calc-no-unspaced-operator",
+    "kind": "expectedOperatorBeforeSign",
+    "text": "Expected an operator before sign \"ARG1\" (function-calc-no-unspaced-operator)"
+  },
+  {
+    "rule": "function-linear-gradient-no-nonstandard-direction",
+    "kind": "rejected",
+    "text": "Unexpected nonstandard direction (function-linear-gradient-no-nonstandard-direction)"
+  },
+  {
+    "rule": "function-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown function \"ARG1\" (function-no-unknown)"
+  },
+  {
+    "rule": "keyframe-block-no-duplicate-selectors",
+    "kind": "rejected",
+    "text": "Unexpected duplicate \"ARG1\" (keyframe-block-no-duplicate-selectors)"
+  },
+  {
+    "rule": "keyframe-declaration-no-important",
+    "kind": "rejected",
+    "text": "Unexpected !important (keyframe-declaration-no-important)"
+  },
+  {
+    "rule": "media-feature-name-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown media feature name \"ARG1\" (media-feature-name-no-unknown)"
+  },
+  {
+    "rule": "named-grid-areas-no-invalid",
+    "kind": "expectedToken",
+    "text": "Expected cell token within string (named-grid-areas-no-invalid)"
+  },
+  {
+    "rule": "named-grid-areas-no-invalid",
+    "kind": "expectedSameNumber",
+    "text": "Expected same number of cell tokens in each string (named-grid-areas-no-invalid)"
+  },
+  {
+    "rule": "named-grid-areas-no-invalid",
+    "kind": "expectedRectangle",
+    "text": "Expected single filled-in rectangle for \"ARG1\" (named-grid-areas-no-invalid)"
+  },
+  {
+    "rule": "no-descending-specificity",
+    "kind": "rejected",
+    "text": "Expected selector \"ARG1\" to come before selector \"ARG2\" (no-descending-specificity)"
+  },
+  {
+    "rule": "no-duplicate-at-import-rules",
+    "kind": "rejected",
+    "text": "Unexpected duplicate @import rule ARG1 (no-duplicate-at-import-rules)"
+  },
+  {
+    "rule": "no-duplicate-selectors",
+    "kind": "rejected",
+    "text": "Unexpected duplicate selector \"ARG1\", first used at line ARG2 (no-duplicate-selectors)"
+  },
+  {
+    "rule": "no-empty-source",
+    "kind": "rejected",
+    "text": "Unexpected empty source (no-empty-source)"
+  },
+  {
+    "rule": "no-extra-semicolons",
+    "kind": "rejected",
+    "text": "Unexpected extra semicolon (no-extra-semicolons)"
+  },
+  {
+    "rule": "no-invalid-double-slash-comments",
+    "kind": "rejected",
+    "text": "Unexpected double-slash CSS comment (no-invalid-double-slash-comments)"
+  },
+  {
+    "rule": "no-invalid-position-at-import-rule",
+    "kind": "rejected",
+    "text": "Unexpected invalid position @import rule (no-invalid-position-at-import-rule)"
+  },
+  {
+    "rule": "no-irregular-whitespace",
+    "kind": "unexpected",
+    "text": "Unexpected irregular whitespace (no-irregular-whitespace)"
+  },
+  {
+    "rule": "property-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown property \"ARG1\" (property-no-unknown)"
+  },
+  {
+    "rule": "selector-pseudo-class-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown pseudo-class selector \"ARG1\" (selector-pseudo-class-no-unknown)"
+  },
+  {
+    "rule": "selector-pseudo-element-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown pseudo-element selector \"ARG1\" (selector-pseudo-element-no-unknown)"
+  },
+  {
+    "rule": "selector-type-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown type selector \"ARG1\" (selector-type-no-unknown)"
+  },
+  {
+    "rule": "string-no-newline",
+    "kind": "rejected",
+    "text": "Unexpected newline in string (string-no-newline)"
+  },
+  {
+    "rule": "unit-no-unknown",
+    "kind": "rejected",
+    "text": "Unexpected unknown unit \"ARG1\" (unit-no-unknown)"
+  }
+]

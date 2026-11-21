@@ -1,8 +1,11 @@
-from qt.core import QApplication, QCheckBox, QComboBox, QEvent, QGroupBox, QLabel, QObject, QSignalBlocker, QWidget
+from qt.core import QApplication, QCheckBox, QComboBox, QEvent, QGroupBox, QLabel, QObject, QSignalBlocker, QTimer, QWidget
 from calibre.gui2.actions import InterfaceAction
 from calibre.gui2.actions.polish import Polish
 from calibre.utils.localization import get_lang
 from calibre_plugins.traditional_chinese_supplement.display import translate_widget
+from calibre_plugins.traditional_chinese_supplement.preferences import install_toolbar_translation, restore_toolbar_translation
+from calibre_plugins.traditional_chinese_supplement.preferences import TEXT
+from calibre_plugins.traditional_chinese_supplement.shortcut_translation import install_shortcut_translation, restore_shortcut_translation
 import traceback
 
 
@@ -116,8 +119,14 @@ def translate_window(widget):
 class TranslationFilter(QObject):
     def start(self):
         self.failures = set()
+        self.pending_windows = set()
+        self.refresh_timer = QTimer(self)
+        self.refresh_timer.setSingleShot(True)
+        self.refresh_timer.timeout.connect(self.refresh_shown_windows)
         self.active = get_lang().lower().replace('-', '_') in ('zh_tw', 'zh_hant', 'zh_hant_tw')
         if self.active:
+            self.original_toolbar_data = install_toolbar_translation()
+            self.original_shortcuts = install_shortcut_translation(TEXT)
             app = QApplication.instance()
             app.installEventFilter(self)
             for widget in app.allWidgets():
@@ -134,15 +143,36 @@ class TranslationFilter(QObject):
                 traceback.print_exc()
 
     def stop(self):
+        if getattr(self, 'active', False):
+            restore_toolbar_translation(self.original_toolbar_data)
+            restore_shortcut_translation(self.original_shortcuts)
         self.active = False
+        if hasattr(self, 'refresh_timer'):
+            self.refresh_timer.stop()
+            self.pending_windows.clear()
         app = QApplication.instance()
         if app is not None:
             app.removeEventFilter(self)
 
     def eventFilter(self, watched, event):
-        if self.active and event.type() == QEvent.Type.Show:
+        if self.active and event.type() in (QEvent.Type.Show, QEvent.Type.LayoutRequest):
             self.translate_safely(watched)
+            if isinstance(watched, QWidget) and type(watched).__module__.startswith(('calibre.gui2.preferences', 'calibre.gui2.convert')):
+                self.pending_windows.add(watched.window())
+                self.refresh_timer.start(0)
         return False
+
+    def refresh_shown_windows(self):
+        pending, self.pending_windows = self.pending_windows, set()
+        if not self.active:
+            return
+        for window in pending:
+            try:
+                widgets = [window, *window.findChildren(QWidget)]
+            except RuntimeError:
+                continue
+            for widget in widgets:
+                self.translate_safely(widget)
 
 
 class TranslationAction(InterfaceAction):

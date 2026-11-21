@@ -5,6 +5,10 @@ from calibre_plugins.traditional_chinese_supplement.editor_strings import EDITOR
 from pathlib import Path
 import re
 import sys
+import html
+from calibre_plugins.traditional_chinese_supplement.preferences import (
+    DIALOG_MODULES, RULE_HELP, TEXT, translate_hover, translate_preferences,
+)
 
 
 def scope_for(widget):
@@ -72,6 +76,12 @@ def translate_save_template(widget):
 def translate_widget(widget):
     if not isinstance(widget, QWidget):
         return
+    translate_hover(widget)
+    if (
+        type(widget).__module__.startswith('calibre.gui2.preferences.')
+        or type(widget).__module__ in DIALOG_MODULES
+    ):
+        translate_preferences(widget)
     scope = scope_for(widget)
     if scope is None:
         return
@@ -79,6 +89,23 @@ def translate_widget(widget):
         translate_save_template(widget)
     texts = SCOPES[scope]
     def translated(text):
+        if scope.startswith('calibre.gui2'):
+            text = text.replace(
+                ' (only one template dialog allowed)', '（同時只能開啟一個範本視窗）',
+            )
+            plain_text = re.sub('<[^>]*>', '', text)
+            plain_text = re.sub(r'&(?!#\d+;|#x[0-9a-fA-F]+;|[A-Za-z][A-Za-z0-9]+;)', '', plain_text)
+            normalized = ' '.join(html.unescape(plain_text).split())
+            if text in TEXT:
+                return TEXT[text]
+            if normalized in TEXT:
+                return TEXT[normalized]
+            if normalized.startswith('default: #') and re.fullmatch(r'default: #[0-9a-fA-F]{6}', normalized):
+                return normalized.replace('default:', '預設值：', 1)
+            for source in ('Change color', 'Change texture', 'Read progress'):
+                text = text.replace('>' + source + '</a>', '>' + TEXT[source] + '</a>')
+            for source, target in RULE_HELP.items():
+                text = text.replace(source, target)
         if scope == EDITOR_SCOPE and text in SCOPES['calibre.gui2']:
             return SCOPES['calibre.gui2'][text]
         return texts.get(text, COMMON.get(text, text))
@@ -87,6 +114,11 @@ def translate_widget(widget):
         new = translated(old)
         if new != old:
             getattr(widget, setter)(new)
+    if scope.startswith('calibre.gui2'):
+        title = widget.windowTitle()
+        new_title = translated(title)
+        if new_title != title:
+            QWidget.setWindowTitle(widget, new_title)
     if scope == EDITOR_SCOPE:
         if isinstance(widget, QMainWindow):
             for action in widget.findChildren(QAction):
@@ -102,7 +134,9 @@ def translate_widget(widget):
             if new != old:
                 widget.setTitle(new)
     # Combo/list/table values can be program identifiers; never change their models.
-    if isinstance(widget, (QLabel, QAbstractButton)) and not isinstance(widget, QToolButton):
+    if isinstance(widget, (QLabel, QAbstractButton)) and (
+        not isinstance(widget, QToolButton) or scope.startswith('calibre.gui2')
+    ):
         old = widget.text()
         new = translated(old)
         if scope.startswith('calibre.gui2') and isinstance(widget, QLabel):
