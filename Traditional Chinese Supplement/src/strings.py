@@ -452,6 +452,10 @@ SCOPES = {'chinese_text': {'Conversion Direction': '轉換方向',
 
 
 # Exact official display strings only; never convert user content at runtime.
+SCOPES['calibre.gui2.preferences.saving'] = {
+    'Save &data files as well': '一併儲存附加資料檔案(&D)',
+    'Save any data files associated with the book when saving the book': '儲存書籍時，一併儲存與該書關聯的資料檔案',
+}
 SCOPES[EDITOR_SCOPE] = EDITOR_TEXT
 SCOPES['calibre.gui2'] = {'\n            在哪里搜索/替换:\n            <dl>\n            <dt><b>当前文件</b></dt>\n            <dd>仅在当前打开的文件中搜索</dd>\n            <dt><b>所有文本文件</b></dt>\n            <dd>在所有文本(HTML)文件中搜索</dd>\n            <dt><b>已选文件</b></dt>\n            <dd>在当前文件浏览器中选择的文件中搜索</dd>\n            <dt><b>打开文件</b></dt>\n            <dd>在当前编辑器中打开的文件中搜索</dd>\n            </dl>': '\n'
                                                                                                                                                                                                                                                                                                                                                                    '            '

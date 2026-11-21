@@ -36,3 +36,8 @@
 ## 自行打包
 
 在專案根目錄執行 `python -B build_release.py`，安裝包會輸出至 `dist/Skip ASCII Text Plugin-zh_TW-release.zip`。
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄與暫存資料驗證。10 項隔離測試通過，涵蓋 Unicode、位元組輸入、重複切換與函式還原。實際裝置傳輸與所有第三方外掛組合尚待驗證。

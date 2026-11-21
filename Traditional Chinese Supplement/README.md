@@ -1,17 +1,17 @@
 # 正體中文補強（Traditional Chinese Supplement）
 
-版本：**1.1.3**；作者：**SamLiao & Codex**；授權：GPL v3；最低 calibre：**9.17.0**。
-本倉庫自行開發。1.1.3 隨整合版 v1.3.19 發布。
+版本：**1.1.4**；作者：**SamLiao & Codex**；授權：GPL v3；最低 calibre：**9.17.0**。
+本倉庫自行開發，隨整合版 v1.3.22 發布。
 
 ## 用途與支援範圍
 
 在正體中文介面中，自動補齊指定視窗的漏翻標籤、按鈕、群組標題及提示。支援主介面與 Edit Book，不顯示工具列或選單按鈕。編輯器新增無障礙、拼字檢查、檔案及分頁操作、圖片壓縮、搜尋和語音朗讀等正體中文對照。
 
-目前對照涵蓋官方「修整書本」、「在網路上分享」及其他官方視窗中混入簡體的指定文字、部分中繼資料編輯視窗，以及 KFX、簡繁轉換、EPUBCheck、XTC、Goodreads、FictionDB、databazeknih、DeACSM、DeDRM、LCPL、Open With、EpubSplit 等外掛的指定顯示文字。不是所有視窗與訊息的完整翻譯。
+目前對照涵蓋「將書本儲存至磁碟」的附加資料檔案選項與範本說明，以及官方「修整書本」、「在網路上分享」及其他官方視窗中混入簡體的指定文字、部分中繼資料編輯視窗，以及 KFX、簡繁轉換、EPUBCheck、XTC、Goodreads、FictionDB、databazeknih、DeACSM、DeDRM、LCPL、Open With、EpubSplit 等外掛的指定顯示文字。不是所有視窗與訊息的完整翻譯。
 
 ## 安裝與使用
 
-1. 從 [v1.3.19 發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.19) 下載安裝包；自行打包可在根目錄執行 `python -B build_release.py`。
+1. 從 [v1.3.22 發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.22) 下載安裝包；自行打包可在根目錄執行 `python -B build_release.py`。
 2. 於 calibre「偏好設定 → 外掛 → 從檔案載入外掛」安裝 `Traditional Chinese Supplement-zh_TW-release.zip`。
 3. 重啟 calibre 及 Edit Book，介面語言設為正體中文後自動生效，無需手動執行。
 
@@ -28,7 +28,7 @@
 
 來源：[本倉庫](https://github.com/SamLaio/calibreMetadatImplode)。依 calibre 與各外掛原介面的顯示文字建立對照，不打包其程式碼。
 
-Windows、calibre 9.18.0 通過 17 組自動化測試，涵蓋字典、語系、設定值與按鈕訊號保護、例外攔截及無按鈕自動啟用；另有實際外掛面板驗證。未驗收所有版本、平台或外掛完整功能。
+2026-11-21 在 Windows、calibre 9.19 通過 18 組隔離自動化測試，涵蓋字典、語系、設定值與按鈕訊號保護、例外攔截及無按鈕自動啟用；另有實際外掛面板驗證。未驗收所有版本、平台或外掛完整功能。
 
 ```powershell
 $env:CALIBRE_CONFIG_DIRECTORY = Join-Path $PWD 'dist/translation-qa/config'

@@ -15,3 +15,8 @@
 目的地由同一個 calibre 使用者的各書庫共用。輸出資料夾必須已存在，且位於目前書庫之外。外掛沿用 calibre 原生匯出引擎，無須修改 calibre 本體。
 
 本倉庫自行開發，作者為 SamLiao & Codex。[calibre 原生匯出入口](https://github.com/kovidgoyal/calibre/blob/v9.18.0/src/calibre/gui2/actions/save_to_disk.py)
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄與暫存資料驗證。在暫存書庫實際匯出 EPUB／PDF，確認逐本格式優先順序、檔名範本與範本編輯視窗。實際裝置傳輸與所有第三方外掛組合尚待驗證。

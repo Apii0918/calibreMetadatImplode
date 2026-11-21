@@ -9,13 +9,13 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.21（2026-11-21）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.21)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 整合發行版號 | **[v1.3.22（2026-11-21）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.22)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出十八個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Extract ISBN、Generate Cover、Goodreads Sync 與 Hardcover Sync 的翻譯在打包時分別編譯。 |
-| 本次變更 | Generate Cover 2.5.4.2 同步上游語系修訂，保留正體中文與本倉庫功能修正。 |
+| 本次變更 | 自製外掛通過 calibre 9.19 相容性驗證；正體中文補強更新至 1.1.4，補翻儲存至磁碟視窗。 |
 
 ## 各外掛簡介、來源與版號
 
-正體中文補強已更新為 1.1.3，支援主介面與 Edit Book 的指定顯示文字，附設定儲存與例外攔截測試。
+正體中文補強已更新為 1.1.4，支援主介面與 Edit Book 的指定顯示文字，附設定儲存與例外攔截測試。
 
 以下先列本倉庫自有外掛，再列有上游來源的外掛，各組依名稱字母升序排列；修改摘要採相同順序。
 
@@ -27,7 +27,7 @@
 | [Enhanced Search and Replace](./Enhanced%20Search%20and%20Replace/README.md) | Edit Book 全書文字類型勾選搜尋、定位與取代。 | 本倉庫自行開發；SamLiao & Codex，API 查核 Calibre v9.0.0／v9.17.0。 | **1.2.0**；原始碼逐字取代、錯誤摘要；原始碼搜尋、背景進度與取消、篩選排序，預設十五行並附操作截圖。 |
 | [Export Folder](./exportFolder/README.md) | 從書庫右鍵選單直接匯出到預設資料夾。 | 本倉庫自行開發，SamLiao & Codex。 | **1.2.2**。 |
 | [Toolbar Manager](./Toolbar%20Manager/README.md) | 右鍵調整工具列按鈕，開啟外掛首頁、選項或移除外掛。 | 本倉庫自行開發；SamLiao & Codex。 | **1.0.0**。 |
-| [Traditional Chinese Supplement](./Traditional%20Chinese%20Supplement/README.md) | 補齊指定官方與第三方外掛視窗的正體中文顯示文字。 | 本倉庫自行開發；SamLiao & Codex，核對 calibre 9.18.0 與本機外掛。 | **1.1.3**，補齊 Edit Book 無障礙、拼字與其他指定文字，無工具列按鈕。 |
+| [Traditional Chinese Supplement](./Traditional%20Chinese%20Supplement/README.md) | 補齊指定官方與第三方外掛視窗的正體中文顯示文字。 | 本倉庫自行開發；SamLiao & Codex，核對 calibre 9.18.0 與本機外掛。 | **1.1.4**，補翻儲存至磁碟，並保留 Edit Book 無障礙、拼字與其他指定文字，無工具列按鈕。 |
 | [AZW6 Image Merge](./AZW6%20Image%20Merge/README.md) | 將 Amazon AZW6 sidecar 高畫質圖片合併至主書檔。 | Andrew Timson；[HamsterExAstris/calibre-azw6-image-merge，提交 `63f76d4`](https://github.com/HamsterExAstris/calibre-azw6-image-merge/tree/63f76d46e19de901536b9bc7c1a02998f26c439b)，基準 **1.0.0**。 | **1.0.0**，含本地相容性修改。 |
 | [Count Pages](./Count%20Pages/README.md) | 計算或下載頁數、字數與可讀性統計，寫入自訂欄位。 | Grant Drake；[kiwidude68/calibre_plugins/count_pages，提交 `d46d919`](https://github.com/kiwidude68/calibre_plugins/tree/d46d9197ac2f78e98f2a774a6afbf8d54d9ce68a/count_pages)，基準 **1.15.3**。 | **1.15.3**，正體中文整合版。 |
 | [EpubSplit](./EpubSplit/README.md) | 按目錄或章節將 EPUB 拆成多本新書。 | Jim Miller；[JimmXinu/EpubSplit，標籤 `v3.12.0`](https://github.com/JimmXinu/EpubSplit/tree/a0b31ea9c0c9b439329574c4752b24eaaab67f72)，基準 **3.12.0**。 | **3.12.0**，含本地 EPUB3 修改。 |
@@ -66,3 +66,19 @@
 | Modify ePub | 同步上游 1.8.14 的 calibre 9.18 封面替換及移除修正，保護原封面頁樣式與標題；保留邊距修正、正體中文語系、中文說明與描述，加入封面回歸測試。 |
 | Send to Kindle | 寄送檔名改用 calibre `mtp_devices.send_template` 與書庫欄位，套用寄送視窗書名並保留 Unicode；修正偏好格式設定鍵為 `preferred_format`，移除介面未使用的格式查詢，保留正體中文與中文說明。 |
 | Skip ASCII Text Plugin | 沿用執行期間替換函式、保留 Unicode 而不改寫 calibre 安裝檔的方向；重寫核心與設定介面，作者為 SamLiao & Codex；修正位元組輸入、重複切換及函式還原，避免覆蓋後續外掛替換；保留舊設定識別，加入「文」字勾號圖示、附效果示意的正體中文設定視窗、測試與統一打包，移除原包程式及圖示。 |
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄和暫存書庫驗證六支自製外掛。
+
+| 外掛 | 驗證範圍 |
+| --- | --- |
+| Embed Metadata Safe 1.0.1 | 實際將中繼資料嵌入暫存書庫的 EPUB。 |
+| Enhanced Search and Replace 1.2.0 | 搜尋、取代、格式驗證、復原，以及實際編輯器儲存重開。 |
+| Export Folder 1.2.2 | 實際匯出 EPUB／PDF、逐本格式優先選擇與範本編輯。 |
+| Toolbar Manager 1.0.0 | 19 項隔離測試通過，涵蓋工具列配置與失敗回復。 |
+| Traditional Chinese Supplement 1.1.4 | 18 項測試通過，涵蓋語系、元件顯示、設定值保護與自動啟用。 |
+| Skip ASCII Text Plugin 1.0.1 | 10 項隔離測試通過，涵蓋 Unicode、切換與函式還原。 |
+
+驗證涵蓋上述操作；實際裝置傳輸及所有第三方外掛組合尚待驗證。

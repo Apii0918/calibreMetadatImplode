@@ -68,3 +68,8 @@ python build_release.py
 ```
 
 發布 ZIP 輸出到 `dist/enhanced-search-and-replace.zip`，外掛入口與模組位於 ZIP 根目錄。此指令會重新產生所有外掛的發行附件。
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄與暫存資料驗證。通過核心搜尋、取代、格式驗證、編輯器復原，以及實際 Edit Book 儲存、關閉和重新開啟檢查。實際裝置傳輸與所有第三方外掛組合尚待驗證。

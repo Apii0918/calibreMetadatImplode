@@ -45,3 +45,8 @@ python build_release.py
 
 發布 zip 會輸出到 `dist/embed-metadata-safe.zip`。
 安裝包中的 `__init__.py` 與外掛模組位於 ZIP 根目錄。
+
+
+## calibre 9.19 相容性
+
+2026-11-21 在 Windows、calibre 9.19，以獨立設定目錄與暫存資料驗證。在暫存書庫實際將中繼資料嵌入 EPUB，並讀回確認書名。實際裝置傳輸與所有第三方外掛組合尚待驗證。

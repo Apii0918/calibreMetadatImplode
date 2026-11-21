@@ -3,6 +3,7 @@ from qt.core import (QAbstractButton, QAbstractItemView, QAction, QGroupBox, QLa
 from calibre_plugins.traditional_chinese_supplement.strings import COMMON, SCOPES
 from calibre_plugins.traditional_chinese_supplement.editor_strings import EDITOR_SCOPE, EDITOR_TEXT
 from pathlib import Path
+import re
 import sys
 
 
@@ -24,12 +25,58 @@ def scope_for(widget):
     return None
 
 
+SAVE_TEMPLATE_HELP = re.compile(
+    r'\s+'.join((
+        r'The template to control the filename and folder structure of the saved files\. Default is',
+        r'"([^"]+)" which will save books into a per-author subfolder with filenames containing title and author\.',
+        r'Available controls are: (\{[^}]+\})',
+    )).replace(' ', r'\s+')
+)
+
+
+def translate_save_help(text):
+    def replace(match):
+        template, controls = match.groups()
+        result = f'指定儲存檔案的名稱與資料夾結構。預設範本為「{template}」，會依作者建立子資料夾'
+        if controls:
+            result += f'，檔名包含書名與作者。可用欄位：{{' '.join(controls.split())}'
+        return result + '。'
+    return SAVE_TEMPLATE_HELP.sub(replace, text)
+
+
+def translate_save_template(widget):
+    description = widget.help_label.text()
+    translated = description.replace(
+        '<b>Title and series</b> will have articles moved to the end unless you change the tweak "save_template_title_series_sorting"',
+        '除非調整「儲存範本的書名與系列排序」微調設定（<code>save_template_title_series_sorting</code>），否則會將<b>書名與系列名稱</b>開頭的冠詞移到末尾。',
+    )
+    if translated != description:
+        widget.help_label.setText(translated)
+    browser = widget.template_variables
+    html = browser.toHtml()
+    if 'The calibre internal page count' in html:
+        browser.setHtml(html.replace('The calibre internal page count', 'calibre 內建頁數統計'))
+    combo = widget.opt_template
+    for field in (combo, combo.lineEdit()):
+        if field is not None:
+            for getter, setter in ((field.toolTip, field.setToolTip),
+                                   (field.statusTip, field.setStatusTip),
+                                   (field.whatsThis, field.setWhatsThis)):
+                original = getter()
+                translated = translate_save_help(original)
+                if translated != original:
+                    setter(translated)
+
+
+
 def translate_widget(widget):
     if not isinstance(widget, QWidget):
         return
     scope = scope_for(widget)
     if scope is None:
         return
+    if type(widget).__module__ == 'calibre.gui2.preferences.save_template':
+        translate_save_template(widget)
     texts = SCOPES[scope]
     def translated(text):
         if scope == EDITOR_SCOPE and text in SCOPES['calibre.gui2']:
@@ -58,6 +105,8 @@ def translate_widget(widget):
     if isinstance(widget, (QLabel, QAbstractButton)) and not isinstance(widget, QToolButton):
         old = widget.text()
         new = translated(old)
+        if scope.startswith('calibre.gui2') and isinstance(widget, QLabel):
+            new = translate_save_help(new)
         if scope == 'dedrm':
             new = new.replace('>Plugin Help</a>', '>外掛說明</a>')
         if new != old:

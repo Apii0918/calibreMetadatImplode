@@ -105,6 +105,33 @@ class DisplayTests(unittest.TestCase):
             self.assertEqual(fields(source), fields(target), source)
             self.assertEqual(source.count('%s'), target.count('%s'), source)
 
+    def test_save_template_translates_help_without_changing_template(self):
+        from calibre.gui2.preferences.save_template import SaveTemplate
+        from calibre.library.save_to_disk import config
+
+        panel = SaveTemplate()
+        self.windows.append(panel)
+        template = '{series}/[{id}]{title} - {authors}'
+        tooltip = config().get_option('template').help
+        panel.initialize('save_to_disk', template, tooltip, None)
+        # Exercise the fallback even if a future official locale supplies these translations.
+        panel.help_label.setText('<b>Title and series</b> will have articles moved to the end '
+                                 'unless you change the tweak "save_template_title_series_sorting"')
+        panel.template_variables.setHtml('<table><tr><td>pages</td>'
+                                         '<td>The calibre internal page count</td></tr></table>')
+        self.assertIn("\n", panel.opt_template.toolTip())
+        display.translate_widget(panel)
+        self.assertIn('冠詞', panel.help_label.text())
+        self.assertIn('save_template_title_series_sorting', panel.help_label.text())
+        self.assertIn('pages', panel.template_variables.toPlainText())
+        self.assertIn('calibre 內建頁數統計', panel.template_variables.toPlainText())
+        for text in (panel.opt_template.toolTip(), panel.opt_template.statusTip(), panel.opt_template.whatsThis()):
+            self.assertIn('預設範本', text)
+            self.assertIn('可用欄位', text)
+            self.assertNotIn('Available controls', text)
+        self.assertIn('{author_sort}/{title}/{title} - {authors}', panel.opt_template.toolTip())
+        self.assertEqual(panel.opt_template.text(), template)
+
     def test_semantic_values_and_business_signals_are_unchanged(self):
         root = self.root('goodreads')
         combo = QComboBox(root)
