@@ -1,0 +1,617 @@
+{
+  "format": "calibre-github-plugins",
+  "schema": 1,
+  "source": "github:samlaio/calibremetadatimplode",
+  "plugins": [
+    {
+      "name": "GitHub Plugin Updater",
+      "version": [
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.github-plugin-updater",
+      "asset": "GitHub Plugin Updater-zh_TW-release.zip",
+      "size": 28417,
+      "sha256": "7e58cff1f9a2eb8568faf34589080c097a6e1548919afeb7cc946315739c6056",
+      "package_sha256": "3b16152eec7fa6acda2b9e1ca5008b13bf7479b9b9a5ceb2fc7793205b1683fe"
+    },
+    {
+      "name": "CrossPoint Reader",
+      "version": [
+        0,
+        2,
+        8,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.crosspoint-reader",
+      "asset": "CrossPoint Reader-zh_TW-release.zip",
+      "size": 47334,
+      "sha256": "7dd552b318b22f65434fa7ce65c875fcbb659fd766d5863d03eaaf3a7dd771c1",
+      "package_sha256": "c3f2a6ffb36c22ef9dd2f90bc7f2a3e9d6567d4eb02304d0fa4003de3c48c4e1"
+    },
+    {
+      "name": "Shortcuts Helper",
+      "version": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        44,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.shortcuts-helper",
+      "asset": "Shortcuts Helper-zh_TW-release.zip",
+      "size": 135765,
+      "sha256": "5a456ddf13630f6f06980dbdeed0fe4881f719269b2ac7ed9277f955041bf486",
+      "package_sha256": "8a88fe523a06deae74e57b9579bf8e6a73a4d4c337eaaae645cacaa8e5e1bbb1"
+    },
+    {
+      "name": "CBZ Output",
+      "version": [
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.cbz-output",
+      "asset": "CBZ Output-zh_TW-release.zip",
+      "size": 18864,
+      "sha256": "14f91013cc2cce053b5dad45dd1579930f71eb2540a38bb0811b5d3d4aa9230f",
+      "package_sha256": "845515be2390231a39c9b86d7c4b03b99520326af1db0405509084f028da4ea6"
+    },
+    {
+      "name": "Plugin Backup",
+      "version": [
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.plugin-backup",
+      "asset": "Plugin Backup-zh_TW-release.zip",
+      "size": 24155,
+      "sha256": "8e5c7280290580c0218e9ac4d348d84d8807db3c791e220f211b139f40d4bda5",
+      "package_sha256": "2d920a95d8d4299d3cf55e9702b06c28f0c901189d83b53de3e644f979531395"
+    },
+    {
+      "name": "Diaps Editing Toolbag",
+      "version": [
+        0,
+        5,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.diaps-editing-toolbag",
+      "asset": "Diaps Editing Toolbag-zh_TW-release.zip",
+      "size": 98858,
+      "sha256": "bf973757e78c4bbd9a6c06dc3cabe589d241d6cc2c35ce14856cb30865bfc15f",
+      "package_sha256": "2e595c2f43fdb706a99bf316c9c59176d32bd6b35490d38d6f82b87c52e62941"
+    },
+    {
+      "name": "Columns Helper",
+      "version": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        44,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.columns-helper",
+      "asset": "Columns Helper-zh_TW-release.zip",
+      "size": 567638,
+      "sha256": "42f2e9955b6f360f882448fe52ad7c398a154df0ef7b12e0cc3fe5abc1343fa0",
+      "package_sha256": "80563c11bbe19672059cb1f84f575780a0dda20cf49e149a58e3dbf60bb9ad1b"
+    },
+    {
+      "name": "Manage Series",
+      "version": [
+        1,
+        5,
+        5,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        19,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.manage-series",
+      "asset": "Manage Series-zh_TW-release.zip",
+      "size": 103256,
+      "sha256": "0c5729a636e22bbd243347b81b031e754aa0caf338befd0ce0f09af7b1a1824f",
+      "package_sha256": "b0ba623e61ef7cfb14d2de53ccc18b7f639317af1bd4b0701a4698c1a633cb73"
+    },
+    {
+      "name": "Export Folder",
+      "version": [
+        1,
+        2,
+        2
+      ],
+      "minimum_calibre_version": [
+        9,
+        18,
+        0
+      ],
+      "supported_platforms": [
+        "windows"
+      ],
+      "id": "samlaio.export-folder",
+      "asset": "Export Folder-zh_TW-release.zip",
+      "size": 5428,
+      "sha256": "58682863afa8550d81e35c904569b3f450a499a4f1db5b65162d4f40c10232c4",
+      "package_sha256": "16afee5b2594be5c8170ed663002bac428347b23cd4c7a5b11e062e30ed09df5"
+    },
+    {
+      "name": "Goodreads Sync",
+      "version": [
+        1,
+        17,
+        6,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.goodreads-sync",
+      "asset": "Goodreads Sync-zh_TW-release.zip",
+      "size": 382611,
+      "sha256": "707c6094ee086f8af3d1b18a33b322fb59384c87228d9676ee06681fdecf7eb5",
+      "package_sha256": "1d218efdbb25fcfa949bc6b62d51dd119291c309ad92ad35b594939dc855a9d4"
+    },
+    {
+      "name": "Hardcover Sync",
+      "version": [
+        0,
+        4,
+        0,
+        2
+      ],
+      "minimum_calibre_version": [
+        7,
+        7,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.hardcover-sync",
+      "asset": "Hardcover Sync-zh_TW-release.zip",
+      "size": 79279,
+      "sha256": "c0092d6d763ba2071785cb6523983aacab36e2bf5ad7e920155a5278488c8ea8",
+      "package_sha256": "1aeb44d2bdecca406a23f1264cc195f138110a20a078745050282ec1ce49a927"
+    },
+    {
+      "name": "Markdown Output",
+      "version": [
+        1,
+        0,
+        3,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.markdown-output",
+      "asset": "Markdown Output-zh_TW-release.zip",
+      "size": 2772,
+      "sha256": "745ece64ee887e7c0255ecf22677f3ba33438d0b003ee5cf41dacf5f4192c6f7",
+      "package_sha256": "e77dc56010ad5f1c3f94cbef07e1fa5e23c2fcd2416e1f24c880a0531a397249"
+    },
+    {
+      "name": "Traditional Chinese Supplement",
+      "version": [
+        1,
+        2,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        17,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.traditional-chinese-supplement",
+      "asset": "Traditional Chinese Supplement-zh_TW-release.zip",
+      "size": 91493,
+      "sha256": "df75bae4a834aaa58fc3c2365e041bb3aeb16fd8fe8489ff6be62f9ed6c3a065",
+      "package_sha256": "ff44cd05e02e7c90bcc162258013811982bcdfe8346df714d80d070b94e2e079"
+    },
+    {
+      "name": "Enhanced Search and Replace",
+      "version": [
+        1,
+        2,
+        0
+      ],
+      "minimum_calibre_version": [
+        9,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.enhanced-search-and-replace",
+      "asset": "enhanced-search-and-replace.zip",
+      "size": 14194,
+      "sha256": "676f69e7bdb32a928e298176f0f528479aa44a49566513bcc4f12fea383ac666",
+      "package_sha256": "71b36dea64337c8a7005f212a32212ab07808ea412dfb27de25b4df196eeb8b8"
+    },
+    {
+      "name": "Toolbar Manager",
+      "version": [
+        1,
+        0,
+        0
+      ],
+      "minimum_calibre_version": [
+        9,
+        17,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.toolbar-manager",
+      "asset": "Toolbar Manager-zh_TW-release.zip",
+      "size": 62210,
+      "sha256": "4449474f02dd7047481486347d55cb99780fb033d04d73a722f474821e59b31e",
+      "package_sha256": "8d03e5d9c094834dbeb1a8089d5d17f2b8b44371fd1d46873461722f96e0a180"
+    },
+    {
+      "name": "Generate Cover",
+      "version": [
+        2,
+        5,
+        4,
+        2
+      ],
+      "minimum_calibre_version": [
+        2,
+        85,
+        1
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.generate-cover",
+      "asset": "Generate Cover-zh_TW-release.zip",
+      "size": 188044,
+      "sha256": "48470229eba4845462b6a3de4bc97b173f462da934fa0358dd72a55544035fa1",
+      "package_sha256": "81d18a71545389cf28fc884228386c7fddcf3fb4d2a0466714bd0cfba5f6f4da"
+    },
+    {
+      "name": "Skip ASCII Text Plugin",
+      "version": [
+        1,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.skip-ascii-text-plugin",
+      "asset": "Skip ASCII Text Plugin-zh_TW-release.zip",
+      "size": 18550,
+      "sha256": "d60e3b1f664d604a52a92d44fbadaf98d7d12ad66caa842c4cea6ebecaae7175",
+      "package_sha256": "4e7a6411443cf480217727d0d7ef58c36ef5d51b9ea16195f7ae275ed2b7438c"
+    },
+    {
+      "name": "Extract ISBN",
+      "version": [
+        1,
+        6,
+        7,
+        1
+      ],
+      "minimum_calibre_version": [
+        2,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.extract-isbn",
+      "asset": "Extract ISBN-zh_TW-release.zip",
+      "size": 112591,
+      "sha256": "dc7bd49bd9418210d8f15b06d5680f478e41910003e4362260d4ddee88a46fb9",
+      "package_sha256": "5f3288e23736ee52c0c241c26514a7dc99a275dc7846bfbe664b4dbe5ad38171"
+    },
+    {
+      "name": "Goodreads",
+      "version": [
+        1,
+        10,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        2,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.goodreads",
+      "asset": "Goodreads.zip",
+      "size": 96816,
+      "sha256": "e22849a21fd13502de123a68f53c98622a12a7d5abdd737a274432ac91a01daf",
+      "package_sha256": "2c6ce4d801bc1eba8549fa2ccc3cef2b1bc65f7587b1ffa91eccd299a64e817d"
+    },
+    {
+      "name": "AZW6 Image Merge",
+      "version": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        5,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.azw6-image-merge",
+      "asset": "AZW6 Image Merge-zh_TW-release.zip",
+      "size": 7395,
+      "sha256": "b6860b54ed6ffab8f281487d332273da0c2afbc3c98b674cb6d63b929fcf2133",
+      "package_sha256": "afe20c5b32daedf88069879fc6f1fa74c3bfee42302d3708ee06934c50a9665c"
+    },
+    {
+      "name": "Embed Metadata Safe",
+      "version": [
+        1,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        9,
+        8,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.embed-metadata-safe",
+      "asset": "embed-metadata-safe.zip",
+      "size": 10033,
+      "sha256": "7e933edf04852275d9e2e66ebf6561a65329aecfc3103b691cf01eb3039544a5",
+      "package_sha256": "6e1197f999abe76ebcb0434193945aea614b06aab3203d28943971c3a48120bc"
+    },
+    {
+      "name": "Modify ePub",
+      "version": [
+        1,
+        8,
+        14,
+        1
+      ],
+      "minimum_calibre_version": [
+        3,
+        48,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.modify-epub",
+      "asset": "Modify ePub-zh_TW-release.zip",
+      "size": 194964,
+      "sha256": "2dd5365d60da6e818c694a935615c55c7bf641c8d75067c06ff62f32d12cc7c4",
+      "package_sha256": "d8b81b3bea6ced168aad3f76b78a8310357cc148c262a35e470fd15f609bd894"
+    },
+    {
+      "name": "Find Duplicates",
+      "version": [
+        1,
+        10,
+        11,
+        1
+      ],
+      "minimum_calibre_version": [
+        2,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.find-duplicates",
+      "asset": "Find Duplicates-zh_TW-release.zip",
+      "size": 255309,
+      "sha256": "4d79351a5215d346614102381f7d5cb1f5e8eaea9c404a071f7e67179157c263",
+      "package_sha256": "f226e6307c3fc9f1763634b15b59dae140e8d0471b1696e49d620acf5fdb8533"
+    },
+    {
+      "name": "EpubSplit",
+      "version": [
+        3,
+        12,
+        0,
+        1
+      ],
+      "minimum_calibre_version": [
+        3,
+        48,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.epubsplit",
+      "asset": "EpubSplit-zh_TW-release.zip",
+      "size": 562441,
+      "sha256": "54226df28dd3d188540295b4de2ee84f05e6c2e5d2e9f684e60169b959754457",
+      "package_sha256": "03ea3e17a65bbc5fb44d95ff5d0a385864a5eecd1c669e437ad3ee821ea02a9a"
+    },
+    {
+      "name": "Count Pages",
+      "version": [
+        1,
+        15,
+        3,
+        1
+      ],
+      "minimum_calibre_version": [
+        3,
+        48,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.count-pages",
+      "asset": "Count Pages-zh_TW-release.zip",
+      "size": 406322,
+      "sha256": "1c2779da8389876b60da3578e15fceb365a34a5ff81d55813a84b58b6fef142f",
+      "package_sha256": "278391c98c4c9f1bd8b2b932f1d48ede84f3af16dc6486bf6a65eca0c237df5c"
+    },
+    {
+      "name": "Send to Kindle",
+      "version": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "minimum_calibre_version": [
+        2,
+        0,
+        0
+      ],
+      "supported_platforms": [
+        "windows",
+        "osx",
+        "linux"
+      ],
+      "id": "samlaio.send-to-kindle",
+      "asset": "Send to Kindle-zh_TW-release.zip",
+      "size": 96702,
+      "sha256": "3291b5bdd20340e0363be2c33eeba2da35ce31f44ee80c0ad1e68076a3ea83ab",
+      "package_sha256": "5a5ed625b0d1cbf3555a5e6455a5bb247f797aeb291f64c39d74a9513fba7fd3"
+    }
+  ]
+}

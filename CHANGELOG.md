@@ -25,12 +25,27 @@
 | Traditional Chinese Supplement | v1.3.17 | 2026-11-09 | 1.1.1 |
 | Export Folder | v1.3.20 | 2026-11-17 | 1.2.2 |
 | Manage Series | v1.3.24 | 2026-11-21 | 1.5.5.1 |
+| GitHub Plugin Updater | v1.3.27 | 2026-11-22 | 0.1 |
 | CBZ Output | v1.3.26 | 2026-11-22 | 0.1 |
 | CrossPoint Reader | v1.3.26 | 2026-11-22 | 0.2.8.1 |
 | Shortcuts Helper | v1.3.26 | 2026-11-22 | 1.1.0.1 |
 | Columns Helper | v1.3.25 | 2026-11-22 | 2.1.1.1 |
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
+
+## [v1.3.27](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.27) — 2026-11-22
+
+### GitHub 外掛更新器 0.1
+
+- 新增多個公開 GitHub 庫來源，預設追蹤本倉庫；固定 ID 與來源綁定，不以同名外掛自動接管其他分支。
+- 檢查只取得 Release 資訊與 JSON，先比較本機身分檔的內容 SHA，不同才比較清單版號；勾選並確認後才下載，不自動降版或覆蓋同版不同內容。
+- 更新前備份舊包、登錄及啟用狀態，失敗回復；支援更新自身，至少一支成功更新後才啟用「重新啟動 calibre」按鈕。
+
+### 身分與發行清單
+
+- 26 個獨立安裝包加入身分檔，包含固定 ID、來源及內容 SHA。內容雜湊排除身分檔、目錄與 ZIP 時間／壓縮資訊；完整 ZIP SHA 另供下載校驗。
+- 打包固定時間戳、屬性與順序，產生並同步根目錄及發行附件 `plugins.json`，包含各外掛名稱、版號、相容性、內容 SHA、ZIP SHA 與大小。
+- 核對內外層說明、更新紀錄與清單規格；22 項測試通過，涵蓋來源失敗隔離、SHA 優先、原生安裝／回復、自我更新、重啟按鈕及可重現打包。實體第三方來源及 macOS／Linux 尚未驗收。
 
 ## [v1.3.26](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.26) — 2026-11-22
 
