@@ -11,7 +11,7 @@
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
 | 整合發行版號 | **[v1.3.25（2026-11-22）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.25)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出二十二個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Columns Helper、Diaps Editing Toolbag、Extract ISBN、Generate Cover、Goodreads Sync、Hardcover Sync 與 Manage Series 的翻譯在打包時分別編譯。 |
-| 本次變更 | 訂定「完整上游基準版號加本倉庫修訂次數 `.x`」慣例；統一 AZW6 Image Merge、Count Pages、EpubSplit、Find Duplicates、Goodreads 與 Send to Kindle 六支外掛的程式版號與內外說明。 |
+| 本次變更 | 新增 Plugin Backup 0.1、Columns Helper 2.1.1.1 與 Diaps Editing Toolbag 0.5.0.1；訂定「完整上游基準版號加本倉庫修訂次數 `.x`」慣例；統一 AZW6 Image Merge、Count Pages、EpubSplit、Find Duplicates、Goodreads 與 Send to Kindle 六支外掛的程式版號與內外說明。 |
 
 ## 外掛版號慣例
 
