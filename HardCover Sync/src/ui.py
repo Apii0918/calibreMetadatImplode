@@ -309,7 +309,8 @@ class HardcoverSyncAction(InterfaceAction):
         self.qaction.setEnabled(loc == "library")
 
     def _setup_book_details(self):
-        if not getattr(self.gui, "current_db", None):
+        original_db = getattr(self.gui, "current_db", None)
+        if original_db is None:
             return
         try:
             changed = ensure_hardcover_lists_column(self.gui)
@@ -335,6 +336,10 @@ class HardcoverSyncAction(InterfaceAction):
                 "hardcover_lists_column_created",
                 parent=self.gui,
             )
+
+        # The confirmation runs a nested event loop that can close or switch libraries.
+        if getattr(self.gui, "current_db", None) is not original_db:
+            return
 
         def restore_and_refresh():
             restored = restore_lists_cache_to_column(self.gui)

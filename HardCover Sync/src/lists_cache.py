@@ -59,7 +59,7 @@ def save_lists_cache_entry(
 def restore_lists_cache_to_column(gui) -> list[int]:
     """Fill stale column values from the plugin cache. Returns updated book ids."""
     db = _db(gui)
-    if COLUMN_KEY not in db.field_metadata:
+    if db is None or COLUMN_KEY not in db.field_metadata:
         return []
 
     cache = get_lists_cache()

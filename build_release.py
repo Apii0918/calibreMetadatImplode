@@ -10,6 +10,23 @@ import zipfile
 ROOT = Path(__file__).resolve().parent
 PROJECTS = [
     {
+        "name": "CrossPoint Reader",
+        "source": ROOT / "CrossPoint Reader" / "src",
+        "output": ROOT / "dist" / "CrossPoint Reader-zh_TW-release.zip",
+        "compile_translations": True,
+    },
+    {
+        "name": "Shortcuts Helper",
+        "source": ROOT / "Shortcuts Helper" / "src",
+        "output": ROOT / "dist" / "Shortcuts Helper-zh_TW-release.zip",
+        "compile_translations": True,
+    },
+    {
+        "name": "CBZ Output",
+        "source": ROOT / "CBZ Output" / "src",
+        "output": ROOT / "dist" / "CBZ Output-zh_TW-release.zip",
+    },
+    {
         "name": "Plugin Backup",
         "source": ROOT / "Plugin Backup" / "src",
         "output": ROOT / "dist" / "Plugin Backup-zh_TW-release.zip",

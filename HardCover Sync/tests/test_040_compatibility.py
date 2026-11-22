@@ -19,7 +19,7 @@ from calibre.db.legacy import LibraryDatabase
 from calibre.ebooks.metadata.book.base import Metadata
 from qt.core import QApplication, QAction, QMainWindow
 ARCHIVE = Path(os.environ.get('HC_TEST_ARCHIVE', str(ROOT / 'dist/Hardcover Sync-zh_TW-release.zip')))
-EXPECTED = tuple(map(int, os.environ.get('HC_EXPECTED_VERSION', '0.4.0.1').split('.')))
+EXPECTED = tuple(map(int, os.environ.get('HC_EXPECTED_VERSION', '0.4.0.2').split('.')))
 plugin_class = loader.load(str(ARCHIVE))
 from calibre_plugins.hardcover_sync import config as cfg, ui
 from calibre_plugins.hardcover_sync.hcl_graphql import client

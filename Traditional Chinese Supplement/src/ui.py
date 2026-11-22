@@ -1,4 +1,4 @@
-from qt.core import QApplication, QCheckBox, QComboBox, QEvent, QGroupBox, QLabel, QObject, QSignalBlocker, QTimer, QWidget
+from qt.core import QApplication, QCheckBox, QComboBox, QEvent, QGroupBox, QLabel, QMenu, QObject, QSignalBlocker, QTimer, QWidget
 from calibre.gui2.actions import InterfaceAction
 from calibre.gui2.actions.polish import Polish
 from calibre.utils.localization import get_lang
@@ -116,6 +116,25 @@ def translate_window(widget):
         translate_widget(widget)
 
 
+def translate_library_actions(gui):
+    for name, module in (
+        ('Open Folder', 'calibre.gui2.actions.open'),
+        ('Show Book Details', 'calibre.gui2.actions.show_book_details'),
+    ):
+        owner = getattr(gui, 'iactions', {}).get(name)
+        if owner is None or type(owner).__module__ != module:
+            continue
+        actions = [owner.qaction]
+        menu = owner.qaction.menu()
+        if menu is not None:
+            actions.extend(menu.actions())
+        for action in actions:
+            text = action.text()
+            translated = TEXT.get(text, text)
+            if translated != text:
+                action.setText(translated)
+
+
 class TranslationFilter(QObject):
     def start(self):
         self.failures = set()
@@ -125,6 +144,7 @@ class TranslationFilter(QObject):
         self.refresh_timer.timeout.connect(self.refresh_shown_windows)
         self.active = get_lang().lower().replace('-', '_') in ('zh_tw', 'zh_hant', 'zh_hant_tw')
         if self.active:
+            translate_library_actions(self.parent())
             self.original_toolbar_data = install_toolbar_translation()
             self.original_shortcuts = install_shortcut_translation(TEXT)
             app = QApplication.instance()
@@ -156,6 +176,8 @@ class TranslationFilter(QObject):
 
     def eventFilter(self, watched, event):
         if self.active and event.type() in (QEvent.Type.Show, QEvent.Type.LayoutRequest):
+            if isinstance(watched, QMenu) and event.type() == QEvent.Type.Show:
+                translate_library_actions(self.parent())
             self.translate_safely(watched)
             if isinstance(watched, QWidget) and type(watched).__module__.startswith(('calibre.gui2.preferences', 'calibre.gui2.convert')):
                 self.pending_windows.add(watched.window())

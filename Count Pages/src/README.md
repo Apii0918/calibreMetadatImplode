@@ -1,54 +1,68 @@
-# Count Pages 外掛
-[![MobileRead][mobileread-image]][mobileread-url]
-[![History][changelog-image]][changelog-url] 
-[![License][license-image]][license-url]
-[![calibre Version][calibre-image]][calibre-url]
-[![Status][status-image]][status-image] 
+# Count Pages
 
-## 總覽
+最低 calibre：**3.48.0**；目前外掛版本為 **1.15.3.1**；作者：**Grant Drake**；授權：GPL v3。
 
-作者：**Grant Drake**；授權：GPL v3；最低 calibre：**3.48.0**。從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `Count Pages-zh_TW-release.zip` 安裝。
+`Count Pages` 是用來計算頁數、字數與可讀性統計的 calibre 外掛。
+它可以把結果寫入自訂欄位，也能依設定從外部來源抓取統計資料，適合做閱讀進度、頁數估算或 Kindle APNX 相關流程。
 
-目前為 **1.15.3.1 正體中文整合版**，基於上游 **1.15.3**：整合官方 Goodreads `.xml` 下載修正與語系更新，保留本倉庫修改，補齊正體中文提示，並修復英文斷句模型的 Windows 換行問題。正體中文涵蓋全部 119 個介面字串。
+## 目前版本與官方比對
 
-這個外掛可以計算書籍的頁數和/或字數，並把結果存到自訂欄位中。除了日常的資料庫瀏覽用途之外，Kindle 使用者還可以用頁數欄位的值產生 APNX 檔。也就是說，當你從 calibre 把電子書送到 Kindle 裝置時，就能像 Amazon 書籍一樣看到頁碼。
+目前為 **1.15.3.1 正體中文整合版**，基於上游 **1.15.3**；本次統一本倉庫版號，既有功能不變。
+比對來源為 [官方下載包](https://plugins.calibre-ebook.com/134000.zip) 與 [官方更新](https://github.com/kiwidude68/calibre_plugins/commit/d46d9197ac2f78e98f2a774a6afbf8d54d9ce68a)。
 
-這個外掛有兩種計算頁數的方法：
+| 項目 | 整合結果 |
+| --- | --- |
+| Goodreads 頁數下載 | 採用官方 `.xml` 網址修正，保留原有頁數解析與來源備援流程。 |
+| 官方語系 | 更新捷克文、法文及俄文，新增日文、韓文、斯洛伐克文、塞爾維亞文（拉丁字母）及瑞典文。 |
+| 本倉庫修改 | 保留中文說明、外掛描述、批次處理與三個正體中文語系別名；補齊 12 個提示翻譯，涵蓋全部 119 個介面字串。 |
+| 英文斷句模型 | 還原與官方一致的 `nltk_lite/english.pickle`，並加入二進位屬性，避免 Windows 換行轉換破壞模型。 |
 
-- 根據書籍格式內容估算
-- 從 Goodreads 之類的網頁下載
+Goodreads 仍屬外部網站服務，實際連線結果可能受網站防護或頁面變動影響。
 
-網站下載只提供頁數；字數與可讀性由本機計算。此外，還可以計算字數，以及各種可讀性統計，例如 [Flesch-Kincaid](http://en.wikipedia.org/wiki/Flesch%E2%80%93Kincaid_readability_test) 和 [Gunning Fog](http://en.wikipedia.org/wiki/Gunning_fog_index) 指數。
+## 功能
 
-更多資訊請參考 [Wiki](https://github.com/kiwidude68/calibre_plugins/wiki/Count-Pages)
-
-## 開發 / 貢獻
-
-kiwidude 的所有 calibre 外掛目前都在 GitHub 上開發與維護：
-- https://github.com/kiwidude68/calibre_plugins
-
-更多資訊請參考該網站中的 README.md 與 CONTRIBUTING.md。
-
-
-[mobileread-image]: https://img.shields.io/badge/MobileRead-Plugin%20Thread-blue?logo=data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAns32/zqT5v8SeeD/Enng/xJ54P8SeeD/LYvl/3+78v8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZazv/xJ54P8SeeD/Enng/zqT5v9Jm+n/HoLi/xJ54P8SeeD/OpPm/wAAAAAAAAAAAAAAAAAAAAAAAAAAzub7/xJ54P8SeeD/Enng/4/D9P/p6en/0tLS/8Tc8P8SeeD/Enng/xJ54P+Pw/T/AAAAAAAAAAAAAAAAAAAAAL3e+v8SeeD/Enng/xJ54P+93vr/Wlpa/zc3N/8AAAAAEnng/xJ54P8SeeD/f7vy/wAAAAAAAAAAAAAAAAAAAAAAAAAAHoLi/xJ54P8SeeD/T3+r/yQkJP9+jpz/Zazv/xJ54P8SeeD/Enng/73e+v8AAAAAAAAAAAAAAAAAAAAAz8Kt/66uof+Gj4L/ho+C/5SKb/+Vh2j/ho+C/4aPgv+Gj4L/ho+C/5OVgv+6qYP/yryi/wAAAAAAAAAAp5BW/6eQVv+nkFb/p5BW/6eQVv+nkFb/p5BW/6eQVv+nkFb/p5BW/6eQVv+nkFb/p5BW/6eQVv8AAAAA6ePb46eQVv+nkFb/p5BW/6eQVv+nkFb/xLWY/8/Crf/Pwq3/vq6N/7qogv+6qIL/uqiC/7qogv+nkFb/5uDW/+bg1v+nkFb/p5BW/6eQVv+nkFb/p5BW/+zn4f///////////8zMzP92dnb/VFRU/9nZ2f//////taJ5/8/Crf/m4Nb/p5BW/6eQVv+nkFb/p5BW/6eQVv/m4Nb////////////MzMz/k5OT/8zMzP/z8/P//////8S1mP/EtZj/5uDW/6eQVv+nkFb/p5BW/6eQVv+nkFb/oZ6Z/5OTk//m5ub/////////////////8/Pz/3Z2dv9xcHD/j4h7/9rRwf+nkFb/p5BW/6eQVv+nkFb/VVNP/8zMzP/z8/P/dnZ2/9nZ2f///////////5OTk//z8/P//////3Rxa//Pwq3/p5BW/6eQVv+nkFb/p5BW/2FgYP///////////76+vv/MzMz///////////+ioqL/oqKi/76+vv91b2X/z8Kt/6eQVv+nkFb/p5BW/6eQVv+JfWX/bGtq/4WFhf+FhYX//////////////////////76+vv++vr7/taJ5/8/Crf+nkFb/p5BW/6eQVv+nkFb/p5BW/8m7ov//////+Pb1/+bg1v/g2Mz/z8Kt/8/Crf+6qIL/uqiC/6eQVv/m4Nb/uqmD/7qpg/+nkFb/p5BW/6eQVv+nkFb/rZZh/7qpg/+/r43/z8Kt/8/Crf/m4NYd5uDWVQAAAAAAAAAA8A8AAOAHAADAAwAAwEMAAOADAADAAQAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAA==
-[mobileread-url]: https://www.mobileread.com/forums/showthread.php?t=134000
-
-[changelog-image]: https://img.shields.io/badge/History-CHANGELOG-blue.svg
-[changelog-url]: CHANGELOG.md
-
-[license-image]: https://img.shields.io/badge/License-GPL-yellow.svg
-[license-url]: https://www.gnu.org/licenses/gpl-3.0.en.html
-
-[calibre-image]: https://img.shields.io/badge/calibre-3.48.0-green
-[calibre-url]: https://www.calibre-ebook.com/
-
-[status-image]: https://img.shields.io/badge/Status-Stable-green
-
-## 中文摘要
-
-`Count Pages` 是用來計算頁數、字數與可讀性統計的 calibre 外掛，常用來把結果寫入自訂欄位。
-
-- 可依書籍內容估算頁數，或從外部來源下載資料
-- 可把頁數、字數與可讀性統計寫回書庫
-- 適合做 Kindle APNX、閱讀統計或書庫整理流程
+- 計算頁數、字數與可讀性統計
+- 把結果寫入 calibre 自訂欄位
+- 支援依書籍內容估算，或從外部來源下載統計資料
+- 可搭配 Kindle APNX 或其他頁數工作流程
 - 內建正體中文介面語系
+
+## 使用方式
+
+1. 先在 calibre 建好要存放結果的自訂欄位。
+2. 對選取書籍執行 `Count Pages`。
+3. 依需求選擇估算或下載來源。
+4. 將頁數、字數與可讀性統計寫回書庫。
+
+## 安裝
+
+從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `Count Pages-zh_TW-release.zip`，於 calibre「偏好設定 → 外掛 → 從檔案載入外掛」安裝並重新啟動。
+
+## 原始 GitHub
+
+- [kiwidude68/calibre_plugins/tree/main/count_pages](https://github.com/kiwidude68/calibre_plugins/tree/main/count_pages)
+
+## 說明
+
+- 頁數可依內容估算或從網站下載；字數與可讀性統計由本機計算，不是從網站下載。
+- 目前這個倉庫收錄的是外掛發行內容，可直接納入 calibre 外掛打包流程。
+
+## 打包
+
+在倉庫根目錄執行：
+
+```powershell
+python build_release.py
+```
+
+發布 zip 會輸出到 `dist/Count Pages-zh_TW-release.zip`。
+
+## 測試
+
+```powershell
+calibre-debug -e "Count Pages/tests/test_update.py"
+```
+
+測試使用離線頁面驗證 Goodreads 網址、頁數解析及來源備援，並載入實際英文斷句模型，檢查三個正體中文語系的完整覆蓋率。
+
+可讀性指標與英文斷句模型主要面向西文，不代表中文閱讀難度；是否產生 APNX 頁碼仍取決於實際 Kindle 裝置與傳輸流程。完整版本紀錄見 [CHANGELOG](./src/CHANGELOG.md)。

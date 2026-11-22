@@ -1,12 +1,12 @@
 # Hardcover Sync
 
-版本：**0.4.0.1**；原作者：**Juan York**；授權：GPL v3；最低 calibre：**7.7.0**。基於上游 **0.4.0**，隨整合版 v1.3.18 發布。
+版本：**0.4.0.2**；原作者：**Juan York**；授權：GPL v3；最低 calibre：**7.7.0**。基於上游 **0.4.0** 的第二次本倉庫修訂。
 
 ## 用途
 
 與 Hardcover 同步清單、評分、書評、閱讀狀態、筆記與引文，並可從書籍內文擷取 ISBN。
 
-安裝包見 [v1.3.18 發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.18)。
+執行根目錄 `python build_release.py` 取得 `dist/Hardcover Sync-zh_TW-release.zip`，或從[本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases)取得對應附件。
 
 ## 安裝與使用
 
@@ -33,11 +33,11 @@
 
 ## 測試與限制
 
-本版在 Windows、calibre 9.18.0 通過 9 項測試：外掛載入、設定保存、Qt 選擇視窗、ISBN 與 Hardcover 識別碼寫入測試書庫、模擬 API 成功及錯誤回應，以及翻譯格式與語系別名。完整主視窗啟動測試尚未通過驗收，不代表外掛本身已確認有錯。
+本版在 Windows、calibre 9.18.0 通過 9 項測試：外掛載入、設定保存、Qt 選擇視窗、ISBN 與 Hardcover 識別碼寫入測試書庫、模擬 API 成功及錯誤回應，以及翻譯格式與語系別名。上述為 0.4.0.1 的既有測試範圍。
 
 已使用本機儲存的 API 金鑰，在 calibre 9.18.0 成功驗證帳號並讀取真實清單、評分、閱讀狀態及書評；未執行遠端寫入或日常書庫回寫。
 
-同步會變更書庫或遠端資料，請先備份並核對方向。自動化測試使用獨立設定與測試書庫並封鎖網路；另有真實帳號唯讀測試，尚未驗收雙向寫入與完整主視窗操作。
+同步會變更書庫或遠端資料，請先備份並核對方向。自動化測試使用獨立設定與測試書庫並封鎖網路；另有真實帳號唯讀測試，尚未驗收雙向遠端寫入與所有主視窗操作。
 
 ```powershell
 $env:CALIBRE_CONFIG_DIRECTORY = Join-Path $PWD 'dist/standalone-qa/config'
@@ -48,3 +48,5 @@ python -B "HardCover Sync/tests/test_catalog.py"
 ```
 
 Windows 注意：若 `HardCover Sync` 與 `Hardcover Sync` 兩筆紀錄指向同一檔案，不要直接刪除其中一個安裝包。先關閉 calibre 並備份設定，再清除舊大小寫名稱的重複登記，保留新版 ZIP 與帳號資料。
+
+2026-11-22 的 0.4.0.2 在 Windows、calibre 9.19 重現並修正首次欄位確認期間關閉／切換書庫後仍還原快取的錯誤。13 項隔離測試通過；原生主視窗在舊版重現相同例外，新版提前關閉與正常確認兩種流程均無例外。未使用正式書庫或執行遠端寫入。新增測試為 `tests/test_initialization_lifecycle.py` 與 `tests/test_gui_shutdown.py`；後者需先在新的 `dist/` 設定目錄安裝 ZIP。

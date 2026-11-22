@@ -1,0 +1,79 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_TW\n"
+
+msgid "Shortcuts Helper"
+msgstr "快捷鍵助手"
+
+msgid "Quick access to Shortcuts preferences and current shortcuts list"
+msgstr "快速開啟快捷鍵偏好設定與目前快捷鍵清單"
+
+msgid "Quick access to Calibre's Keyboard Shortcuts preferences and current shortcuts list"
+msgstr "快速開啟 calibre 的鍵盤快捷鍵偏好設定與目前快捷鍵清單"
+
+msgid "Open Shortcuts Preferences"
+msgstr "開啟快捷鍵偏好設定"
+
+msgid "Show Current Shortcuts"
+msgstr "顯示目前快捷鍵"
+
+msgid "Choose what the toolbar button click opens."
+msgstr "選擇點擊工具列按鈕時開啟的功能。"
+
+msgid "Direct toolbar click action:"
+msgstr "直接點擊工具列的動作："
+
+msgid "Current Shortcuts"
+msgstr "目前快捷鍵"
+
+msgid "Filter:"
+msgstr "篩選："
+
+msgid "Search shortcuts..."
+msgstr "搜尋快捷鍵…"
+
+msgid "Filter shortcuts by action, group, default, or current keys"
+msgstr "依動作、群組、預設或目前按鍵篩選快捷鍵"
+
+msgid "Use colour if Current is Custom"
+msgstr "以色彩標示自訂快捷鍵"
+
+msgid "Action"
+msgstr "動作"
+
+msgid "Group"
+msgstr "群組"
+
+msgid "Default"
+msgstr "預設"
+
+msgid "Current"
+msgstr "目前"
+
+msgid "None"
+msgstr "無"
+
+msgid "Sort - Alphabetic"
+msgstr "排序－字母順序"
+
+msgid "Sort - Modifier.Key"
+msgstr "排序－修飾鍵優先"
+
+msgid "Sort - Key.Modifier"
+msgstr "排序－主按鍵優先"
+
+msgid "Shortcuts Helper - Run configured action"
+msgstr "快捷鍵助手－執行設定的動作"
+
+msgid "Configure plugin..."
+msgstr "設定外掛…"
+
+msgid "Direct click: {}\nUse the arrow for menu actions"
+msgstr "直接點擊：{}\n使用箭頭開啟動作選單"
+
+msgid "Shortcuts Helper: Open Shortcuts Preferences"
+msgstr "快捷鍵助手：開啟快捷鍵偏好設定"
+
+msgid "Shortcuts Helper: Show Current Shortcuts"
+msgstr "快捷鍵助手：顯示目前快捷鍵"

@@ -1,48 +1,46 @@
 # EpubSplit
 
-This is a repository for the EpubSplit Calibre Plugin.
+版本：**3.12.0.1（本倉庫修訂版）**；最低 calibre：**3.48.0**；作者：**Jim Miller**；授權：GPL v3。上游固定基準為官方 3.12.0。
 
-本倉庫修訂版：**3.12.0.1**；作者：**Jim Miller**；GPL v3；最低 calibre：**3.48.0**。安裝包為 `EpubSplit-zh_TW-release.zip`，由 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載。官方 3.12.0 不含下述 EPUB3 修改。
+`EpubSplit` 是把一本 EPUB 拆成多本新書的 calibre 外掛。
+它特別適合處理合集、雜誌、連載或長篇作品，讓你可以把同一本 EPUB 依章節或 TOC 節點拆成獨立條目。
 
-## 中文摘要
+## 功能
 
-`EpubSplit` 是把一本 EPUB 拆成多本新書的 calibre 外掛，適合把合集、連載或長篇作品切成獨立條目。
-
-- 依 TOC 或章節節點拆分 EPUB
+- 依目錄或章節節點拆分 EPUB
 - 產生新的獨立書籍與中繼資料
-- 支援 EPUB2 NCX 與 EPUB3 導覽目錄，依來源版本輸出 EPUB2 或 EPUB3
-- 會整理拆分後所需的資源與連結
+- 支援 EPUB2 的 NCX 目錄；本倉庫另加入 EPUB3 導覽目錄解析，並依來源版本輸出 EPUB2 或 EPUB3
+- 保留必要資源與內部連結修正
 - HTML 解析器依序嘗試 `html5lib`、`lxml` 與 `html.parser`
 
-於 calibre 中一次選取一本未受 DRM 保護的 EPUB，再選擇要拆出的段落。原有正體中文翻譯與上述本倉庫修改均保留。
+## 使用方式
 
-Most discussion of this plugin takes place in the [EpubSplit Calibre Plugin forum].
+1. 在 calibre 書庫中選取一本要拆分、且未受 DRM 保護的 EPUB。
+2. 開啟 `EpubSplit` 外掛。
+3. 選擇拆分位置與輸出方式。
+4. 讓外掛建立新的書籍條目。
 
-Splitting omnibus eBooks into multiple eBooks seems to be a common request, but there haven't been many tools to do so without a lot of hand editing.
+## 安裝
 
-This plugin provides the ability to create new EPUBs by splitting off part of an existing (non-DRM) EPUB format eBook.
+從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `EpubSplit-zh_TW-release.zip`，於 calibre「偏好設定 → 外掛 → 從檔案載入外掛」安裝並重新啟動。上游官方 ZIP 不含本倉庫的 EPUB3 修改。
 
-Main Features of EpubSplit Plugin:
+## 原始 GitHub
 
-* Present the user with a list of 'split lines' in the existing EPUB. The beginning of each file listed in the manifest spine and each Table of Contents(TOC) entry. <guide> tagged files are also indicated.
-* 'Preview' contents of each 'split line' as a tooltip over the HREF.
-* Allow user to edit the TOC entry(s) for each 'line'.
-* Select one or more of the offered lines to include in the new eBook,
-* Edit the metadata for the new split eBook, and then,
-* Extract only the selected contents of the source EPUB into the new EPUB,
-* Scan the selected content for CSS & image links for additional files to include,
-* Scan the selected content for internal links and anchors and update links that need to point to different filenames,
-* Use the metadata entered into calibre for the new eBook (including cover) as the metadata in the new EPUB.
-* Return to list of source EPUB sections after creating a new split EPUB.
-* Configure which metadata from source EPUB to copy to new eBook, now offering more of the standard metadata and custom columns.
-* Configurably populate a custom column with the source book title/author/etc.
-* CLI via `calibre-debug --run-plugin EpubSplit -- [options] <input epub> [line numbers...]`
+- [JimmXinu/EpubSplit](https://github.com/JimmXinu/EpubSplit)
 
-While EpubSplit doesn't have a `pip` package distribution, you can use it as a stand-alone CLI by downloading `epubsplit.py` and executing with python.  However, I offer only minimal support for that option at this time.
+## 結構
 
-[NightMachinary](https://github.com/NightMachinary) has contributed a [zsh script for calling epubsplit.py](https://github.com/JimmXinu/EpubSplit/wiki/Automatic-EPUB-Splitting-(zsh-script))
+- `src/`：外掛原始碼
+- `src/translations/`：語系檔，包含正體中文
 
+## 打包
 
+在倉庫根目錄執行：
 
-[EpubSplit Calibre Plugin forum]: http://www.mobileread.com/forums/showthread.php?t=178799
+```powershell
+python build_release.py
+```
 
+發布 zip 會輸出到 `dist/EpubSplit-zh_TW-release.zip`。
+
+更新紀錄見 [CHANGELOG](./CHANGELOG.md)。

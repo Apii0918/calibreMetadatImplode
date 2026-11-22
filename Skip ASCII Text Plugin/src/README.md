@@ -1,5 +1,7 @@
 # Skip ASCII Text Plugin（保留原文字元）
 
+本倉庫自研（獨立重寫），版號獨立管理。
+
 版本：**1.0.1**；作者：**SamLiao & Codex**；授權：GPL v3；最低 calibre：5.0.0。
 
 ## 功用與理念

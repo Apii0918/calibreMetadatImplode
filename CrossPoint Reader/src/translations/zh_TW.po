@@ -1,0 +1,406 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_TW\n"
+
+msgid " s"
+msgstr " 秒"
+
+msgid "Enable debug logging"
+msgstr "啟用偵錯記錄"
+
+msgid "Fetch metadata for side-loaded books (downloads each once on connect)"
+msgstr "讀取自行放入書籍的中繼資料（連線時各下載一次）"
+
+msgid "Send to root (ignore any template)"
+msgstr "傳送到根目錄（忽略範本）"
+
+msgid "Overwrite file if it already exists on the device"
+msgstr "覆蓋閱讀器上已存在的同名檔案"
+
+msgid "Optimize EPUBs before transfer"
+msgstr "傳輸前最佳化 EPUB"
+
+msgid "Convert images to grayscale"
+msgstr "將圖片轉為灰階"
+
+msgid "Auto-crop uniform margins"
+msgstr "自動裁切一致的邊白"
+
+msgid "Split large chapters/paragraphs, remove fonts (prevents out-of-memory)"
+msgstr "分割大型章節／段落並移除字型（避免記憶體不足）"
+
+msgid "Auto-detect"
+msgstr "自動偵測"
+
+msgid "X4 (480×800)"
+msgstr "X4（480×800）"
+
+msgid "X3 (528×792)"
+msgstr "X3（528×792）"
+
+msgid "Leave blank to use Calibre's send-to-device template"
+msgstr "留白時使用 calibre 的傳送到裝置範本"
+
+msgid "Host"
+msgstr "主機"
+
+msgid "Port"
+msgstr "連接埠"
+
+msgid "Host and port settings are fallback values used only when the device is not auto-discoverable by UDP broadcast."
+msgstr "主機與連接埠用於探索時的備援目標；必須確認閱讀器檔案服務可用才會連線。"
+
+msgid "Upload path"
+msgstr "上傳路徑"
+
+msgid "Upload template"
+msgstr "上傳範本"
+
+msgid "Chunk size"
+msgstr "傳輸區塊大小"
+
+msgid "<b>Upload reliability</b>"
+msgstr "<b>傳輸穩定性</b>"
+
+msgid "Retries resend the current book from the beginning after transient WebSocket failures."
+msgstr "WebSocket 暫時失敗後，會從頭重新傳送目前書籍。"
+
+msgid "Upload retries"
+msgstr "上傳重試次數"
+
+msgid "Retry delay"
+msgstr "重試間隔"
+
+msgid "Delay between books"
+msgstr "書籍間的等候時間"
+
+msgid "Socket timeout"
+msgstr "連線逾時"
+
+msgid "<b>Optimizer</b>"
+msgstr "<b>最佳化</b>"
+
+msgid "Mirrors the CrossPoint web optimizer: resizes images to the screen, converts to grayscale and re-encodes as JPEG, then rewrites the EPUB. A summary is shown after each transfer."
+msgstr "沿用 CrossPoint 網頁最佳化器：依螢幕縮放圖片、轉成灰階並重編碼為 JPEG，再重建 EPUB。傳輸完成後會顯示摘要。"
+
+msgid "Device target"
+msgstr "目標裝置"
+
+msgid "JPEG quality"
+msgstr "JPEG 品質"
+
+msgid "Discovery log will appear here when debug is enabled."
+msgstr "啟用偵錯後，這裡會顯示裝置探索記錄。"
+
+msgid "Refresh Log"
+msgstr "重新整理記錄"
+
+msgid "Log"
+msgstr "記錄"
+
+msgid "[CrossPoint] failed to open optimizer dialog: {0}"
+msgstr "[CrossPoint] 無法開啟最佳化視窗：{0}"
+
+msgid "[CrossPoint] optimizer dialog finish failed: {0}"
+msgstr "[CrossPoint] 最佳化摘要完成時發生錯誤：{0}"
+
+msgid "Done: %d book(s), %d image(s), %d fix(es)%s"
+msgstr "完成：%d 本書、%d 張圖片、%d 項修正%s"
+
+msgid "Total size: %s → %s  (%+.0f%%)"
+msgstr "總大小：%s → %s（%+.0f%%）"
+
+msgid "CrossPoint optimizer"
+msgstr "CrossPoint 最佳化"
+
+msgid "Optimization complete."
+msgstr "最佳化完成。"
+
+msgid "   %d error(s)"
+msgstr "   %d 項錯誤"
+
+msgid "[CrossPoint] add_books_to_metadata: {0} locations, {1} booklists"
+msgstr "[CrossPoint] 加入書單：{0} 個位置、{1} 份書單"
+
+msgid "[CrossPoint] deleting {0} books: {1}"
+msgstr "[CrossPoint] 正在刪除 {0} 本書：{1}"
+
+msgid "[CrossPoint] deleted paths: {0}"
+msgstr "[CrossPoint] 已刪除路徑：{0}"
+
+msgid "[CrossPoint] removed {0} items from device list"
+msgstr "[CrossPoint] 已從裝置清單移除 {0} 個項目"
+
+msgid "A CrossPoint Reader is already connected at {0}:{1}"
+msgstr "CrossPoint 閱讀器已連接至 {0}:{1}"
+
+msgid "Found a CrossPoint Reader at {0}:{1}"
+msgstr "已找到 CrossPoint 閱讀器：{0}:{1}"
+
+msgid "[CrossPoint] chunk_size capped to 2048 (was {0})"
+msgstr "[CrossPoint] 區塊大小已限制為 2048（原為 {0}）"
+
+msgid "[CrossPoint] delete OK: {0}"
+msgstr "[CrossPoint] 刪除成功：{0}"
+
+msgid "[CrossPoint] rejected discovery: {0}"
+msgstr "[CrossPoint] 已拒絕未通過驗證的裝置：{0}"
+
+msgid "Error while probing for a CrossPoint Reader: {0}"
+msgstr "探索 CrossPoint 閱讀器時發生錯誤：{0}"
+
+msgid "[CrossPoint] detected device model: {0}"
+msgstr "[CrossPoint] 已偵測裝置型號：{0}"
+
+msgid "[CrossPoint] device model detection failed: {0}"
+msgstr "[CrossPoint] 裝置型號偵測失敗：{0}"
+
+msgid "[CrossPoint] listing {0} failed: {1}"
+msgstr "[CrossPoint] 無法讀取 {0} 清單：{1}"
+
+msgid "[CrossPoint] template format failed: {0}"
+msgstr "[CrossPoint] 範本格式處理失敗：{0}"
+
+msgid "[CrossPoint] {0} already on device; overwriting"
+msgstr "[CrossPoint] 裝置上已有 {0}，正在覆蓋"
+
+msgid "[CrossPoint] optimization failed for {0}: {1} (sending original)"
+msgstr "[CrossPoint] {0} 最佳化失敗：{1}（改傳原檔）"
+
+msgid "[CrossPoint] added to booklist: {0}"
+msgstr "[CrossPoint] 已加入書單：{0}"
+
+msgid "[CrossPoint] WARNING: booklists empty, could not add {0}"
+msgstr "[CrossPoint] 警告：書單為空，無法加入 {0}"
+
+msgid "[CrossPoint] delete error {0}: {1}"
+msgstr "[CrossPoint] 刪除錯誤 {0}：{1}"
+
+msgid "[CrossPoint] pruned empty folder: {0}"
+msgstr "[CrossPoint] 已移除空資料夾：{0}"
+
+msgid "[CrossPoint] library index unavailable: {0}"
+msgstr "[CrossPoint] 無法使用書庫索引：{0}"
+
+msgid "[CrossPoint] metadata read failed for {0}: {1}"
+msgstr "[CrossPoint] 無法讀取 {0} 中繼資料：{1}"
+
+msgid "[CrossPoint] disconnected: {0}"
+msgstr "[CrossPoint] 已斷線：{0}"
+
+msgid "HTTP request failed: {0}"
+msgstr "HTTP 請求失敗：{0}"
+
+msgid "Invalid JSON response: {0}"
+msgstr "JSON 回應格式無效：{0}"
+
+msgid "[CrossPoint] mkdir ignored (already exists): {0} in {1}"
+msgstr "[CrossPoint] 資料夾已存在，略過建立：{1}/{0}"
+
+msgid "[CrossPoint] mkdir error ignored, folder exists: {0} in {1}: {2}"
+msgstr "[CrossPoint] 資料夾已存在，略過建立錯誤：{1}/{0}：{2}"
+
+msgid "[CrossPoint] could not open optimizer dialog: {0}"
+msgstr "[CrossPoint] 無法開啟最佳化視窗：{0}"
+
+msgid "[CrossPoint] {0} already on device; skipping"
+msgstr "[CrossPoint] 裝置上已有 {0}，已略過"
+
+msgid "[CrossPoint] could not finalize optimizer dialog: {0}"
+msgstr "[CrossPoint] 無法完成最佳化摘要：{0}"
+
+msgid "Delete failed: {0} {1}"
+msgstr "刪除失敗：{0} {1}"
+
+msgid "Delete failed: {0}"
+msgstr "刪除失敗：{0}"
+
+msgid "[CrossPoint] prune: listing {0} failed, skipping: {1}"
+msgstr "[CrossPoint] 清理：無法讀取 {0}，已略過：{1}"
+
+msgid "[CrossPoint] prune: could not delete {0}: {1}"
+msgstr "[CrossPoint] 清理：無法刪除 {0}：{1}"
+
+msgid "Failed to download {0}: {1}"
+msgstr "無法下載 {0}：{1}"
+
+msgid "mkdir failed for {0} in {1}: {2}"
+msgstr "無法在 {1} 建立資料夾 {0}：{2}"
+
+msgid "[CrossPoint] pre-overwrite delete failed for {0}: {1}"
+msgstr "[CrossPoint] 覆蓋前刪除 {0} 失敗：{1}"
+
+msgid "[CrossPoint] {0} already on device; recording without re-upload"
+msgstr "[CrossPoint] 裝置上已有 {0}，只更新記錄，不重新上傳"
+
+msgid "[CrossPoint] upload failed for {0} attempt {1}/{2}: {3}"
+msgstr "[CrossPoint] {0} 第 {1}/{2} 次上傳失敗：{3}"
+
+msgid "Upload failed for {0} after {1} attempt(s): {2}"
+msgstr "{0} 上傳失敗，已嘗試 {1} 次：{2}"
+
+msgid "[CrossPoint] partial upload cleanup ignored for {0}: {1}"
+msgstr "[CrossPoint] 略過 {0} 的未完成上傳清理：{1}"
+
+msgid "CrossPoint Reader wireless device"
+msgstr "CrossPoint Reader 無線閱讀器"
+
+msgid "Looking for a CrossPoint Reader on the network..."
+msgstr "正在網路上尋找 CrossPoint 閱讀器…"
+
+msgid "No CrossPoint Reader detected on the network"
+msgstr "網路上未偵測到 CrossPoint 閱讀器"
+
+msgid "Transferring books to device..."
+msgstr "正在傳送書籍到閱讀器…"
+
+msgid "Reading books on device..."
+msgstr "正在讀取閱讀器書單…"
+
+msgid "[CrossPoint] /api/status returned no device model"
+msgstr "[CrossPoint] 狀態服務未回傳裝置型號"
+
+msgid "Attempt to open a closed device"
+msgstr "無法開啟已斷線的閱讀器"
+
+msgid "Optimizing %d book(s) for %s…"
+msgstr "正在最佳化 %d 本書，目標為 %s…"
+
+msgid "In-memory uploads are not supported"
+msgstr "不支援只存在記憶體中的上傳檔案"
+
+msgid "Uploading %s …"
+msgstr "正在上傳 %s…"
+
+msgid "Retrying transfer to device..."
+msgstr "正在重試傳送到閱讀器…"
+
+msgid "OPF cover meta"
+msgstr "OPF 封面中繼資料"
+
+msgid "%s (%s) — target %s %dx%d, quality %d%%, grayscale %s, auto-crop %s"
+msgstr "%s（%s）－目標 %s %dx%d、品質 %d%%、灰階 %s、自動裁切 %s"
+
+msgid "Optimized %d image(s), %d fix(es) — %s → %s (%+.0f%%) in %.1fs"
+msgstr "已最佳化 %d 張圖片、%d 項修正：%s → %s（%+.0f%%），耗時 %.1f 秒"
+
+msgid "SVG images (%d)"
+msgstr "SVG 圖片（%d 張）"
+
+msgid "opf parse failed"
+msgstr "OPF 解析失敗"
+
+msgid "%s: %s (kept original)"
+msgstr "%s：%s（保留原檔）"
+
+msgid " [cropped]"
+msgstr "［已裁切］"
+
+msgid "NCX identifier synced"
+msgstr "已同步 NCX 識別碼"
+
+msgid "[CrossPoint WS] discovery local {0} {1}"
+msgstr "[CrossPoint WS] 本機探索位址 {0} {1}"
+
+msgid "[CrossPoint WS] discovery subnet broadcast {0}"
+msgstr "[CrossPoint WS] 子網路廣播位址 {0}"
+
+msgid "[CrossPoint WS] discovery {0} {1}"
+msgstr "[CrossPoint WS] 探索回覆 {0} {1}"
+
+msgid "[CrossPoint WS] discovery send failed {0}:{1} {2}"
+msgstr "[CrossPoint WS] 無法傳送探索訊息至 {0}:{1}：{2}"
+
+msgid "Handshake OK"
+msgstr "交握成功"
+
+msgid "Socket not connected"
+msgstr "連線通道尚未連接"
+
+msgid "Sending START"
+msgstr "傳送 START 指令"
+
+msgid "Handshake failed: "
+msgstr "交握失敗："
+
+msgid "Timed out waiting for text frame"
+msgstr "等候文字訊框逾時"
+
+msgid "Server closed connection"
+msgstr "伺服器已關閉連線"
+
+msgid "Connection closed"
+msgstr "連線已關閉"
+
+msgid "Ignoring non-text opcode"
+msgstr "略過非文字操作碼"
+
+msgid "Socket closed"
+msgstr "連線通道已關閉"
+
+msgid "[CrossPoint WS] discovery bind failed"
+msgstr "[CrossPoint WS] 無法綁定探索連接埠"
+
+msgid "Failed to connect: "
+msgstr "無法連線："
+
+msgid "Failed to send handshake: "
+msgstr "無法傳送交握請求："
+
+msgid "Failed to send WebSocket frame: "
+msgstr "無法傳送 WebSocket 訊框："
+
+msgid "[CrossPoint WS] ignored invalid discovery response"
+msgstr "[CrossPoint WS] 已略過無效的探索回覆"
+
+msgid "Unexpected response: "
+msgstr "收到非預期回應："
+
+msgid "Failed to read handshake: "
+msgstr "無法讀取交握回應："
+
+msgid "Failed to read WebSocket frame: "
+msgstr "無法讀取 WebSocket 訊框："
+
+msgid "no OPF found, text splitting skipped"
+msgstr "找不到 OPF，已略過文字分割"
+
+msgid "extracted %.1f KB data-URI image -> %s"
+msgstr "已擷取 %.1f KB 的內嵌資料圖片 → %s"
+
+msgid "%s -> %d files (max %d B)"
+msgstr "%s → %d 個檔案（最大 %d 位元組）"
+
+msgid "removed %d embedded font(s)"
+msgstr "已移除 %d 個內嵌字型"
+
+msgid "split oversized paragraphs in %d file(s)"
+msgstr "已分割 %d 個檔案中的過大段落"
+
+msgid "text splitting skipped: %s"
+msgstr "已略過文字分割：%s"
+
+msgid "%s: file split produced text diff, reverted"
+msgstr "%s：分割檔案造成文字差異，已還原"
+
+msgid "unterminated tag"
+msgstr "標籤尚未結束"
+
+msgid "unbalanced markup"
+msgstr "標記不配對"
+
+msgid "unterminated comment"
+msgstr "註解尚未結束"
+
+msgid "%s: file split skipped (%s)"
+msgstr "%s：已略過檔案分割（%s）"
+
+msgid "data-URI image kept raw (%s)"
+msgstr "內嵌資料圖片維持原樣（%s）"
+
+msgid "%s: paragraph pass skipped (%s)"
+msgstr "%s：已略過段落處理（%s）"
+
+msgid "%s: paragraph pass produced text diff, reverted"
+msgstr "%s：段落處理造成文字差異，已還原"
