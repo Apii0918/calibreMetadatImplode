@@ -5,10 +5,10 @@ from pathlib import Path
 from calibre.gui2 import error_dialog, info_dialog, open_local_file, open_url
 from calibre.utils.config import JSONConfig, config_dir
 from calibre.utils.ipc.launch import Worker
-from qt.core import (QDialog, QDialogButtonBox, QFileDialog, QHBoxLayout, QLabel, QPlainTextEdit, QProcess,
+from qt.core import (QDialog, QDialogButtonBox, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QProcess,
                      QPushButton, QTableWidget, QTableWidgetItem, Qt, QUrl, QVBoxLayout, QMessageBox)
 
-from .core import DEFAULT_REPO, backup_directory, digest, installed_plugins, repository
+from .core import DEFAULT_REPO, backup_directory, digest, installed_plugins, repository, validate_token
 
 
 class SortItem(QTableWidgetItem):
@@ -24,7 +24,7 @@ class UpdaterDialog(QDialog):
     def __init__(self, gui):
         super().__init__(gui)
         self.gui = gui
-        self.setWindowTitle('GitHub 外掛更新器 0.3')
+        self.setWindowTitle('GitHub 外掛更新器 0.3.1')
         self.resize(1000, 650)
         self.prefs = JSONConfig('plugins/github_plugin_updater')
         self.rows, self.process, self.temporary = [], None, None
@@ -98,7 +98,13 @@ class UpdaterDialog(QDialog):
         buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, dialog)
         buttons.accepted.connect(dialog.accept)
         buttons.rejected.connect(dialog.reject)
-        layout.addWidget(buttons)
+        footer = QHBoxLayout()
+        token_button = QPushButton('設定 GitHub Token', dialog)
+        token_button.clicked.connect(self.edit_token)
+        footer.addWidget(token_button)
+        footer.addStretch()
+        footer.addWidget(buttons)
+        layout.addLayout(footer)
         if dialog.exec() == QDialog.DialogCode.Accepted:
             try:
                 sources = list(dict((repository(line).lower(), repository(line)) for line in text.toPlainText().splitlines() if line.strip()).values())
@@ -109,6 +115,30 @@ class UpdaterDialog(QDialog):
                 self.show_rows()
             except Exception as error:
                 error_dialog(self, '來源無效', str(error), show=True)
+
+    def edit_token(self):
+        dialog = QDialog(self)
+        dialog.setWindowTitle('設定 GitHub Token')
+        dialog.resize(600, 180)
+        layout = QVBoxLayout(dialog)
+        note = QLabel('選填 Fine-grained PAT，公開庫唯讀即可。留空儲存可清除。\nToken 以明文保存在本機 calibre 設定；匯出設定備份時可能一併包含。僅傳送至 api.github.com。', dialog)
+        note.setWordWrap(True)
+        layout.addWidget(note)
+        token = QLineEdit(dialog)
+        token.setEchoMode(QLineEdit.EchoMode.Password)
+        token.setPlaceholderText('貼上 GitHub Personal Access Token；留空清除')
+        token.setText(self.prefs.get('github_token', ''))
+        layout.addWidget(token)
+        buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, dialog)
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            try:
+                self.prefs['github_token'] = validate_token(token.text())
+                self.status.setText('GitHub Token 已儲存。' if self.prefs['github_token'] else 'GitHub Token 已清除，改用匿名查詢。')
+            except ValueError as error:
+                error_dialog(self, 'Token 無效', str(error), show=True)
 
     def selected(self):
         return [self.rows[self.table.item(row, 0).data(Qt.ItemDataRole.UserRole)]
@@ -289,7 +319,7 @@ class UpdaterDialog(QDialog):
             if self.mode == 'check':
                 self.rows = result['rows']
                 self.show_rows()
-                self.status.setText(f"檢查完成：{sum(e['eligible'] for e in self.rows)} 項可更新。")
+                self.status.setText(f"檢查完成：{sum(e['eligible'] for e in self.rows)} 項可更新。" if not result['errors'] else f"部分或全部來源檢查失敗（{len(result['errors'])} 個），請查看下方原因；不能據此判定沒有更新。")
                 self.details.setPlainText('\n'.join(result['errors']))
             else:
                 self.restart_required = self.restart_required or bool(result['installed'])

@@ -2,6 +2,9 @@
 import hashlib
 import json
 import re
+import time
+from datetime import datetime
+from urllib.error import HTTPError
 from pathlib import Path
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -10,6 +13,8 @@ from zipfile import ZipFile
 DEFAULT_REPO = 'SamLaio/calibreMetadatImplode'
 FORMAT = 'calibre-github-plugins'
 IDENTITY = 'github-plugin-identity.json'
+FETCH_CACHE = None
+API_TOKEN = ''
 MAX_JSON = 2 * 1024 * 1024
 MAX_PACKAGE = 256 * 1024 * 1024
 
@@ -98,15 +103,66 @@ def fetch(url, limit):
     class GitHubRedirect(HTTPRedirectHandler):
         def redirect_request(self, req, fp, code, msg, headers, newurl):
             github_url(newurl)
-            return super().redirect_request(req, fp, code, msg, headers, newurl)
+            redirected = super().redirect_request(req, fp, code, msg, headers, newurl)
+            if redirected is not None:
+                redirected.remove_header('Authorization')
+            return redirected
 
-    request = Request(github_url(url), headers={'User-Agent': 'calibre-github-plugin-updater/0.1'})
-    with build_opener(GitHubRedirect()).open(request, timeout=30) as response:
-        github_url(response.url)
-        data = response.read(limit + 1)
+    github_url(url)
+    api = urlsplit(url).hostname == 'api.github.com'
+    cache = Path(FETCH_CACHE) if api and FETCH_CACHE is not None else None
+    cached = None
+    if cache is not None:
+        cache = cache / hashlib.sha256(API_TOKEN.encode()).hexdigest()
+        cache.mkdir(parents=True, exist_ok=True)
+        cached = cache / (hashlib.sha256(url.encode()).hexdigest() + '.json')
+        if cached.is_file() and 0 <= time.time() - cached.stat().st_mtime < 300:
+            data = cached.read_bytes()
+            if len(data) <= limit:
+                return data
+        cooldown = cache / 'rate-limit.json'
+        try:
+            until = json.loads(cooldown.read_text(encoding='utf-8'))['until']
+            if isinstance(until, (int, float)) and until > time.time():
+                raise ValueError('GitHub API 額度已用完或暫時限流，請於 ' + datetime.fromtimestamp(until).astimezone().strftime('%Y-%m-%d %H:%M:%S %Z') + ' 後重試。')
+        except (OSError, KeyError, TypeError, json.JSONDecodeError):
+            pass
+    request = Request(url, headers={'User-Agent': 'calibre-github-plugin-updater/0.3.1'})
+    if api and API_TOKEN:
+        request.add_unredirected_header('Authorization', 'Bearer ' + validate_token(API_TOKEN))
+    try:
+        with build_opener(GitHubRedirect()).open(request, timeout=30) as response:
+            github_url(response.url)
+            data = response.read(limit + 1)
+    except HTTPError as error:
+        if api and error.code == 401:
+            raise ValueError('GitHub Token 無效或已到期，請到管理來源重新設定或清除。') from None
+        if not api or error.code not in (403, 429):
+            raise
+        message = error.read(MAX_JSON).decode('utf-8', errors='replace').lower()
+        if error.code != 429 and error.headers.get('X-RateLimit-Remaining') != '0' and 'rate limit' not in message:
+            raise
+        now = time.time()
+        try:
+            until = max(now + 60, float(error.headers.get('X-RateLimit-Reset', 0)), now + float(error.headers.get('Retry-After', 0)))
+        except ValueError:
+            until = now + 60
+        if cache is not None:
+            cooldown.write_text(json.dumps({'until': until}), encoding='utf-8')
+        raise ValueError('GitHub API 額度已用完或暫時限流，請於 ' + datetime.fromtimestamp(until).astimezone().strftime('%Y-%m-%d %H:%M:%S %Z') + ' 後重試。' + ('已使用 Token；登入額度仍有限制。' if API_TOKEN else '匿名額度由同一出口 IP 共用。')) from None
     if len(data) > limit:
         raise ValueError('下載內容超過大小限制。')
+    if cached is not None:
+        json.loads(data)
+        cached.write_bytes(data)
     return data
+
+
+def validate_token(value):
+    value = value.strip()
+    if value and not re.fullmatch(r'[A-Za-z0-9_]{1,512}', value):
+        raise ValueError('Token 格式無效，請只貼上 GitHub Token，不要包含網址或其他文字。')
+    return value
 
 
 def manifest(data, repo):
@@ -448,13 +504,16 @@ def backup_directory(prefs, config_root):
 
 
 def worker():
+    global FETCH_CACHE, API_TOKEN
     import sys
     import traceback
     from calibre.utils.config import JSONConfig, config_dir
     job_path, report_path = map(Path, sys.argv[-2:])
     try:
+        FETCH_CACHE = Path(config_dir) / 'github-plugin-updater-cache'
         job = json.loads(job_path.read_text(encoding='utf-8'))
         prefs = JSONConfig('plugins/github_plugin_updater')
+        API_TOKEN = validate_token(prefs.get('github_token', ''))
         bindings = dict(prefs.get('bindings', {}))
         if job['mode'] == 'check':
             result = check(job['sources'], bindings)

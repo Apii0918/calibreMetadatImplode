@@ -103,3 +103,9 @@ GitHub API 的附件 `digest` 可作完整 ZIP 校驗的資料來源，本版已
 AZW6 Image Merge 以最新正式 Release 標籤作外掛版號，固定配對唯一的 AZW6ImageMerge.zip，沒有 digest 時明確退回版號比對，不以時間或附件 ID 代替 SHA。新增辨識規則不會自動訂閱該來源；全新安裝只預設我們的庫，更新或重裝保留使用者已設好的所有來源，包括空清單。
 
 相容性仍以實際下載包為準；該上游 v1.0.0 在 calibre 9.19 的隔離載入測試缺少 imghdr，更新器會停止安裝並保留舊包，不會偷偷修補作者原包。完整流程見[單庫單外掛來源規則](./SINGLE_RULES.md)。
+
+## Token 與查詢頻率
+
+更新器 0.3.1 可在「管理來源 → 設定 GitHub Token」保存選填的 Fine-grained PAT，公開庫唯讀即可；留空保存即清除。Token 只傳至 api.github.com，不跟隨重新導向或附件下載，仍只支援公開庫。Token 在本機 calibre 設定中為明文，完整設定備份可能包含。
+
+API JSON 快取 5 分鐘，身份／版號／下載後 SHA 驗證照常執行；ZIP 不快取。匿名額度由同一出口 IP 共用，Token 可提高額度但不能免除限流。收到限流時依 X-RateLimit-Reset、Retry-After 等待，缺少時間則至少 60 秒；不自動密集重試。快取和等待狀態依 Token 分開，來源失敗不視為沒有更新。

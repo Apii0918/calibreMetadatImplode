@@ -33,6 +33,19 @@
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
 
+## [v1.3.30](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.30) — 2026-11-22
+
+### GitHub Plugin Updater 0.3.1
+
+- 管理來源新增選填 GitHub Token（遮罩輸入、保存及清除），僅授權 API 請求；本機明文設定的限制同步說明。
+- API JSON 快取 5 分鐘並依 Token 隔離，記錄限流恢復時間，失敗來源不再顯示成沒有更新。
+- Windows、calibre 9.19 通過 68 項測試及原生主視窗入口驗證；未使用真實 Token 進行線上驗證。
+
+### 說明、打包與清單
+
+- 同步內外層 README、來源庫指南與更新紀錄，說明 Token 保存位置、公開庫限制、快取延遲及限流等待行為。
+- 重新產出 26 個獨立安裝包與 plugins.json，核對身分內容 SHA、完整 ZIP SHA 與實際程式宣告。
+
 ## [v1.3.29](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.29) — 2026-11-22
 
 ### GitHub 外掛更新器 0.3

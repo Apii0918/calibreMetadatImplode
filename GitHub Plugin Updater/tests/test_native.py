@@ -67,6 +67,41 @@ class NativeTests(unittest.TestCase):
     def run_install(self, data=None):
         return core.install([self.entry], self.bindings, self.root / 'backups', lambda *args: self.data if data is None else data)
 
+    def test_token_dialog_masks_saves_clears_and_preserves_sources(self):
+        dialog = ui.UpdaterDialog(None)
+        dialog.prefs['sources'] = ['https://github.com/Example/Plugins']
+        def accept(widget):
+            field = widget.findChild(ui.QLineEdit)
+            self.assertEqual(field.echoMode(), ui.QLineEdit.EchoMode.Password)
+            field.setText(' github_pat_fixture ')
+            return ui.QDialog.DialogCode.Accepted
+        with patch.object(ui.QDialog, 'exec', accept):
+            dialog.edit_token()
+        self.assertEqual(dialog.prefs['github_token'], 'github_pat_fixture')
+        with patch.object(ui.QDialog, 'exec', return_value=ui.QDialog.DialogCode.Rejected):
+            dialog.edit_token()
+        self.assertEqual(dialog.prefs['github_token'], 'github_pat_fixture')
+        def clear(widget):
+            widget.findChild(ui.QLineEdit).clear()
+            return ui.QDialog.DialogCode.Accepted
+        with patch.object(ui.QDialog, 'exec', clear):
+            dialog.edit_token()
+        self.assertEqual(dialog.prefs['github_token'], '')
+        self.assertEqual(dialog.prefs['sources'], ['https://github.com/Example/Plugins'])
+        dialog.close()
+
+    def test_sources_dialog_has_token_button_in_footer(self):
+        dialog = ui.UpdaterDialog(None)
+        def inspect(widget):
+            buttons = [b for b in widget.findChildren(ui.QPushButton) if b.text() == '設定 GitHub Token']
+            self.assertEqual(len(buttons), 1)
+            footer = widget.layout().itemAt(widget.layout().count() - 1).layout()
+            self.assertIs(footer.itemAt(0).widget(), buttons[0])
+            return ui.QDialog.DialogCode.Rejected
+        with patch.object(ui.QDialog, 'exec', inspect):
+            dialog.edit_sources()
+        dialog.close()
+
     def test_native_install_preserves_disabled_and_recovery_package(self):
         result = self.run_install()
         self.assertEqual(result['installed'], [NAME], result)

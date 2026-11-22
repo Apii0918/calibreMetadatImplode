@@ -1,5 +1,12 @@
 # 更新紀錄
 
+## 0.3.1 — 2026-11-22
+
+- 管理來源左下加入 GitHub Token 設定，支援遮罩輸入、保存、取消及留空清除；保留既有來源。
+- Token 僅送往 api.github.com，不跟隨重新導向或附件下載；本機設定為明文，補上備份提醒。
+- API JSON 快取 5 分鐘，依 Token 隔離；遇到限流記住恢復時間並停止重複請求，新增中文限流與無效 Token 提示。
+- 來源失敗不再顯示為單純的零項更新；Windows、calibre 9.19 通過 68 項測試及原生主視窗入口驗證。
+
 ## 0.3 — 2026-11-22
 
 - 新增 HamsterExAstris/calibre-azw6-image-merge 的單庫單外掛規則，配對數字標籤與固定 AZW6ImageMerge.zip。
