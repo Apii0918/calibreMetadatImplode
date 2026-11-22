@@ -27,7 +27,7 @@
 }
 ```
 
-`name`、`version`、`minimum_calibre_version`、`supported_platforms` 必須與 calibre 外掛類別宣告一致；`asset` 必須為同次 Release 中唯一的 `.zip` 附件名稱，`size` 為 ZIP 位元組數。JSON 不指定任意下載網址，更新器由 GitHub API 對應同次 Release 的附件，避免外部網址注入。
+`name`、`version`、`minimum_calibre_version`、`supported_platforms` 必須與 calibre 外掛類別宣告一致；`asset` 必須為同次 Release 中唯一的 `.zip` 附件名稱，`size` 為 ZIP 位元組數。GitHub 上傳時會將附件名稱的空白改為句點；清單保留本機原檔名，更新器先比對原名，找不到時再比對空白轉句點的附件名。JSON 不指定任意下載網址，更新器由 GitHub API 對應同次 Release 的附件，避免外部網址注入。
 
 ## 包內身分檔
 

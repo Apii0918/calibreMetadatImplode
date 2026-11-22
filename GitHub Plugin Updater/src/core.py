@@ -156,7 +156,8 @@ def release_entries(repo, get=fetch):
     entries = manifest(data, repo)
     result = []
     for entry in entries:
-        asset = by_name.get(entry['asset'])
+        # GitHub rewrites spaces in uploaded attachment names to dots.
+        asset = by_name.get(entry['asset']) or by_name.get(entry['asset'].replace(' ', '.'))
         if not asset or asset.get('size') != entry['size']:
             raise ValueError('清單與發行附件不一致。')
         result.append(dict(entry, source=source_id(repo), repo=repo, url=asset_url(asset)))

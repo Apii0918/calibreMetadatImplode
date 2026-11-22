@@ -99,6 +99,18 @@ class CoreTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             core.release_entries(REPO, lambda *args: json.dumps(data).encode())
 
+    def test_github_space_to_dot_attachment_names(self):
+        self.entry['asset'] = 'Example Tool.zip'
+        prefix = 'https://github.com/Example/Plugins/releases/download/v1/'
+        release = {'assets': [{'name': 'plugins.json', 'browser_download_url': prefix + 'plugins.json'},
+                              {'name': 'Example.Tool.zip', 'size': 100,
+                               'browser_download_url': prefix + 'Example.Tool.zip'}]}
+        def get(url, limit):
+            return json.dumps(release if '/releases/latest' in url else self.manifest()).encode()
+        entries = core.release_entries(REPO, get)
+        self.assertEqual(entries[0]['asset'], 'Example Tool.zip')
+        self.assertTrue(entries[0]['url'].endswith('/Example.Tool.zip'))
+
     def test_network_and_repository_boundaries(self):
         self.assertEqual(core.repository('https://github.com/Example/Plugins/'), REPO)
         for value in ['https://evil.example/x/y', 'a/..', 'a/b/c', '']:
