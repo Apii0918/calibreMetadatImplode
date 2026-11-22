@@ -16,9 +16,9 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.30（2026-11-22）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.30)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 整合發行版號 | **[v1.3.31（2026-11-22）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.31)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出二十六個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Columns Helper、CrossPoint Reader、Diaps Editing Toolbag、Extract ISBN、Generate Cover、Goodreads Sync、Hardcover Sync 、Manage Series 與 Shortcuts Helper 的翻譯在打包時分別編譯。 |
-| 本次變更 | GitHub Plugin Updater 0.3.1 新增選填 GitHub Token 設定、5 分鐘 API 快取及中文限流恢復提示；保留使用者來源與下載驗證。 |
+| 本次變更 | GitHub Plugin Updater 0.3.2 新增可記憶的「自動備份」開關；取消後不保留更新前備份，仍保留安裝期間的一般失敗回復。 |
 
 ## 各外掛簡介、來源與版號
 
@@ -34,7 +34,7 @@
 | [Embed Metadata Safe](./Embed%20Metadata%20Safe/README.md) | 清理 EPUB 的特定損壞自訂欄位資料，再嵌入書庫中繼資料。 | [本倉庫自有外掛](./Embed%20Metadata%20Safe/)，作者為 SamLiao 及 codex；沒有獨立上游。 | **1.0.1**；修正 ZIP 安裝層級並縮短按鈕名稱。 |
 | [Enhanced Search and Replace](./Enhanced%20Search%20and%20Replace/README.md) | Edit Book 全書文字類型勾選搜尋、定位與取代。 | 本倉庫自行開發；SamLiao & Codex，API 查核 Calibre v9.0.0／v9.17.0。 | **1.2.0**；原始碼逐字取代、錯誤摘要；原始碼搜尋、背景進度與取消、篩選排序，預設十五行並附操作截圖。 |
 | [Export Folder](./exportFolder/README.md) | 從書庫右鍵選單直接匯出到預設資料夾。 | 本倉庫自行開發，SamLiao & Codex。 | **1.2.2**。 |
-| [GitHub Plugin Updater](./GitHub%20Plugin%20Updater/README.md) | 追蹤多個公開 GitHub 庫，先比身分檔與清單的內容 SHA，再比版號；勾選下載更新前備份。 | 本倉庫自行開發，SamLiao & Codex；思路參考 Obtainium。 | **0.3.1**；選填 GitHub Token、API 快取與限流恢復提示。 |
+| [GitHub Plugin Updater](./GitHub%20Plugin%20Updater/README.md) | 追蹤多個公開 GitHub 庫，先比身分檔與清單的內容 SHA，再比版號；勾選下載更新，可選自動備份。 | 本倉庫自行開發，SamLiao & Codex；思路參考 Obtainium。 | **0.3.2**；新增可記憶的自動備份開關，保留 Token、快取與限流提示。 |
 | [Plugin Backup](./Plugin%20Backup/README.md) | 勾選或一次全部匯出／批次匯入第三方外掛與啟用狀態，可選是否包含設定；入口位於外掛偏好設定底部。 | 本倉庫自行開發，SamLiao & Codex。 | **0.1**。 |
 | [Skip ASCII Text Plugin](./Skip%20ASCII%20Text%20Plugin/README.md) | 保留檔名中的中文等原文字元，略過 ASCII 轉寫。 | 本倉庫獨立重寫，SamLiao & Codex；功能參考 [shiratori3/calibre-plugins v1.0.0](https://gitee.com/shiratori3/calibre-plugins/releases/tag/v1.0.0)，程式作者欄 Billy Zhou，原版採 BSD 3-Clause。 | **1.0.1**，本倉庫重寫版。 |
 | [Toolbar Manager](./Toolbar%20Manager/README.md) | 右鍵調整工具列按鈕，開啟外掛首頁、選項或移除外掛。 | 本倉庫自行開發；SamLiao & Codex。 | **1.0.0**。 |
@@ -113,7 +113,7 @@
 
 | 外掛 | 驗證範圍 |
 | --- | --- |
-| GitHub Plugin Updater 0.3.1 | 11 項核心、9 項前綴、9 項單一來源、8 項網路、28 項原生 Qt／安裝／回復及 3 項打包測試；含真正背景程序、自我更新、重啟按鈕、SHA 優先、多來源失敗隔離、停用狀態、備份回復及不同時間重打包一致。 |
+| GitHub Plugin Updater 0.3.2 | 11 項核心、9 項前綴、9 項單一來源、8 項網路、31 項原生 Qt／安裝／回復及 3 項打包測試；含真正背景程序、自我更新、重啟按鈕、SHA 優先、多來源失敗隔離、停用狀態、備份回復及不同時間重打包一致。 |
 | Hardcover Sync 0.4.0.2 | 13 項隔離測試通過；原生主視窗確認舊版重現相同關閉例外，新版提前關閉與正常確認均無例外。 |
 | CrossPoint Reader 0.2.8.1 | 7 項連線與 4 項語言／設定／協定測試通過，含真實本機 HTTP 服務；未以實體閱讀器驗收。 |
 | Shortcuts Helper 1.1.0.1 | 4 項語言／設定／排序測試及原生中文工具列、快捷鍵清單與設定頁驗證通過。 |

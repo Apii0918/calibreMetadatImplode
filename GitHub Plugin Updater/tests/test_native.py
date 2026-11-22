@@ -67,6 +67,44 @@ class NativeTests(unittest.TestCase):
     def run_install(self, data=None):
         return core.install([self.entry], self.bindings, self.root / 'backups', lambda *args: self.data if data is None else data)
 
+    def test_no_backup_install_leaves_no_recovery_files(self):
+        result = core.install([self.entry], self.bindings, self.root / 'backups', lambda *a: self.data, auto_backup=False)
+        self.assertEqual(result['installed'], [NAME])
+        self.assertEqual(result['backups'], [])
+        self.assertFalse((self.root / 'backups').exists())
+        self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.entry['package_sha256'])
+        self.assertTrue(is_disabled(NAME))
+
+    def test_no_backup_failure_still_rolls_back(self):
+        before = dict(config['plugins'])
+        def fail(path):
+            Path(plugin_dir, NAME + '.zip').write_bytes(b'broken')
+            config['plugins'] = {}
+            raise RuntimeError('模擬無備份安裝失敗')
+        with patch('calibre.customize.ui.add_plugin', side_effect=fail):
+            result = core.install([self.entry], self.bindings, None, lambda *a: self.data, auto_backup=False)
+        self.assertIn('模擬無備份安裝失敗', result['failed'][0])
+        self.assertEqual(result['backups'], [])
+        self.assertEqual(dict(config['plugins']), before)
+        self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.old_package_sha)
+        self.assertTrue(is_disabled(NAME))
+
+    def test_auto_backup_checkbox_persists_and_install_job_uses_it(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        self.addCleanup(lambda: dialog.prefs.__setitem__('auto_backup', True))
+        dialog.auto_backup.setChecked(False)
+        self.assertFalse(dialog.prefs['auto_backup'])
+        reopened = ui.UpdaterDialog(None)
+        self.addCleanup(reopened.close)
+        self.assertFalse(reopened.auto_backup.isChecked())
+        with patch.object(dialog, 'selected', return_value=[dict(self.entry, status='可更新')]), patch.object(ui.QMessageBox, 'question', return_value=ui.QMessageBox.StandardButton.Yes) as confirm, patch.object(dialog, 'start') as start:
+            dialog.install_selected()
+        self.assertIs(start.call_args.args[0]['auto_backup'], False)
+        self.assertIn('不保留更新前備份', confirm.call_args.args[2])
+        reopened.auto_backup.setChecked(True)
+        self.assertTrue(reopened.prefs['auto_backup'])
+
     def test_token_dialog_masks_saves_clears_and_preserves_sources(self):
         dialog = ui.UpdaterDialog(None)
         dialog.prefs['sources'] = ['https://github.com/Example/Plugins']
@@ -493,7 +531,7 @@ import calibre.customize.ui
 from calibre_plugins.github_plugin_updater import core
 original_install=core.install
 data=Path(sys.argv[-3]).read_bytes()
-core.install=lambda entries,bindings,backup,force=False,original_install=original_install,data=data: original_install(entries,bindings,backup,get=lambda *args:data,force=force)
+core.install=lambda entries,bindings,backup,force=False,auto_backup=True,original_install=original_install,data=data: original_install(entries,bindings,backup,get=lambda *args:data,force=force,auto_backup=auto_backup)
 core.worker()
 '''
         try:

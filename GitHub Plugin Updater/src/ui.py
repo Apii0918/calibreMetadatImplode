@@ -5,7 +5,7 @@ from pathlib import Path
 from calibre.gui2 import error_dialog, info_dialog, open_local_file, open_url
 from calibre.utils.config import JSONConfig, config_dir
 from calibre.utils.ipc.launch import Worker
-from qt.core import (QDialog, QDialogButtonBox, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QProcess,
+from qt.core import (QCheckBox, QDialog, QDialogButtonBox, QFileDialog, QHBoxLayout, QLabel, QLineEdit, QPlainTextEdit, QProcess,
                      QPushButton, QTableWidget, QTableWidgetItem, Qt, QUrl, QVBoxLayout, QMessageBox)
 
 from .core import DEFAULT_REPO, backup_directory, digest, installed_plugins, repository, validate_token
@@ -24,7 +24,7 @@ class UpdaterDialog(QDialog):
     def __init__(self, gui):
         super().__init__(gui)
         self.gui = gui
-        self.setWindowTitle('GitHub 外掛更新器 0.3.1')
+        self.setWindowTitle('GitHub 外掛更新器 0.3.2')
         self.resize(1000, 650)
         self.prefs = JSONConfig('plugins/github_plugin_updater')
         self.rows, self.process, self.temporary = [], None, None
@@ -32,7 +32,7 @@ class UpdaterDialog(QDialog):
         self.sort_column, self.sort_order = None, Qt.SortOrder.AscendingOrder
         self.restart_required = bool(getattr(gui, '_github_plugin_updater_updated', False))
         layout = QVBoxLayout(self)
-        note = QLabel('JSON 來源先比身分內容 SHA；發行來源先比已記錄的附件 SHA，沒有基準或 digest 時比較版號。勾選確認後才下載，安裝前備份。', self)
+        note = QLabel('JSON 來源先比身分內容 SHA；發行來源先比已記錄的附件 SHA，沒有基準或 digest 時比較版號。勾選確認後才下載；可選擇是否自動備份。', self)
         note.setWordWrap(True)
         layout.addWidget(note)
         self.table = QTableWidget(0, 6, self)
@@ -78,6 +78,11 @@ class UpdaterDialog(QDialog):
         self.backup_settings_button.setToolTip(str(backup_directory(self.prefs, config_dir)))
         self.backup_settings_button.clicked.connect(self.choose_backup_directory)
         footer.addWidget(self.backup_settings_button)
+        self.auto_backup = QCheckBox('自動備份', self)
+        self.auto_backup.setChecked(self.prefs.get('auto_backup', True) is not False)
+        self.auto_backup.setToolTip('勾選：保留更新前舊包與登錄備份；不勾選：不保留備份，僅在安裝期間暫存供失敗回復。')
+        self.auto_backup.toggled.connect(lambda checked: self.prefs.__setitem__('auto_backup', checked))
+        footer.addWidget(self.auto_backup)
         footer.addStretch()
         footer.addWidget(buttons)
         layout.addLayout(footer)
@@ -236,8 +241,10 @@ class UpdaterDialog(QDialog):
         text = '\n'.join(f"{e['name']}：{e['status']}（{e['repo']}）" for e in entries)
         if any(e.get('mode') in ('prefixed', 'single') and not e.get('package_sha256') for e in entries):
             text += '\n注意：部分來源未提供附件 SHA，無法對照作者公布的檔案摘要；仍會核對 ZIP、名稱、版號與相容性。'
-        if QMessageBox.question(self, '確認強制安裝勾選項目', text + '\n將從勾選來源下載，備份後強制覆蓋安裝，包含同版重裝或降版，並改綁此來源。完整性與相容性仍須通過檢查；完成後需重啟。是否繼續？') == QMessageBox.StandardButton.Yes:
-            self.start({'mode': 'install', 'entries': entries, 'force': True})
+        auto_backup = self.auto_backup.isChecked()
+        text += '\n自動備份：' + ('開啟，保留舊包與登錄備份。' if auto_backup else '關閉，不保留更新前備份；完成後無法由此還原舊版。')
+        if QMessageBox.question(self, '確認強制安裝勾選項目', text + '\n將從勾選來源下載並強制覆蓋安裝，包含同版重裝或降版，並改綁此來源。完整性與相容性仍須通過檢查；完成後需重啟。是否繼續？') == QMessageBox.StandardButton.Yes:
+            self.start({'mode': 'install', 'entries': entries, 'force': True, 'auto_backup': auto_backup})
 
     def open_backups(self):
         path = backup_directory(self.prefs, config_dir)
@@ -286,9 +293,9 @@ class UpdaterDialog(QDialog):
         root = Path(self.temporary.name)
         (root / 'job.json').write_text(json.dumps(job, ensure_ascii=False), encoding='utf-8')
         self.report = root / 'result.json'
-        self.status.setText('正在檢查清單…' if self.mode == 'check' else '正在下載、備份與安裝…')
+        self.status.setText('正在檢查清單…' if self.mode == 'check' else ('正在下載、備份與安裝…' if job.get('auto_backup', True) else '正在下載與安裝（不保留備份）…'))
         self.details.clear()
-        for button in (self.sources_button, self.backup_settings_button, self.check_button, self.bind_button, self.install_button, self.close_button):
+        for button in (self.sources_button, self.backup_settings_button, self.auto_backup, self.check_button, self.bind_button, self.install_button, self.close_button):
             button.setEnabled(False)
         self.restart_button.setEnabled(False)
         self.process = QProcess(self)
@@ -340,7 +347,7 @@ class UpdaterDialog(QDialog):
             self.process = None
             self.temporary.cleanup()
             self.temporary = None
-            for button in (self.sources_button, self.backup_settings_button, self.check_button, self.bind_button, self.install_button, self.close_button):
+            for button in (self.sources_button, self.backup_settings_button, self.auto_backup, self.check_button, self.bind_button, self.install_button, self.close_button):
                 button.setEnabled(True)
 
     def reject(self):

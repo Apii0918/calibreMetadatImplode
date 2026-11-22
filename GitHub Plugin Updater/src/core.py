@@ -395,7 +395,7 @@ def check(sources, bindings):
     return {'rows': rows, 'errors': errors}
 
 
-def install(entries, bindings, backup_root, get=fetch, force=False):
+def install(entries, bindings, backup_root, get=fetch, force=False, auto_backup=True):
     import shutil
     import tempfile
     from datetime import datetime
@@ -442,8 +442,9 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
                     if (not identity_matches(stamp, entry) or stamp['sha256'] != entry['sha256']
                             or content_sha != entry['sha256']):
                         raise ValueError('安裝包身分與更新清單不符。')
-                # Persist recovery material before importing any incoming plugin code.
-                backup = Path(backup_root) / (datetime.now().strftime('%Y%m%d-%H%M%S-') + uuid4().hex[:12])
+                # Keep temporary rollback material even when retained backups are disabled.
+                backup = (Path(backup_root) / (datetime.now().strftime('%Y%m%d-%H%M%S-') + uuid4().hex[:12])
+                          if auto_backup else Path(temporary) / 'recovery')
                 backup.mkdir(parents=True)
                 safe_name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', name).strip(' .')[:100] or 'plugin'
                 old_version = '.'.join(map(str, current['version'])) if current['version'] else '未知版號'
@@ -455,8 +456,9 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
                 state = {'name': name, 'version': current['version'], 'sha256': current['sha256'], 'package': previous.name,
                          'plugins': registry, 'disabled_plugins': sorted(disabled),
                          'enabled_plugins': sorted(enabled), 'plugin_customization': customization}
-                (backup / 'state.json').write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding='utf-8')
-                result['backups'].append(str(backup))
+                if auto_backup:
+                    (backup / 'state.json').write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding='utf-8')
+                    result['backups'].append(str(backup))
                 target = Path(plugin_dir) / (name + '.zip')
                 had_target = target.is_file()
                 changed = False
@@ -519,7 +521,9 @@ def worker():
             result = check(job['sources'], bindings)
             prefs['bindings'] = bindings
         elif job['mode'] == 'install':
-            result = install(job['entries'], bindings, backup_directory(prefs, config_dir), force=job.get('force') is True)
+            auto_backup = job.get('auto_backup', prefs.get('auto_backup', True)) is not False
+            result = install(job['entries'], bindings, backup_directory(prefs, config_dir) if auto_backup else None,
+                             force=job.get('force') is True, auto_backup=auto_backup)
             prefs['bindings'] = bindings
         else:
             raise ValueError('未知工作模式。')

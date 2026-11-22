@@ -33,6 +33,14 @@
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
 
+## [v1.3.31](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.31) — 2026-11-22
+
+### GitHub Plugin Updater 0.3.2
+
+- 在設定備份資料夾右側加入「自動備份」，預設勾選並記住設定；更新確認顯示當次選擇。
+- 取消勾選後不保留備份包與登錄檔，安裝暫存仍可供一般失敗回復，作業結束即清除。
+- Windows、calibre 9.19 通過 71 項測試及原生主視窗入口驗證；同步內外層 README、來源指南、更新紀錄與身分 SHA，重新產出 26 個安裝包及 plugins.json。
+
 ## [v1.3.30](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.30) — 2026-11-22
 
 ### GitHub Plugin Updater 0.3.1
