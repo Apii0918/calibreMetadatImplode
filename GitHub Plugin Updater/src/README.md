@@ -1,12 +1,12 @@
 # GitHub 外掛更新器（GitHub Plugin Updater）
 
-版本：**0.1.1**；作者：**SamLiao & Codex**；授權：**GPL v3**；最低 calibre：**9.19.0**。本倉庫自行開發。
+版本：**0.3**；作者：**SamLiao & Codex**；授權：**GPL v3**；最低 calibre：**9.19.0**。本倉庫自行開發。
 
 建立自己的更新來源或了解比對流程，請看[來源庫建立與版本檢查指南](./SOURCE_GUIDE.md)。
 
 ## 用途與安裝
 
-從多個公開 GitHub 庫追蹤已安裝的 calibre 外掛。預設來源為 `SamLaio/calibreMetadatImplode`，每個來源可提供多支外掛。功能思路參考 [Obtainium](https://github.com/ImranR98/Obtainium) 的直接追蹤發行來源方式，沒有沿用其程式碼。
+從多個公開 GitHub 庫追蹤已安裝的 calibre 外掛。預設來源為 `SamLaio/calibreMetadatImplode`，每個來源可提供多支外掛。全新安裝預設只追蹤我們的庫；更新／重裝不覆蓋使用者既有來源，也保留空清單。0.2 新增 kiwidude68/calibre_plugins 的前綴發行模式，不要求上游提供我們的身分檔或 JSON。功能思路參考 [Obtainium](https://github.com/ImranR98/Obtainium) 的直接追蹤發行來源方式，沒有沿用其程式碼。
 
 1. 以根目錄 `python -B build_release.py` 打包，安裝 `dist/GitHub Plugin Updater-zh_TW-release.zip` 並重啟 calibre。
 2. 從「偏好設定 → 進階」第二列左側的「GitHub 外掛更新」開啟，關閉後回到偏好設定首頁；不提供工具列按鈕，入口使用循環箭頭與下載箭頭的專用圖示。
@@ -17,11 +17,27 @@
 
 外掛、目前版號、來源版號、GitHub 來源及狀態欄標題可點擊排序，再點切換升冪／降冪；版號按數字段比較，排序後保留勾選與正確外掛對應。
 
+雙擊「GitHub 來源」欄可用瀏覽器開啟該庫；排序後仍對應正確來源。
+
 未安裝項目的目前版號顯示「未安裝」；已安裝但無法載入的外掛才顯示「載入失敗」。
 
-## 身分、SHA-256 與版號
+## 單庫單外掛來源（AZW6）
 
-每個 ZIP 的 `github-plugin-identity.json` 保存固定 `id`、`source` 與內容 `sha256`。本機設定 `plugins/github_plugin_updater.json` 保存來源及綁定。固定 ID 不隨版號改動；0.1.1 不支援外掛改名遷移。更新器本身也列入清單，沿用同一流程並在獨立程序安裝，重啟後才載入新版。
+0.3 新增 `https://github.com/HamsterExAstris/calibre-azw6-image-merge` 規則，從最新正式 Release 的 `v數字版號` 或數字標籤選版，精確尋找 `AZW6ImageMerge.zip`。只查 JSON，不先下載 ZIP；沒有 digest 時比較版號並提示校驗不足。附件 ID 只能提示重傳，不能代替 SHA。詳見[單庫單外掛規則](./SINGLE_RULES.md)。
+
+實際上游 v1.0.0 原包在 calibre 9.19 的隔離載入測試因缺少 `imghdr` 失敗；更新器會保留舊包並回報失敗，不會替上游修改程式。此來源要由使用者自行加入，不預設訂閱。
+
+## 前綴發行來源（kiwidude）
+
+加入 `https://github.com/kiwidude68/calibre_plugins` 即自動套用內建 25 支外掛的名稱／前綴規則，分頁掃描正式 Release，依數字版號挑選各支最新版，接受 `prefix-1.2.3` 與 `prefix-v1.2.3`。先比較已保存的 GitHub 附件 digest；首次沒有基準或沒有 digest 時比較版號。檢查不下載 ZIP。找不到唯一附件或同版多個候選時標示錯誤，不猜包、不退回舊版。
+
+同名外掛分來源列出；既有綁定不自動切換。同時勾選兩個同名來源會被擋下；選擇另一來源並確認強制安裝後才覆蓋及改綁，calibre 不支援同名版本並存。上游版可能取代本倉庫的翻譯與修正。
+
+上游 ZIP 無身分檔也可安裝，但仍核對 GitHub digest、名稱、版號及實際 calibre／平台相容性。未提供 digest 時，確認視窗明確提示校驗不足，下載後計算本機 SHA 留存，不宣稱與作者摘要一致。完整規則見[前綴來源規則](./PREFIX_RULES.md)。
+
+## 身分、SHA-256 與版號（JSON 來源）
+
+每個 ZIP 的 `github-plugin-identity.json` 保存固定 `id`、`source` 與內容 `sha256`。本機設定 `plugins/github_plugin_updater.json` 保存來源及綁定。固定 ID 不隨版號改動；0.3 不支援外掛改名遷移。更新器本身也列入清單，沿用同一流程並在獨立程序安裝，重啟後才載入新版。
 
 1. 讀取本機 ZIP 身分檔的內容 `sha256`，與清單 `sha256` 比較；有身分檔時不重新掃描外掛內容。舊包沒有身分檔才計算內容 SHA 作為初次基準。相同便結束，不比較版號。
 2. SHA 不同，才比較 JSON 的版號及相容性。較新版提示「可更新」；同版不同 SHA 提示「同版內容不同（可勾選重裝）」；較舊版提示「遠端較舊（可勾選降版）」。這是檢查結果，不會自動下載或安裝。
@@ -40,7 +56,7 @@
 
 ## 來源清單與發布
 
-各來源的最新正式 GitHub Release 必須附上 `plugins.json` 及清單列出的 ZIP；不接受預發行、原始碼 ZIP 或只有 ZIP 而沒有清單的第三方庫。JSON 已包含版號，無須下載外掛才得知版本。
+一般 JSON 來源的最新正式 GitHub Release 必須附上 `plugins.json` 及清單列出的 ZIP；不接受預發行或原始碼 ZIP。內建 kiwidude 前綴與 AZW6 單一發行規則不要求清單；其他沒有清單、也沒有內建規則的庫暫不支援。JSON 已包含版號，無須下載外掛才得知版本。
 
 根目錄 `plugins.json` 是維護用的清單快照；`build_release.py` 產生 `dist/plugins.json`，發布時將該檔與同批 ZIP 一起上傳。更新器使用同一 Release 的清單與附件，避免 `main` 與已發布安裝包不同步。根目錄快照也須在發行前同步。
 
@@ -55,10 +71,10 @@
 - 不提供背景自動安裝、私有庫認證、無清單庫的猜測配對、新外掛首次安裝或跨來源自動選版。
 - SHA 只能核對下載內容與來源清單一致，不是作者簽章。加入來源代表信任其可執行程式；僅允許 GitHub HTTPS 下載並限制大小與重新導向。
 - 快速檢查信任身分檔的內容 SHA，並非每次檢查都驗證本機所有程式是否遭修改；一般更新會核對舊包內容；明確勾選的強制安裝允許修復本機內容差異，但仍先保留舊包備份，並完整驗證下載的新包。
-- 來源的正式 Release 必須提供 `plugins.json`；缺少時顯示錯誤，不會改抓不匹配的 ZIP。
+- 一般 JSON 來源的正式 Release 必須提供 `plugins.json`；kiwidude 前綴與 AZW6 單一發行模式例外。
 
 ## 驗證
 
-Windows、calibre 9.19：11 項核心測試、18 項原生 Qt／安裝／回復測試及 3 項打包測試，涵蓋 JSON-only 檢查、SHA 優先、來源綁定、來源失敗隔離、同版／降版判斷及手動強制安裝、校驗失敗、身分／宣告不符、更新備份、停用狀態、安裝失敗回復、真正背景程序及自我更新／重啟按鈕狀態。另以原生主視窗確認「進階」區入口可開啟更新器、關閉後回到偏好設定首頁，入口位於第二列左側，且沒有工具列動作。所有設定與測試外掛均在 `dist/` 隔離目錄，不變更正式設定。
+Windows、calibre 9.19：11 項既有核心、9 項前綴、9 項單一來源、26 項原生 Qt／安裝／回復及 3 項打包測試，涵蓋 JSON-only 檢查、SHA 優先、來源綁定、來源失敗隔離、同版／降版判斷及手動強制安裝、校驗失敗、身分／宣告不符、更新備份、停用狀態、安裝失敗回復、真正背景程序及自我更新／重啟按鈕狀態。另以原生主視窗確認「進階」區入口可開啟更新器、關閉後回到偏好設定首頁，入口位於第二列左側，且沒有工具列動作。所有設定與測試外掛均在 `dist/` 隔離目錄，不變更正式設定。
 
-尚未驗收 macOS／Linux、真實第三方清單或中途斷電恢復。測試方式見 `tests/`；先打包，再以 Python 執行 `test_core.py`、`test_build.py`；`test_native.py` 使用 `calibre-debug -e` 並將 `CALIBRE_CONFIG_DIRECTORY` 指向 `dist/`。
+另實際讀取 kiwidude 的 247 筆發行：3 頁 JSON、25 支外掛、零配對錯誤、未下載 ZIP。另以一份 JSON 驗證 AZW6 單一來源，並在隔離設定確認上游 v1.0.0 缺少 imghdr 的載入錯誤，未實際安裝該上游原包。尚未驗收 macOS／Linux、中途斷電恢復。測試方式見 `tests/`；先打包，再以 Python 執行 `test_core.py`、`test_prefixed.py`、`test_single.py`、`test_build.py`；`test_native.py` 使用 `calibre-debug -e` 並將 `CALIBRE_CONFIG_DIRECTORY` 指向 `dist/`。

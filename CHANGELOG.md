@@ -33,6 +33,22 @@
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
 
+## [v1.3.29](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.29) — 2026-11-22
+
+### GitHub 外掛更新器 0.3
+
+- 新增 kiwidude68/calibre_plugins 的多外掛前綴發行規則，分頁查找 25 支外掛的最新正式版，依標籤與唯一 ZIP 配對。
+- 新增 HamsterExAstris/calibre-azw6-image-merge 的單庫單外掛規則，固定配對 AZW6ImageMerge.zip，從最新正式標籤取得版號。
+- 使用 GitHub 附件 digest 比對，沒有摘要時明確退回版號判斷；附件 ID 只提示重傳，不代替 SHA。上游原包不要求本倉庫身分檔，仍核對名稱、版號及實際相容性。
+- 同名分來源列出且不自動改綁；同批不能勾選兩個同名來源。全新安裝仍只預設本倉庫，更新／重裝保留使用者來源，包含空清單。
+- 來源欄可雙擊開啟 GitHub 庫，排序後仍對應正確來源。
+
+### 指南、清單與驗證
+
+- 更新內外層 README、來源庫指南，新增前綴與單庫單外掛規則說明，同步 26 個包的身分與發行 plugins.json。
+- Windows、calibre 9.19 通過 58 項測試及原生主視窗入口驗證；實際查詢 kiwidude 247 筆發行取得 25 支外掛，AZW6 單一來源僅需一份 JSON。
+- 上游 AZW6 v1.0.0 原包在 calibre 9.19 的隔離載入因 imghdr 缺失失敗；未安裝到正式設定，不自動套用本倉庫修正。macOS／Linux、真實上游安裝及斷電回復尚未驗收。
+
 ## [v1.3.28](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.28) — 2026-11-22
 
 ### GitHub 外掛更新器 0.1.1

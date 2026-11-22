@@ -2,13 +2,13 @@ import json
 import tempfile
 from pathlib import Path
 
-from calibre.gui2 import error_dialog, info_dialog, open_local_file
+from calibre.gui2 import error_dialog, info_dialog, open_local_file, open_url
 from calibre.utils.config import JSONConfig, config_dir
 from calibre.utils.ipc.launch import Worker
 from qt.core import (QDialog, QDialogButtonBox, QFileDialog, QHBoxLayout, QLabel, QPlainTextEdit, QProcess,
-                     QPushButton, QTableWidget, QTableWidgetItem, Qt, QVBoxLayout, QMessageBox)
+                     QPushButton, QTableWidget, QTableWidgetItem, Qt, QUrl, QVBoxLayout, QMessageBox)
 
-from .core import DEFAULT_REPO, backup_directory, installed_plugins, repository
+from .core import DEFAULT_REPO, backup_directory, digest, installed_plugins, repository
 
 
 class SortItem(QTableWidgetItem):
@@ -24,7 +24,7 @@ class UpdaterDialog(QDialog):
     def __init__(self, gui):
         super().__init__(gui)
         self.gui = gui
-        self.setWindowTitle('GitHub 外掛更新器 0.1.1')
+        self.setWindowTitle('GitHub 外掛更新器 0.3')
         self.resize(1000, 650)
         self.prefs = JSONConfig('plugins/github_plugin_updater')
         self.rows, self.process, self.temporary = [], None, None
@@ -32,7 +32,7 @@ class UpdaterDialog(QDialog):
         self.sort_column, self.sort_order = None, Qt.SortOrder.AscendingOrder
         self.restart_required = bool(getattr(gui, '_github_plugin_updater_updated', False))
         layout = QVBoxLayout(self)
-        note = QLabel('先比對清單與本機身分檔的內容 SHA-256，不同才比較版號。勾選並確認後才下載；安裝前備份舊包與外掛登錄設定。', self)
+        note = QLabel('JSON 來源先比身分內容 SHA；發行來源先比已記錄的附件 SHA，沒有基準或 digest 時比較版號。勾選確認後才下載，安裝前備份。', self)
         note.setWordWrap(True)
         layout.addWidget(note)
         self.table = QTableWidget(0, 6, self)
@@ -41,6 +41,7 @@ class UpdaterDialog(QDialog):
         self.table.horizontalHeader().sectionClicked.connect(self.header_clicked)
         self.table.horizontalHeaderItem(0).setToolTip('點一下全選，再點一下取消全選')
         self.table.setEditTriggers(QTableWidget.EditTrigger.NoEditTriggers)
+        self.table.cellDoubleClicked.connect(self.open_source)
         self.table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.table)
         row = QHBoxLayout()
@@ -89,7 +90,7 @@ class UpdaterDialog(QDialog):
         dialog = QDialog(self)
         dialog.setWindowTitle('管理 GitHub 來源')
         layout = QVBoxLayout(dialog)
-        layout.addWidget(QLabel('每行貼上一個完整 GitHub 網址；Release、分支或檔案網址會自動辨識所屬庫，不必手動刪除後半段。\n來源必須在正式 Release 提供 plugins.json。加入來源代表信任該來源的程式。只支援公開庫；移除來源不會移除外掛或切換綁定。', dialog))
+        layout.addWidget(QLabel('每行貼上一個完整 GitHub 網址；Release、分支或檔案網址會自動辨識所屬庫。\n支援 JSON 清單、kiwidude 前綴發行及 AZW6 Image Merge 單一發行規則。加入來源代表信任其程式。只支援公開庫。', dialog))
         text = QPlainTextEdit(dialog)
         text.setPlainText('\n'.join('https://github.com/' + repository(source)
                                    for source in self.prefs.get('sources', [DEFAULT_REPO])))
@@ -113,6 +114,12 @@ class UpdaterDialog(QDialog):
         return [self.rows[self.table.item(row, 0).data(Qt.ItemDataRole.UserRole)]
                 for row in range(self.table.rowCount())
                 if self.table.item(row, 0).checkState() == Qt.CheckState.Checked]
+
+    def open_source(self, row, column):
+        if column != 4:
+            return
+        entry = self.rows[self.table.item(row, 0).data(Qt.ItemDataRole.UserRole)]
+        open_url(QUrl('https://github.com/' + repository(entry['repo'])))
 
     def header_clicked(self, column):
         if column == 0:
@@ -142,7 +149,7 @@ class UpdaterDialog(QDialog):
             item = QTableWidgetItem()
             item.setData(Qt.ItemDataRole.UserRole, row)
             item.setFlags(Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsUserCheckable)
-            if not entry.get('installed', entry['current'] is not None):
+            if not entry.get('installed', entry['current'] is not None) or entry.get('error'):
                 item.setFlags(Qt.ItemFlag.NoItemFlags)
             item.setCheckState(Qt.CheckState.Unchecked)
             self.table.setItem(row, 0, item)
@@ -151,7 +158,10 @@ class UpdaterDialog(QDialog):
             for col, value in enumerate((entry['name'], current, '.'.join(map(str, entry['version'])), entry['repo'], entry['status']), 1):
                 numeric = entry['current'] if col == 2 else entry['version'] if col == 3 else None
                 key = ((0, tuple(numeric)) if numeric else (1, ())) if col in (2, 3) else (0, value.casefold())
-                self.table.setItem(row, col, SortItem(value, key))
+                cell = SortItem(value, key)
+                if col == 4:
+                    cell.setToolTip('雙擊開啟 GitHub 庫')
+                self.table.setItem(row, col, cell)
         if self.sort_column is not None:
             self.table.sortItems(self.sort_column, self.sort_order)
         self.table.resizeColumnsToContents()
@@ -172,6 +182,11 @@ class UpdaterDialog(QDialog):
             local = current.get(entry['name'])
             if local and local['sha256'] == entry['observed_sha256']:
                 bindings[entry['name']] = {'source': entry['source'], 'id': entry['id'], 'accepted_sha256': local['sha256']}
+                if entry.get('mode') in ('prefixed', 'single'):
+                    local_digest = digest(local['path'])
+                    bindings[entry['name']]['package_sha256'] = local_digest
+                    if local_digest == entry.get('package_sha256'):
+                        bindings[entry['name']]['asset_id'] = entry.get('asset_id')
         self.prefs['bindings'] = bindings
         self.check()
 
@@ -189,6 +204,8 @@ class UpdaterDialog(QDialog):
             error_dialog(self, '來源重複', '同一支外掛只能勾選一個來源。', show=True)
             return
         text = '\n'.join(f"{e['name']}：{e['status']}（{e['repo']}）" for e in entries)
+        if any(e.get('mode') in ('prefixed', 'single') and not e.get('package_sha256') for e in entries):
+            text += '\n注意：部分來源未提供附件 SHA，無法對照作者公布的檔案摘要；仍會核對 ZIP、名稱、版號與相容性。'
         if QMessageBox.question(self, '確認強制安裝勾選項目', text + '\n將從勾選來源下載，備份後強制覆蓋安裝，包含同版重裝或降版，並改綁此來源。完整性與相容性仍須通過檢查；完成後需重啟。是否繼續？') == QMessageBox.StandardButton.Yes:
             self.start({'mode': 'install', 'entries': entries, 'force': True})
 
@@ -213,14 +230,15 @@ class UpdaterDialog(QDialog):
         except Exception as error:
             error_dialog(self, '無法使用備份資料夾', str(error), show=True)
 
-    def refresh_installed_rows(self, installed):
+    def refresh_installed_rows(self, installed, states=None):
         keys = {(e['source'], e['id']) for e in self.pending_entries if e['name'] in installed}
         for row in range(self.table.rowCount()):
             checkbox = self.table.item(row, 0)
             entry = self.rows[checkbox.data(Qt.ItemDataRole.UserRole)]
             if (entry['source'], entry['id']) not in keys:
                 continue
-            entry.update(current=list(entry['version']), observed_sha256=entry['sha256'], eligible=False,
+            sha = (states or {}).get(entry['name'], {}).get('sha256', entry['sha256'])
+            entry.update(current=list(entry['version']), observed_sha256=sha, eligible=False,
                          status='已更新（待重新啟動）')
             checkbox.setCheckState(Qt.CheckState.Unchecked)
             checkbox.setFlags(Qt.ItemFlag.NoItemFlags)
@@ -279,7 +297,7 @@ class UpdaterDialog(QDialog):
                     self.gui._github_plugin_updater_updated = True
                     self.gui.must_restart_before_config = True
                 self.restart_button.setEnabled(self.restart_required)
-                self.refresh_installed_rows(result['installed'])
+                self.refresh_installed_rows(result['installed'], result.get('installed_state'))
                 self.status.setText(f"已安裝 {len(result['installed'])} 支，失敗 {len(result['failed'])} 支。請重新啟動 calibre。")
                 self.details.setPlainText('\n'.join(result['failed'] + ['備份：' + p for p in result['backups']]))
         except Exception as error:

@@ -304,16 +304,137 @@ class NativeTests(unittest.TestCase):
         self.assertTrue(start.call_args.args[0]['force'])
         self.assertEqual(len(start.call_args.args[0]['entries']), 2)
 
+    def prefix_candidate(self, change=None):
+        incoming = self.root / 'upstream.zip'
+        with ZipFile(self.root / 'new.zip') as original, ZipFile(incoming, 'w') as archive:
+            for name in original.namelist():
+                if name == core.IDENTITY:
+                    continue
+                data = original.read(name)
+                if change and name == '__init__.py':
+                    data = data.replace(*change)
+                archive.writestr(name, data)
+        return incoming.read_bytes(), dict(self.entry, mode='prefixed', sha256=None,
+                                          minimum_calibre_version=None, supported_platforms=None,
+                                          size=incoming.stat().st_size, package_sha256=core.digest(incoming))
+
+    def test_prefixed_zip_without_identity_is_verified_and_recorded(self):
+        data, entry = self.prefix_candidate()
+        result = core.install([entry], self.bindings, self.root / 'upstream-backups', get=lambda *args: data)
+        self.assertEqual(result['installed'], [NAME], result)
+        self.assertIsNone(core.identity(Path(plugin_dir) / (NAME + '.zip')))
+        self.assertEqual(self.bindings[NAME]['package_sha256'], entry['package_sha256'])
+        self.assertEqual(self.bindings[NAME]['accepted_sha256'], core.payload_digest(Path(plugin_dir) / (NAME + '.zip')))
+
+    def test_prefixed_download_still_checks_name_and_actual_compatibility(self):
+        for change in [(NAME.encode(), b'Another Fixture'), (b'(9,19,0)', b'(9999,0)')]:
+            with self.subTest(change=change):
+                data, entry = self.prefix_candidate(change)
+                result = core.install([entry], self.bindings, self.root / 'upstream-backups', get=lambda *args: data, force=True)
+                self.assertEqual(result['installed'], [])
+                self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.old_package_sha)
+
+    def test_missing_upstream_digest_is_explicit_before_install(self):
+        data, entry = self.prefix_candidate()
+        entry['package_sha256'] = None
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        dialog.rows = [dict(entry, current=[0, 1], eligible=True, status='可更新；來源未提供附件 SHA')]
+        dialog.show_rows()
+        dialog.toggle_all(0)
+        with patch.object(ui.QMessageBox, 'question', return_value=ui.QMessageBox.StandardButton.No) as confirm:
+            dialog.install_selected()
+        self.assertIn('未提供附件 SHA', confirm.call_args.args[2])
+        result = core.install([entry], self.bindings, self.root / 'upstream-backups', get=lambda *args: data, force=True)
+        self.assertEqual(result['installed'], [NAME], result)
+        self.assertEqual(self.bindings[NAME]['package_sha256'], hashlib.sha256(data).hexdigest())
+
+    def test_same_name_from_two_sources_cannot_be_selected_together(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, current=[0, 1], status='可更新', eligible=True)
+        dialog.rows = [base, dict(base, id='upstream.fixture', source='github:another/plugins', repo='Another/Plugins')]
+        dialog.show_rows()
+        dialog.toggle_all(0)
+        with patch.object(ui, 'error_dialog') as error, patch.object(dialog, 'start') as start:
+            dialog.install_selected()
+        self.assertIn('只能勾選一個來源', error.call_args.args[2])
+        start.assert_not_called()
+
+    def test_double_click_source_opens_correct_repo_after_sorting(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, current=[0, 1], status='可更新', eligible=True)
+        dialog.rows = [dict(base, name='Zulu', repo='Example/Zulu'),
+                       dict(base, name='Alpha', repo='Example/Alpha')]
+        dialog.show_rows()
+        dialog.header_clicked(1)
+        with patch.object(ui, 'open_url') as open_browser:
+            dialog.table.cellDoubleClicked.emit(0, 4)
+            self.assertEqual(open_browser.call_args.args[0].toString(), 'https://github.com/Example/Alpha')
+            dialog.table.cellDoubleClicked.emit(1, 4)
+            self.assertEqual(open_browser.call_args.args[0].toString(), 'https://github.com/Example/Zulu')
+            dialog.table.cellDoubleClicked.emit(0, 1)
+            self.assertEqual(open_browser.call_count, 2)
+
+    def test_single_release_installs_original_zip_and_saves_asset_id(self):
+        for stamp in [True, False]:
+            with self.subTest(has_digest=stamp):
+                data, entry = self.prefix_candidate()
+                entry.update(mode='single', asset_id=1234)
+                if not stamp:
+                    entry['package_sha256'] = None
+                result = core.install([entry], self.bindings, self.root / 'single-backups', get=lambda *args: data, force=True)
+                self.assertEqual(result['installed'], [NAME], result)
+                self.assertEqual(self.bindings[NAME]['asset_id'], 1234)
+                self.assertEqual(self.bindings[NAME]['package_sha256'], hashlib.sha256(data).hexdigest())
+                add_plugin(str(self.root / 'old.zip'))
+                disable_plugin(NAME)
+
+    def test_single_release_import_failure_keeps_old_plugin_and_backup(self):
+        data, entry = self.prefix_candidate()
+        incoming = self.root / 'broken-upstream.zip'
+        with ZipFile(self.root / 'upstream.zip') as original, ZipFile(incoming, 'w') as archive:
+            for name in original.namelist():
+                body = original.read(name)
+                if name == '__init__.py':
+                    body = b'import nonexistent_upstream_dependency\n' + body
+                archive.writestr(name, body)
+        data = incoming.read_bytes()
+        entry.update(mode='single', size=len(data), package_sha256=hashlib.sha256(data).hexdigest())
+        result = core.install([entry], self.bindings, self.root / 'single-backups', get=lambda *args: data, force=True)
+        self.assertEqual(result['installed'], [])
+        self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.old_package_sha)
+        self.assertTrue(Path(result['backups'][0], NAME + '-0.1.zip').exists())
+
+    def test_reinstall_preserves_user_sources_including_empty_list(self):
+        from calibre.utils.config import JSONConfig
+        preferences = JSONConfig('plugins/github_plugin_updater')
+        existed = 'sources' in preferences
+        previous = preferences.get('sources')
+        try:
+            for sources in [['https://github.com/Example/MyPlugins', 'https://github.com/Another/Source'], []]:
+                preferences['sources'] = sources
+                add_plugin(str(ROOT / 'dist/GitHub Plugin Updater-zh_TW-release.zip'))
+                self.assertEqual(JSONConfig('plugins/github_plugin_updater')['sources'], sources)
+        finally:
+            if existed:
+                preferences['sources'] = previous
+            else:
+                del preferences['sources']
+
     def test_self_update_in_separate_worker_preserves_running_module(self):
         original = ROOT / 'dist/GitHub Plugin Updater-zh_TW-release.zip'
         incoming = self.root / 'updater-next.zip'
+        next_version = (plugin.version[0] + 1, 0)
         with ZipFile(original) as src, ZipFile(incoming, 'w') as dst:
             for name in src.namelist():
                 if name == core.IDENTITY:
                     continue
                 data = src.read(name)
                 if name == '__init__.py':
-                    data = data.replace(('version = ' + repr(tuple(plugin.version))).encode(), b'version = (0, 2)')
+                    data = data.replace(('version = ' + repr(tuple(plugin.version))).encode(),
+                                        ('version = ' + repr(next_version)).encode())
                 dst.writestr(name, data)
         stamp = core.identity(original)
         stamp['sha256'] = core.payload_digest(incoming)
@@ -321,7 +442,7 @@ class NativeTests(unittest.TestCase):
             dst.writestr(core.IDENTITY, json.dumps(stamp))
         name = 'GitHub Plugin Updater'
         old = core.installed_plugins()[name]
-        entry = dict(self.entry, name=name, id=stamp['id'], source=stamp['source'], version=[0, 2],
+        entry = dict(self.entry, name=name, id=stamp['id'], source=stamp['source'], version=list(next_version),
                      sha256=stamp['sha256'], package_sha256=core.digest(incoming),
                      size=incoming.stat().st_size, observed_sha256=old['sha256'])
         job = self.root / 'self-job.json'; report = self.root / 'self-result.json'

@@ -143,8 +143,90 @@ def manifest(data, repo):
     return entries
 
 
+def release_asset_url(repo, asset):
+    url = asset['browser_download_url']
+    prefix = f'https://github.com/{repo}/releases/download/'
+    if not url.lower().startswith(prefix.lower()):
+        raise ValueError('附件不屬於指定 GitHub 庫。')
+    asset_id = asset.get('id')
+    if type(asset_id) is int and asset_id > 0:
+        url += ('&' if '?' in url else '?') + f'calibre_asset={asset_id}'
+    return github_url(url)
+
+
+def external_entry(repo, plugin_id, name, number, mode, release, expected):
+    entry = dict(id=plugin_id, name=name, source=source_id(repo), repo=repo, version=list(number), mode=mode,
+                 minimum_calibre_version=None, supported_platforms=None, sha256=None,
+                 package_sha256=None, size=0, asset=expected, asset_id=None, url=None)
+    try:
+        if release is None:
+            raise ValueError('相同外掛版號有多個正式發行，無法唯一配對。')
+        assets = [a for a in release.get('assets', []) if a.get('name') == expected]
+        if len(assets) != 1:
+            raise ValueError('找不到唯一的版本 ZIP：' + expected)
+        asset = assets[0]
+        if type(asset.get('size')) is not int or not 0 < asset['size'] <= MAX_PACKAGE:
+            raise ValueError('附件大小無效。')
+        stamp = asset.get('digest')
+        if stamp is not None and not re.fullmatch(r'sha256:[0-9a-f]{64}', stamp):
+            raise ValueError('GitHub 附件 digest 無效。')
+        entry.update(size=asset['size'], url=release_asset_url(repo, asset), asset_id=asset.get('id'),
+                     package_sha256=stamp[7:] if stamp else None)
+    except (KeyError, ValueError) as error:
+        entry['error'] = str(error)
+    return entry
+
+
+def single_entries(repo, rule, get=fetch):
+    release = json.loads(get(f'https://api.github.com/repos/{repo}/releases/latest', MAX_JSON))
+    if release.get('draft') or release.get('prerelease'):
+        raise ValueError('只接受正式發行。')
+    match = re.fullmatch(r'v?([0-9]+(?:\.[0-9]+)+)', release.get('tag_name', ''))
+    if not match:
+        raise ValueError('正式發行標籤無法解析成數字版號。')
+    number = tuple(map(int, match[1].split('.')))
+    return [external_entry(repo, rule['id'], rule['name'], number, 'single', release, rule['asset'])]
+
+
+def prefixed_entries(repo, rules, get=fetch):
+    candidates = {}
+    for page in range(1, 21):
+        releases = json.loads(get(f'https://api.github.com/repos/{repo}/releases?per_page=100&page={page}', 8 * MAX_JSON))
+        if not isinstance(releases, list) or len(releases) > 100:
+            raise ValueError('GitHub 發行列表格式無效。')
+        for release in releases:
+            if release.get('draft') or release.get('prerelease'):
+                continue
+            match = re.fullmatch(r'([a-z0-9_]+)-v?([0-9]+(?:\.[0-9]+)+)', release.get('tag_name', ''))
+            if not match or match[1] not in rules:
+                continue
+            prefix, number = match[1], tuple(map(int, match[2].split('.')))
+            previous = candidates.get(prefix)
+            if previous is None or number > previous[0]:
+                candidates[prefix] = (number, [release])
+            elif number == previous[0]:
+                previous[1].append(release)
+        if len(releases) < 100:
+            break
+    else:
+        raise ValueError('發行超過 2000 筆，未完成掃描，不採用部分結果。')
+    result = []
+    for prefix, (number, releases) in sorted(candidates.items()):
+        release = releases[0] if len(releases) == 1 else None
+        result.append(external_entry(repo, repo.split('/')[0].lower() + '.' + prefix.replace('_', '-'),
+                                     rules[prefix], number, 'prefixed', release,
+                                     releases[0]['tag_name'] + '.zip'))
+    return result
+
+
 def release_entries(repo, get=fetch):
     repo = repository(repo)
+    if repo.lower() == 'kiwidude68/calibre_plugins':
+        from .prefixes import PREFIX_RULES
+        return prefixed_entries(repo, PREFIX_RULES[repo.lower()], get)
+    if repo.lower() == 'hamsterexastris/calibre-azw6-image-merge':
+        from .singles import SINGLE_RULES
+        return single_entries(repo, SINGLE_RULES[repo.lower()], get)
     release = json.loads(get(f'https://api.github.com/repos/{repo}/releases/latest', MAX_JSON))
     if release.get('draft') or release.get('prerelease'):
         raise ValueError('只接受正式發行。')
@@ -156,17 +238,7 @@ def release_entries(repo, get=fetch):
         by_name[asset['name']] = asset
     if 'plugins.json' not in by_name:
         raise ValueError('此庫最新正式發行沒有 plugins.json，請發布更新清單。')
-    prefix = f'https://github.com/{repo}/releases/download/'
-    def asset_url(asset):
-        url = asset['browser_download_url']
-        if not url.lower().startswith(prefix.lower()):
-            raise ValueError('附件不屬於指定 GitHub 庫。')
-        # Re-uploading the same filename gets a new asset ID; avoid stale CDN content.
-        asset_id = asset.get('id')
-        if type(asset_id) is int and asset_id > 0:
-            url += ('&' if '?' in url else '?') + f'calibre_asset={asset_id}'
-        return github_url(url)
-    data = json.loads(get(asset_url(by_name['plugins.json']), MAX_JSON))
+    data = json.loads(get(release_asset_url(repo, by_name['plugins.json']), MAX_JSON))
     entries = manifest(data, repo)
     result = []
     for entry in entries:
@@ -174,7 +246,7 @@ def release_entries(repo, get=fetch):
         asset = by_name.get(entry['asset']) or by_name.get(entry['asset'].replace(' ', '.'))
         if not asset or asset.get('size') != entry['size']:
             raise ValueError('清單與發行附件不一致。')
-        result.append(dict(entry, source=source_id(repo), repo=repo, url=asset_url(asset)))
+        result.append(dict(entry, mode='manifest', source=source_id(repo), repo=repo, url=release_asset_url(repo, asset)))
     return result
 
 
@@ -182,6 +254,9 @@ def plan(entry, installed, bindings, calibre_version, platform):
     current = installed.get(entry['name'])
     row = dict(entry, current=current['version'] if current else None, installed=current is not None, eligible=False,
                observed_sha256=current['sha256'] if current else '')
+    if entry.get('error'):
+        row['status'] = entry['error']
+        return row
     if current is None:
         row['status'] = '未安裝（不自動新增）'
         return row
@@ -194,6 +269,23 @@ def plan(entry, installed, bindings, calibre_version, platform):
         row['status'] = '需要綁定來源' if binding is None else '已綁定其他來源'
     elif not identity_matches(local_identity, expected) and binding.get('accepted_sha256') != current['sha256']:
         row['status'] = '安裝來源已變更，請重新綁定'
+    elif entry.get('mode') in ('prefixed', 'single'):
+        saved_digest = binding.get('package_sha256') if binding.get('accepted_sha256') == current['sha256'] else None
+        if saved_digest and saved_digest == entry.get('package_sha256'):
+            row['status'] = '附件相同'
+        elif current['version'] is None:
+            row['status'] = '目前外掛載入失敗，可勾選修復'
+        elif tuple(current['version']) < version(entry['version']):
+            row['status'], row['eligible'] = '可更新', True
+        elif tuple(current['version']) == version(entry['version']):
+            if binding.get('asset_id') and entry.get('asset_id') and binding['asset_id'] != entry['asset_id']:
+                row['status'] = '版號相同（附件已更換，未驗證內容）'
+            else:
+                row['status'] = '版號相同（附件已變更或尚無校驗基準）'
+        else:
+            row['status'] = '遠端較舊（可勾選降版）'
+        if not entry.get('package_sha256'):
+            row['status'] += '；來源未提供附件 SHA'
     elif current['sha256'] == entry['sha256']:
         row['status'] = '內容相同'
     elif current['version'] is None:
@@ -255,23 +347,27 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
     from calibre.constants import numeric_version, iswindows, ismacos
     from calibre.customize.ui import (BLACKLISTED_PLUGINS, add_plugin, config, disable_plugin,
                                      enable_plugin, is_disabled, load_plugin, plugin_dir)
-    installed, result = installed_plugins(), {'installed': [], 'failed': [], 'backups': []}
+    installed, result = installed_plugins(), {'installed': [], 'failed': [], 'backups': [], 'installed_state': {}}
     platform = 'windows' if iswindows else 'osx' if ismacos else 'linux'
     for entry in entries:
         name = entry['name']
         try:
+            external = entry.get('mode') in ('prefixed', 'single')
+            if entry.get('error'):
+                raise ValueError(entry['error'])
             current = installed.get(name)
             if not current or current['sha256'] != entry['observed_sha256']:
                 raise ValueError('檢查後安裝內容已變更，請重新檢查。')
             if not force and payload_digest(current['path']) != current['sha256']:
                 raise ValueError('目前安裝內容與身分 SHA 不符，請先處理本機變更。')
-            incompatible = (tuple(numeric_version) < version(entry['minimum_calibre_version'])
-                            or platform not in entry['supported_platforms'])
+            incompatible = not external and (tuple(numeric_version) < version(entry['minimum_calibre_version'])
+                                             or platform not in entry['supported_platforms'])
             if (name in BLACKLISTED_PLUGINS or incompatible
                     or (not force and not plan(entry, installed, bindings, numeric_version, platform)['eligible'])):
                 raise ValueError('此外掛不相容、已被 calibre 封鎖，或一般更新條件不符。')
             data = get(entry['url'], MAX_PACKAGE)
-            if len(data) != entry['size'] or hashlib.sha256(data).hexdigest() != entry['package_sha256']:
+            package_sha = hashlib.sha256(data).hexdigest()
+            if len(data) != entry['size'] or (entry.get('package_sha256') and package_sha != entry['package_sha256']):
                 raise ValueError('下載檔案的大小或 SHA-256 與清單不符。')
             with tempfile.TemporaryDirectory(prefix='github-plugin-update-') as temporary:
                 package = Path(temporary) / 'incoming.zip'
@@ -284,10 +380,12 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
                             m.filename.startswith('/') or '\\' in m.filename or ':' in m.filename
                             or '..' in m.filename.split('/') for m in members):
                         raise ValueError('安裝包包含重複或不安全路徑。')
-                stamp = identity(package)
-                if (not identity_matches(stamp, entry) or stamp['sha256'] != entry['sha256']
-                        or payload_digest(package) != entry['sha256']):
-                    raise ValueError('安裝包身分與更新清單不符。')
+                content_sha = payload_digest(package)
+                if not external:
+                    stamp = identity(package)
+                    if (not identity_matches(stamp, entry) or stamp['sha256'] != entry['sha256']
+                            or content_sha != entry['sha256']):
+                        raise ValueError('安裝包身分與更新清單不符。')
                 # Persist recovery material before importing any incoming plugin code.
                 backup = Path(backup_root) / (datetime.now().strftime('%Y%m%d-%H%M%S-') + uuid4().hex[:12])
                 backup.mkdir(parents=True)
@@ -310,13 +408,15 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
                     cls = load_plugin(str(package))
                     if cls.name != name or tuple(cls.version) != version(entry['version']):
                         raise ValueError('程式宣告的名稱或版號與清單不符。')
-                    if tuple(cls.minimum_calibre_version) != version(entry['minimum_calibre_version']) or list(cls.supported_platforms) != entry['supported_platforms']:
+                    if not external and (tuple(cls.minimum_calibre_version) != version(entry['minimum_calibre_version']) or list(cls.supported_platforms) != entry['supported_platforms']):
                         raise ValueError('程式宣告的相容性與清單不符。')
+                    if tuple(numeric_version) < tuple(cls.minimum_calibre_version) or platform not in cls.supported_platforms:
+                        raise ValueError('外掛不相容目前 calibre／平台。')
                     was_disabled = is_disabled(name)
                     changed = True
                     add_plugin(str(package))
                     (disable_plugin if was_disabled else enable_plugin)(name)
-                    if digest(target) != entry['package_sha256']:
+                    if digest(target) != package_sha:
                         raise ValueError('安裝後檔案校驗不符。')
                 except Exception:
                     if changed:
@@ -329,7 +429,11 @@ def install(entries, bindings, backup_root, get=fetch, force=False):
                         config['enabled_plugins'] = enabled
                         config['plugin_customization'] = customization
                     raise
-                bindings[name] = {'id': entry['id'], 'source': entry['source'], 'accepted_sha256': entry['sha256']}
+                bindings[name] = {'id': entry['id'], 'source': entry['source'], 'accepted_sha256': content_sha,
+                                  'package_sha256': package_sha}
+                if external:
+                    bindings[name]['asset_id'] = entry.get('asset_id')
+                result['installed_state'][name] = {'sha256': content_sha}
                 result['installed'].append(name)
         except Exception as error:
             result['failed'].append(f'{name}：{error}')
