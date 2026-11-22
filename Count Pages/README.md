@@ -1,13 +1,13 @@
 # Count Pages
 
-最低 calibre：**3.48.0**；目前外掛版本為 **1.15.3**；作者：**Grant Drake**；授權：GPL v3。
+最低 calibre：**3.48.0**；目前外掛版本為 **1.15.3.1**；作者：**Grant Drake**；授權：GPL v3。
 
 `Count Pages` 是用來計算頁數、字數與可讀性統計的 calibre 外掛。
 它可以把結果寫入自訂欄位，也能依設定從外部來源抓取統計資料，適合做閱讀進度、頁數估算或 Kindle APNX 相關流程。
 
 ## 目前版本與官方比對
 
-目前為 **1.15.3 正體中文整合版（2026-10-23）**，從本倉庫的 1.15.2 更新。
+目前為 **1.15.3.1 正體中文整合版**，基於上游 **1.15.3**；本次統一本倉庫版號，既有功能不變。
 比對來源為 [官方下載包](https://plugins.calibre-ebook.com/134000.zip) 與 [官方更新](https://github.com/kiwidude68/calibre_plugins/commit/d46d9197ac2f78e98f2a774a6afbf8d54d9ce68a)。
 
 | 項目 | 整合結果 |

@@ -11,7 +11,11 @@
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
 | 整合發行版號 | **[v1.3.25（2026-11-22）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.25)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出二十二個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Columns Helper、Diaps Editing Toolbag、Extract ISBN、Generate Cover、Goodreads Sync、Hardcover Sync 與 Manage Series 的翻譯在打包時分別編譯。 |
-| 本次變更 | 新增 Plugin Backup 0.1、Columns Helper 2.1.1.1 與 Diaps Editing Toolbag 0.5.0.1；提供可選設定的外掛批次備份還原、原生正體中文及 calibre 9.19 驗證，並核對全部外掛說明。 |
+| 本次變更 | 訂定「完整上游基準版號加本倉庫修訂次數 `.x`」慣例；統一 AZW6 Image Merge、Count Pages、EpubSplit、Find Duplicates、Goodreads 與 Send to Kindle 六支外掛的程式版號與內外說明。 |
+
+## 外掛版號慣例
+
+有上游來源的外掛，本倉庫版號一律採「完整上游基準版號.x」：完整保留上游所有數字段，不修改、截短或假設固定段數；最後另加一段本倉庫修訂次數，從 `.1` 起，同一上游基準每次本地改版依序遞增為 `.2`、`.3`。例如上游 `1.5.0.1.0`，本倉庫第二次修訂為 `1.5.0.1.0.2`。更換上游基準後，修訂次數從 `.1` 重新計算。程式宣告、介面、內外層 README、更新紀錄與發行說明必須一致；上游來源欄保留原始基準版號，歷史發行紀錄不回改。自有外掛及整合發行版號各自管理。
 
 ## 各外掛簡介、來源與版號
 
@@ -27,21 +31,21 @@
 | [Plugin Backup](./Plugin%20Backup/README.md) | 勾選或一次全部匯出／批次匯入第三方外掛與啟用狀態，可選是否包含設定；入口位於外掛偏好設定底部。 | 本倉庫自行開發，SamLiao & Codex。 | **0.1**。 |
 | [Toolbar Manager](./Toolbar%20Manager/README.md) | 右鍵調整工具列按鈕，開啟外掛首頁、選項或移除外掛。 | 本倉庫自行開發；SamLiao & Codex。 | **1.0.0**。 |
 | [Traditional Chinese Supplement](./Traditional%20Chinese%20Supplement/README.md) | 補齊指定官方與第三方外掛視窗的正體中文顯示文字。 | 本倉庫自行開發；SamLiao & Codex，核對 calibre 9.18／9.19 與相關外掛介面。 | **1.2.0**；擴充偏好設定、動態視窗、快捷鍵、範本與書本檢查翻譯，無額外工具列按鈕。 |
-| [AZW6 Image Merge](./AZW6%20Image%20Merge/README.md) | 將 Amazon AZW6 sidecar 高畫質圖片合併至主書檔。 | Andrew Timson；[HamsterExAstris/calibre-azw6-image-merge，提交 `63f76d4`](https://github.com/HamsterExAstris/calibre-azw6-image-merge/tree/63f76d46e19de901536b9bc7c1a02998f26c439b)，基準 **1.0.0**。 | **1.0.0**，含本地相容性修改。 |
+| [AZW6 Image Merge](./AZW6%20Image%20Merge/README.md) | 將 Amazon AZW6 sidecar 高畫質圖片合併至主書檔。 | Andrew Timson；[HamsterExAstris/calibre-azw6-image-merge，提交 `63f76d4`](https://github.com/HamsterExAstris/calibre-azw6-image-merge/tree/63f76d46e19de901536b9bc7c1a02998f26c439b)，基準 **1.0.0**。 | **1.0.0.1**，本倉庫修訂版。 |
 | [Columns Helper](./Columns%20Helper/README.md) | 預覽、建立及管理自訂欄位與套組，提供範本測試、篩選及排序。 | Comfy.n；[MobileRead 官方討論串](https://www.mobileread.com/forums/showthread.php?t=372614)，2026-11-22 取得官方 **2.1.1** 安裝包。 | **2.1.1.1**；原生正體中文修訂版，已驗證 calibre 9.19。 |
-| [Count Pages](./Count%20Pages/README.md) | 計算或下載頁數、字數與可讀性統計，寫入自訂欄位。 | Grant Drake；[kiwidude68/calibre_plugins/count_pages，提交 `d46d919`](https://github.com/kiwidude68/calibre_plugins/tree/d46d9197ac2f78e98f2a774a6afbf8d54d9ce68a/count_pages)，基準 **1.15.3**。 | **1.15.3**，正體中文整合版。 |
+| [Count Pages](./Count%20Pages/README.md) | 計算或下載頁數、字數與可讀性統計，寫入自訂欄位。 | Grant Drake；[kiwidude68/calibre_plugins/count_pages，提交 `d46d919`](https://github.com/kiwidude68/calibre_plugins/tree/d46d9197ac2f78e98f2a774a6afbf8d54d9ce68a/count_pages)，基準 **1.15.3**。 | **1.15.3.1**，本倉庫修訂版。 |
 | [Diaps Editing Toolbag](./Diaps%20Editing%20Toolbag/README.md) | 在編輯書本中批次編輯 HTML 標籤、轉換西文智慧標點及 CSS cm／em 單位。 | DiapDealer（Doug Massay）；[dougmassay/toolbag-calibre-plugin，提交 `4589e1a`](https://github.com/dougmassay/toolbag-calibre-plugin/tree/4589e1ad30421d1a7698fc26464cb20336a61771)，基準 **0.5.0**。 | **0.5.0.1**；正體中文與 calibre 9.19 相容性修訂。 |
-| [EpubSplit](./EpubSplit/README.md) | 按目錄或章節將 EPUB 拆成多本新書。 | Jim Miller；[JimmXinu/EpubSplit，標籤 `v3.12.0`](https://github.com/JimmXinu/EpubSplit/tree/a0b31ea9c0c9b439329574c4752b24eaaab67f72)，基準 **3.12.0**。 | **3.12.0**，含本地 EPUB3 修改。 |
+| [EpubSplit](./EpubSplit/README.md) | 按目錄或章節將 EPUB 拆成多本新書。 | Jim Miller；[JimmXinu/EpubSplit，標籤 `v3.12.0`](https://github.com/JimmXinu/EpubSplit/tree/a0b31ea9c0c9b439329574c4752b24eaaab67f72)，基準 **3.12.0**。 | **3.12.0.1**，本倉庫修訂版。 |
 | [Extract ISBN](./Extract%20ISBN/README.md) | 從電子書內文擷取 ISBN，確認後更新書庫識別碼。 | Grant Drake；[kiwidude68/calibre_plugins/extract_isbn，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/extract_isbn)，程式宣告 **1.6.7**。 | **1.6.7.1**，基於上游 1.6.7 的本倉庫修訂版。 |
-| [Find Duplicates](./Find%20Duplicates/README.md) | 依書目規則找重複書籍，也支援格式檔案的二進位比對。 | Grant Drake；[kiwidude68/calibre_plugins/find_duplicates，提交 `91b0f23`](https://github.com/kiwidude68/calibre_plugins/tree/91b0f23da54fa8f020ba387e1f13a1321706c0ff/find_duplicates)，基準 **1.10.11**；早期來源為 JimmXinu 分支。 | **1.10.11**，正體中文整合版。 |
+| [Find Duplicates](./Find%20Duplicates/README.md) | 依書目規則找重複書籍，也支援格式檔案的二進位比對。 | Grant Drake；[kiwidude68/calibre_plugins/find_duplicates，提交 `91b0f23`](https://github.com/kiwidude68/calibre_plugins/tree/91b0f23da54fa8f020ba387e1f13a1321706c0ff/find_duplicates)，基準 **1.10.11**；早期來源為 JimmXinu 分支。 | **1.10.11.1**，本倉庫修訂版。 |
 | [Generate Cover](./Generate%20Cover/README.md) | 用圖片與書目資料製作自訂封面。 | Grant Drake；[kiwidude68/calibre_plugins/generate_cover](https://github.com/kiwidude68/calibre_plugins/tree/cd41919f50ce650c45f652f05bbb4327f243a171/generate_cover)，基準 2.5.4。 | **2.5.4.2**，正體中文修訂版。 |
-| [Goodreads](./Goodreads/README.md) | 從 Goodreads 下載書籍中繼資料與封面。 | Grant Drake；最初由使用者提供的 1.10.0 安裝包匯入，已對照 [kiwidude68/calibre_plugins/goodreads，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/goodreads)，基準 **1.10.0**。 | **1.10.1**，本倉庫修正版。 |
+| [Goodreads](./Goodreads/README.md) | 從 Goodreads 下載書籍中繼資料與封面。 | Grant Drake；最初由使用者提供的 1.10.0 安裝包匯入，已對照 [kiwidude68/calibre_plugins/goodreads，提交 `2a2dbb2`](https://github.com/kiwidude68/calibre_plugins/tree/2a2dbb2469ec6e68179cd71ba943db240045d097/goodreads)，基準 **1.10.0**。 | **1.10.0.1**，本倉庫修訂版。 |
 | [Goodreads Sync](./Goodreads%20Sync/README.md) | 同步 Goodreads 書架、評分、書評與閱讀進度。 | Grant Drake；[上游](https://github.com/kiwidude68/calibre_plugins/tree/main/goodreads_sync)，本機安裝包基準 **1.17.6**。 | **1.17.6.1**，直接正體中文化，保留原同步核心。 |
 | [Hardcover Sync](./HardCover%20Sync/README.md) | 同步 Hardcover 清單與閱讀資料，擷取書籍 ISBN。 | Juan York；[jojuyo/calibre-hardcover-sync-plugin](https://github.com/jojuyo/calibre-hardcover-sync-plugin)，上游 GitHub 發行基準 **0.4.0**。 | **0.4.0.1**，真正的 Hardcover 外掛，直接正體中文化。 |
 | [Manage Series](./Manage%20Series/README.md) | 集中調整系列名稱、順序、整數及小數編號，支援鎖定與自訂系列欄位。 | Grant Drake；[kiwidude68/calibre_plugins/manage_series，提交 `c01cf614`](https://github.com/kiwidude68/calibre_plugins/tree/c01cf614f0c6da3c996d7010a0fbba4a68623f66/manage_series)，基準 **1.5.5**。 | **1.5.5.1**；原生正體中文語言包與 calibre 9.19 相容性修訂。 |
 | [Markdown Output](./Markdown%20Output/README.md) | 將書籍轉為 Markdown，保留連結與圖片參照。 | The_book；[原始討論串](https://www.mobileread.com/forums/showthread.php?t=328999)，本機安裝包基準 **1.0.3**。 | **1.0.3.1**，獨立中文設定頁，修正新版 calibre 相容性。 |
 | [Modify ePub](./Modify%20ePub/README.md) | 直接清理與修改 EPUB，免經轉檔流程。 | Grant Drake 等；[kiwidude68/calibre_plugins/modify_epub，提交 `683c996`](https://github.com/kiwidude68/calibre_plugins/tree/683c9968aa0302212ee88d769eb598788c88a8b1/modify_epub)，基準 **1.8.14**。 | **1.8.14.1**，正體中文修訂版。 |
-| [Send to Kindle](./Send%20to%20Kindle/README.md) | 透過 calibre 電子郵件設定寄書到 Kindle，可指定寄送書名與檔名。 | BookFere／bookfere.com；[bookfere/Send-to-Kindle-Calibre-Plugin，標籤 `v1.1.1`](https://github.com/bookfere/Send-to-Kindle-Calibre-Plugin/tree/e57861e85fcddded1344d784e3c1d4cc4306520c)，基準 **1.1.1**。 | **v1.1.1_r.1**；calibre 數字版號顯示 **1.1.1**。 |
+| [Send to Kindle](./Send%20to%20Kindle/README.md) | 透過 calibre 電子郵件設定寄書到 Kindle，可指定寄送書名與檔名。 | BookFere／bookfere.com；[bookfere/Send-to-Kindle-Calibre-Plugin，標籤 `v1.1.1`](https://github.com/bookfere/Send-to-Kindle-Calibre-Plugin/tree/e57861e85fcddded1344d784e3c1d4cc4306520c)，基準 **1.1.1**。 | **1.1.1.1**，本倉庫修訂版。 |
 | [Skip ASCII Text Plugin](./Skip%20ASCII%20Text%20Plugin/README.md) | 保留檔名中的中文等原文字元，略過 ASCII 轉寫。 | SamLiao & Codex 重寫；原版為 [shiratori3/calibre-plugins v1.0.0](https://gitee.com/shiratori3/calibre-plugins/releases/tag/v1.0.0)，程式作者欄 Billy Zhou，原版採 BSD 3-Clause。 | **1.0.1**，本倉庫重寫版。 |
 
 ## 各外掛修改摘要

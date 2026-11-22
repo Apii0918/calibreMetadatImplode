@@ -1,13 +1,13 @@
 # Find Duplicates
 
-最低 calibre：**2.0.0**；目前外掛版本為 **1.10.11**；作者：**Grant Drake**；授權：GPL v3。
+最低 calibre：**2.0.0**；目前外掛版本為 **1.10.11.1**；作者：**Grant Drake**；授權：GPL v3。
 
 `Find Duplicates` 是用來找出 calibre 書庫中可能重複書籍的外掛。
 它會依照你設定的比對規則整理候選項目，讓你再人工確認哪些書應該合併、保留或刪除。
 
 ## 目前版本與官方比對
 
-目前為 **1.10.11 正體中文整合版（2026-10-23）**，從本倉庫的 1.10.10 更新。
+目前為 **1.10.11.1 正體中文整合版**，基於上游 **1.10.11**；本次統一本倉庫版號，既有功能不變。
 比對來源為 [官方下載包](https://plugins.calibre-ebook.com/131017.zip) 與 [官方更新](https://github.com/kiwidude68/calibre_plugins/commit/91b0f23da54fa8f020ba387e1f13a1321706c0ff)。
 
 | 項目 | 整合結果 |

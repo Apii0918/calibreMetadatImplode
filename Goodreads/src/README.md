@@ -1,6 +1,6 @@
 # Goodreads Plugin
 
-本倉庫版本 **1.10.1**；作者 **Grant Drake**；GPL v3；最低 calibre **2.0.0**。包含本地書名／作者比對、識別碼核對、系列與封面解析修正；目前操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Goodreads)。以下保留上游原始說明。
+本倉庫版本 **1.10.0.1**；作者 **Grant Drake**；GPL v3；最低 calibre **2.0.0**。包含本地書名／作者比對、識別碼核對、系列與封面解析修正；目前操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Goodreads)。以下保留上游原始說明。
 [![MobileRead][mobileread-image]][mobileread-url]
 [![History][changelog-image]][changelog-url]
 [![License][license-image]][license-url]

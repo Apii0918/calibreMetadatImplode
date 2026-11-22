@@ -1,6 +1,6 @@
 # AZW6 Image Merge
 
-版本：**1.0.0**；最低 calibre：**5.0.0**；作者：**Andrew Timson**；授權：GPL v3。本倉庫保留以 Pillow 取代 `imghdr` 的 Python 3.13 以上相容性修改。
+版本：**1.0.0.1**；最低 calibre：**5.0.0**；作者：**Andrew Timson**；授權：GPL v3。本倉庫保留以 Pillow 取代 `imghdr` 的 Python 3.13 以上相容性修改。
 
 這個 calibre 外掛會把 Amazon AZW6 sidecar 檔中的高清圖片，合併回同一本書的 AZW3/AZW 內容。
 
@@ -43,3 +43,5 @@
 ## 上游來源
 
 [HamsterExAstris/calibre-azw6-image-merge](https://github.com/HamsterExAstris/calibre-azw6-image-merge/tree/63f76d46e19de901536b9bc7c1a02998f26c439b)，固定基準提交 `63f76d46e19de901536b9bc7c1a02998f26c439b`，版本 1.0.0。整合紀錄見[根目錄 CHANGELOG](../CHANGELOG.md)。
+
+更新紀錄見 [CHANGELOG](./CHANGELOG.md)。

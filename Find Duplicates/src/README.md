@@ -1,6 +1,6 @@
 # Find Duplicates Plugin
 
-本倉庫版本 **1.10.11**；作者 **Grant Drake**；GPL v3；最低 calibre **2.0.0**。依書目規則或格式檔案的二進位內容找重複項目，包含正體中文語系。操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Find%20Duplicates)。以下保留上游原始說明。
+本倉庫版本 **1.10.11.1**；作者 **Grant Drake**；GPL v3；最低 calibre **2.0.0**。依書目規則或格式檔案的二進位內容找重複項目，包含正體中文語系。操作與限制見[本倉庫說明](https://github.com/SamLaio/calibreMetadatImplode/tree/main/Find%20Duplicates)。以下保留上游原始說明。
 [![MobileRead][mobileread-image]][mobileread-url]
 [![History][changelog-image]][changelog-url] 
 [![License][license-image]][license-url]
@@ -42,7 +42,7 @@ Please see the README.md and CONTRIBUTING.md at the above site for more informat
 
 最低 calibre：**2.0.0**。從 [本倉庫發行頁](https://github.com/SamLaio/calibreMetadatImplode/releases) 下載 `Find Duplicates-zh_TW-release.zip` 安裝。
 
-目前為 **1.10.11 正體中文整合版（2026-10-23）**：整合官方語系更新，保留本倉庫原有正體中文、中文說明與外掛描述。正體中文涵蓋全部 179 個介面字串；重複書籍比對演算法沒有變更。
+目前為 **1.10.11.1 正體中文整合版**，基於上游 **1.10.11**：整合官方語系更新，保留本倉庫原有正體中文、中文說明與外掛描述。正體中文涵蓋全部 179 個介面字串；重複書籍比對演算法沒有變更。
 
 `Find Duplicates` 是用來找出可能重複書籍的 calibre 外掛，會依照 metadata 與你設定的規則整理候選結果。
 
