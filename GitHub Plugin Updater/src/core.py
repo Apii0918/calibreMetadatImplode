@@ -151,6 +151,10 @@ def release_entries(repo, get=fetch):
         url = asset['browser_download_url']
         if not url.lower().startswith(prefix.lower()):
             raise ValueError('附件不屬於指定 GitHub 庫。')
+        # Re-uploading the same filename gets a new asset ID; avoid stale CDN content.
+        asset_id = asset.get('id')
+        if type(asset_id) is int and asset_id > 0:
+            url += ('&' if '?' in url else '?') + f'calibre_asset={asset_id}'
         return github_url(url)
     data = json.loads(get(asset_url(by_name['plugins.json']), MAX_JSON))
     entries = manifest(data, repo)

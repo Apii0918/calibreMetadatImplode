@@ -111,6 +111,18 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(entries[0]['asset'], 'Example Tool.zip')
         self.assertTrue(entries[0]['url'].endswith('/Example.Tool.zip'))
 
+    def test_asset_id_distinguishes_reuploaded_manifest(self):
+        prefix = 'https://github.com/Example/Plugins/releases/download/v1/'
+        release = {'assets': [{'id': 123, 'name': 'plugins.json', 'browser_download_url': prefix + 'plugins.json'},
+                              {'id': 456, 'name': 'tool.zip', 'size': 100, 'browser_download_url': prefix + 'tool.zip'}]}
+        calls = []
+        def get(url, limit):
+            calls.append(url)
+            return json.dumps(release if '/releases/latest' in url else self.manifest()).encode()
+        entries = core.release_entries(REPO, get)
+        self.assertTrue(calls[1].endswith('plugins.json?calibre_asset=123'))
+        self.assertTrue(entries[0]['url'].endswith('tool.zip?calibre_asset=456'))
+
     def test_network_and_repository_boundaries(self):
         self.assertEqual(core.repository('https://github.com/Example/Plugins/'), REPO)
         for value in ['https://evil.example/x/y', 'a/..', 'a/b/c', '']:

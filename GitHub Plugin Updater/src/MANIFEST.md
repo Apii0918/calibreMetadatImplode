@@ -58,3 +58,5 @@ GitHub API 使用[最新正式 Release](https://docs.github.com/en/rest/releases
 SHA-256 初始輸入為 UTF-8／ASCII 位元組 `calibre-plugin-content-v1` 加一個 NUL 位元組。按 ZIP 項目檔名的字串升序處理所有檔案，跳過目錄與根層 `github-plugin-identity.json`。每個檔案依序加入：UTF-8 檔名位元組長度（8 位元組無號大端序）、UTF-8 檔名、解壓後檔案大小（8 位元組無號大端序）、解壓後完整內容。最後輸出小寫十六進位摘要。長度欄位避免不同路徑／內容組合混淆；ZIP 時間、權限、壓縮方式與身分檔不納入內容 SHA。
 
 更新檢查僅比較身分檔與清單的 `sha256`；下載後另驗 `package_sha256` 及實際內容 SHA。身分檔本身不是防竄改簽章，來源與 ID 仍須獨立核對。
+
+下載網址會附加 GitHub 附件 ID；同名重新上傳後 ID 改變，避免 CDN 回傳舊版清單或 ZIP。
