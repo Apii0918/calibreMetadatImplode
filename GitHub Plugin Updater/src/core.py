@@ -15,7 +15,17 @@ MAX_PACKAGE = 256 * 1024 * 1024
 
 
 def repository(value):
-    value = value.strip().removeprefix('https://github.com/').rstrip('/')
+    value = value.strip()
+    if '://' in value:
+        parsed = urlsplit(value)
+        if (parsed.scheme != 'https' or parsed.hostname != 'github.com' or parsed.username
+                or parsed.password or parsed.port not in (None, 443)):
+            raise ValueError('來源必須為 GitHub HTTPS 網址。')
+        parts = parsed.path.strip('/').split('/')
+        if len(parts) < 2:
+            raise ValueError('GitHub 網址缺少庫名稱。')
+        value = '/'.join(parts[:2])
+    value = value.rstrip('/').removesuffix('.git')
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9_.-]+', value):
         raise ValueError('來源必須為 GitHub 的 owner/repo。')
     if value.split('/')[1] in ('.', '..'):
@@ -170,7 +180,7 @@ def release_entries(repo, get=fetch):
 
 def plan(entry, installed, bindings, calibre_version, platform):
     current = installed.get(entry['name'])
-    row = dict(entry, current=current['version'] if current else None, eligible=False,
+    row = dict(entry, current=current['version'] if current else None, installed=current is not None, eligible=False,
                observed_sha256=current['sha256'] if current else '')
     if current is None:
         row['status'] = '未安裝（不自動新增）'
@@ -191,9 +201,9 @@ def plan(entry, installed, bindings, calibre_version, platform):
     elif tuple(calibre_version) < version(entry['minimum_calibre_version']) or platform not in entry['supported_platforms']:
         row['status'] = '不相容目前 calibre／平台'
     elif version(entry['version']) < tuple(current['version']):
-        row['status'] = '遠端較舊，不降版'
+        row['status'] = '遠端較舊（可勾選降版）'
     elif version(entry['version']) == tuple(current['version']):
-        row['status'] = '同版內容不符，請來源修正版號'
+        row['status'] = '同版內容不同（可勾選重裝）'
     else:
         row['status'] = '可更新'
         row['eligible'] = True
@@ -237,7 +247,7 @@ def check(sources, bindings):
     return {'rows': rows, 'errors': errors}
 
 
-def install(entries, bindings, backup_root, get=fetch):
+def install(entries, bindings, backup_root, get=fetch, force=False):
     import shutil
     import tempfile
     from datetime import datetime
@@ -253,10 +263,13 @@ def install(entries, bindings, backup_root, get=fetch):
             current = installed.get(name)
             if not current or current['sha256'] != entry['observed_sha256']:
                 raise ValueError('檢查後安裝內容已變更，請重新檢查。')
-            if payload_digest(current['path']) != current['sha256']:
+            if not force and payload_digest(current['path']) != current['sha256']:
                 raise ValueError('目前安裝內容與身分 SHA 不符，請先處理本機變更。')
-            if not plan(entry, installed, bindings, numeric_version, platform)['eligible'] or name in BLACKLISTED_PLUGINS:
-                raise ValueError('此外掛不可更新或來源尚未綁定。')
+            incompatible = (tuple(numeric_version) < version(entry['minimum_calibre_version'])
+                            or platform not in entry['supported_platforms'])
+            if (name in BLACKLISTED_PLUGINS or incompatible
+                    or (not force and not plan(entry, installed, bindings, numeric_version, platform)['eligible'])):
+                raise ValueError('此外掛不相容、已被 calibre 封鎖，或一般更新條件不符。')
             data = get(entry['url'], MAX_PACKAGE)
             if len(data) != entry['size'] or hashlib.sha256(data).hexdigest() != entry['package_sha256']:
                 raise ValueError('下載檔案的大小或 SHA-256 與清單不符。')
@@ -278,12 +291,14 @@ def install(entries, bindings, backup_root, get=fetch):
                 # Persist recovery material before importing any incoming plugin code.
                 backup = Path(backup_root) / (datetime.now().strftime('%Y%m%d-%H%M%S-') + uuid4().hex[:12])
                 backup.mkdir(parents=True)
-                previous = backup / 'previous.zip'
+                safe_name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', name).strip(' .')[:100] or 'plugin'
+                old_version = '.'.join(map(str, current['version'])) if current['version'] else '未知版號'
+                previous = backup / f'{safe_name}-{old_version}.zip'
                 shutil.copyfile(current['path'], previous)
                 registry = dict(config['plugins'])
                 disabled, enabled = set(config['disabled_plugins']), set(config['enabled_plugins'])
                 customization = dict(config['plugin_customization'])
-                state = {'name': name, 'version': current['version'], 'sha256': current['sha256'],
+                state = {'name': name, 'version': current['version'], 'sha256': current['sha256'], 'package': previous.name,
                          'plugins': registry, 'disabled_plugins': sorted(disabled),
                          'enabled_plugins': sorted(enabled), 'plugin_customization': customization}
                 (backup / 'state.json').write_text(json.dumps(state, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -321,6 +336,13 @@ def install(entries, bindings, backup_root, get=fetch):
     return result
 
 
+def backup_directory(prefs, config_root):
+    path = Path(prefs.get('backup_dir') or Path(config_root) / 'github-plugin-updater-backups').expanduser()
+    if not path.is_absolute():
+        raise ValueError('備份資料夾必須為完整路徑。')
+    return path
+
+
 def worker():
     import sys
     import traceback
@@ -334,7 +356,7 @@ def worker():
             result = check(job['sources'], bindings)
             prefs['bindings'] = bindings
         elif job['mode'] == 'install':
-            result = install(job['entries'], bindings, Path(config_dir) / 'github-plugin-updater-backups')
+            result = install(job['entries'], bindings, backup_directory(prefs, config_dir), force=job.get('force') is True)
             prefs['bindings'] = bindings
         else:
             raise ValueError('未知工作模式。')

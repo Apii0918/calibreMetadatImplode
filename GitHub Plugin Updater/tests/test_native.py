@@ -73,7 +73,7 @@ class NativeTests(unittest.TestCase):
         self.assertTrue(is_disabled(NAME))
         self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.entry['package_sha256'])
         backup = Path(result['backups'][0])
-        self.assertEqual(core.digest(backup / 'previous.zip'), self.old_package_sha)
+        self.assertEqual(core.digest(backup / (NAME + '-0.1.zip')), self.old_package_sha)
         self.assertEqual(json.loads((backup / 'state.json').read_text(encoding='utf-8'))['name'], NAME)
         self.assertEqual(self.bindings[NAME]['accepted_sha256'], self.entry['sha256'])
 
@@ -96,7 +96,7 @@ class NativeTests(unittest.TestCase):
         result = self.run_install()
         self.assertIn('版號', result['failed'][0])
         self.assertEqual(core.digest(Path(plugin_dir) / (NAME + '.zip')), self.old_package_sha)
-        self.assertTrue(Path(result['backups'][0], 'previous.zip').exists())
+        self.assertTrue(Path(result['backups'][0], NAME + '-0.1.zip').exists())
 
     def test_partial_install_failure_rolls_back_registry_and_package(self):
         before = dict(config['plugins'])
@@ -157,6 +157,153 @@ class NativeTests(unittest.TestCase):
         self.assertIn('檢查完成', dialog.status.text())
         self.assertEqual(dialog.rows, [])
 
+    def test_header_toggles_all_selectable_rows(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, current=[0, 1], status='可更新', eligible=True)
+        dialog.rows = [base, dict(base), dict(base, current=None, installed=False)]
+        dialog.show_rows()
+        header = dialog.table.horizontalHeader()
+        self.assertEqual(dialog.table.horizontalHeaderItem(0).text(), '全選')
+        header.sectionClicked.emit(0)
+        self.assertEqual(len(dialog.selected()), 2)
+        header.sectionClicked.emit(0)
+        self.assertEqual(dialog.selected(), [])
+        dialog.table.item(0, 0).setCheckState(Qt.CheckState.Checked)
+        header.sectionClicked.emit(0)
+        self.assertEqual(len(dialog.selected()), 2)
+        header.sectionClicked.emit(1)
+        self.assertEqual(len(dialog.selected()), 2)
+
+    def test_native_preferences_entry_has_no_toolbar_action(self):
+        from calibre.customize import InterfaceActionBase, PreferencesPlugin
+        from calibre.customize.ui import preferences_plugins
+        from calibre.gui2.preferences import AbortInitialize
+        from qt.core import QWidget
+        self.assertIsInstance(plugin, PreferencesPlugin)
+        self.assertNotIsInstance(plugin, InterfaceActionBase)
+        entry = next(p for p in preferences_plugins() if p.name == 'GitHub Plugin Updater')
+        self.assertEqual(entry.category, 'Advanced')
+        self.assertEqual(entry.gui_name, 'GitHub 外掛更新')
+        parent = QWidget()
+        widget = entry.create_widget(parent)
+        widget.genesis(parent)
+        with patch.object(ui.UpdaterDialog, 'exec', return_value=0) as execute:
+            with self.assertRaises(AbortInitialize):
+                widget.initialize()
+        execute.assert_called_once()
+        parent.close()
+
+    def test_sort_keeps_checked_plugin_identity_and_numeric_versions(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, status='可更新', eligible=True)
+        dialog.rows = [dict(base, name='Zulu', current=[1, 2], version=[1, 2]),
+                       dict(base, name='Alpha', current=[1, 10], version=[1, 10])]
+        dialog.show_rows()
+        dialog.table.item(0, 0).setCheckState(Qt.CheckState.Checked)
+        header = dialog.table.horizontalHeader()
+        header.sectionClicked.emit(1)
+        self.assertEqual(dialog.table.item(0, 1).text(), 'Alpha')
+        self.assertEqual(dialog.selected()[0]['name'], 'Zulu')
+        header.sectionClicked.emit(1)
+        self.assertEqual(dialog.table.item(0, 1).text(), 'Zulu')
+        header.sectionClicked.emit(2)
+        self.assertEqual(dialog.table.item(0, 2).text(), '1.2')
+        header.sectionClicked.emit(2)
+        self.assertEqual(dialog.table.item(0, 2).text(), '1.10')
+        self.assertEqual(dialog.selected()[0]['name'], 'Zulu')
+        header.sectionClicked.emit(0)
+        self.assertEqual(len(dialog.selected()), 2)
+        header.sectionClicked.emit(0)
+        self.assertEqual(dialog.selected(), [])
+
+    def test_install_completion_only_refreshes_successful_rows(self):
+        from types import SimpleNamespace
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, status='可更新', eligible=True, current=[0, 1])
+        dialog.rows = [dict(base, name='Zulu', id='example.zulu'),
+                       dict(base, name='Alpha', id='example.alpha')]
+        dialog.show_rows()
+        dialog.table.item(0, 0).setCheckState(Qt.CheckState.Checked)
+        dialog.table.item(1, 0).setCheckState(Qt.CheckState.Checked)
+        dialog.header_clicked(1)
+        dialog.pending_entries = [dialog.rows[0]]
+        dialog.mode = 'install'
+        dialog.report = self.root / 'result.json'
+        dialog.report.write_text(json.dumps({'installed': ['Zulu'], 'failed': [], 'backups': []}), encoding='utf-8')
+        dialog.process = SimpleNamespace(deleteLater=lambda: None)
+        dialog.temporary = tempfile.TemporaryDirectory(dir=ROOT / 'dist')
+        dialog.finished(0, None)
+        self.assertEqual(dialog.table.rowCount(), 2)
+        self.assertEqual(dialog.rows[0]['current'], [0, 2])
+        self.assertEqual(dialog.rows[0]['status'], '已更新（待重新啟動）')
+        self.assertEqual(dialog.rows[1]['current'], [0, 1])
+        self.assertEqual(dialog.rows[1]['status'], '可更新')
+        self.assertEqual([e['name'] for e in dialog.selected()], ['Alpha'])
+        self.assertEqual(dialog.table.item(0, 1).text(), 'Alpha')
+        self.assertTrue(dialog.restart_button.isEnabled())
+
+    def test_backup_directory_setting_is_saved_and_opened_consistently(self):
+        from calibre.utils.config import JSONConfig
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        previous = dialog.prefs.get('backup_dir')
+        self.addCleanup(lambda: dialog.prefs.__setitem__('backup_dir', previous))
+        folder = self.root / 'chosen-backups'
+        with patch.object(ui.QFileDialog, 'getExistingDirectory', return_value=str(folder)):
+            dialog.choose_backup_directory()
+        persisted = JSONConfig('plugins/github_plugin_updater')
+        self.assertEqual(core.backup_directory(persisted, config_dir), folder)
+        self.assertEqual(dialog.backup_settings_button.toolTip(), str(folder))
+        with patch.object(ui, 'open_local_file') as open_folder:
+            dialog.open_backups()
+        open_folder.assert_called_once_with(str(folder))
+        with patch.object(ui.QFileDialog, 'getExistingDirectory', return_value=''):
+            dialog.choose_backup_directory()
+        self.assertEqual(dialog.prefs['backup_dir'], str(folder))
+
+    def test_checked_items_force_same_version_and_downgrade(self):
+        for target in [(0, 1), (0, 0)]:
+            with self.subTest(version=target):
+                data = package(self.root / 'force.zip', target)
+                candidate = dict(self.entry, version=list(target), size=len(data),
+                                 sha256=core.payload_digest(self.root / 'force.zip'),
+                                 package_sha256=hashlib.sha256(data).hexdigest())
+                bindings = {NAME: {'id': 'another.fixture', 'source': 'github:another/repo'}}
+                result = core.install([candidate], bindings, self.root / 'forced-backups',
+                                      get=lambda *args: data, force=True)
+                self.assertEqual(result['installed'], [NAME], result)
+                self.assertEqual(bindings[NAME]['source'], SOURCE)
+                # Restore the baseline before testing the next forced operation.
+                add_plugin(str(self.root / 'old.zip'))
+                disable_plugin(NAME)
+
+    def test_force_does_not_bypass_download_hash_validation(self):
+        result = core.install([self.entry], self.bindings, self.root / 'forced-backups',
+                              get=lambda *args: b'wrong', force=True)
+        self.assertEqual(result['installed'], [])
+        self.assertIn('SHA-256', result['failed'][0])
+        incompatible = dict(self.entry, minimum_calibre_version=[9999, 0])
+        result = core.install([incompatible], self.bindings, self.root / 'forced-backups',
+                              get=lambda *args: self.fail('不相容項目不應下載'), force=True)
+        self.assertEqual(result['installed'], [])
+        self.assertIn('不相容', result['failed'][0])
+
+    def test_mixed_checked_rows_are_all_sent_for_force_install(self):
+        dialog = ui.UpdaterDialog(None)
+        self.addCleanup(dialog.close)
+        base = dict(self.entry, current=[0, 1])
+        dialog.rows = [dict(base, name='Newer', eligible=True, status='可更新'),
+                       dict(base, name='Same', eligible=False, status='內容相同')]
+        dialog.show_rows()
+        dialog.toggle_all(0)
+        with patch.object(ui.QMessageBox, 'question', return_value=ui.QMessageBox.StandardButton.Yes), patch.object(dialog, 'start') as start:
+            dialog.install_selected()
+        self.assertTrue(start.call_args.args[0]['force'])
+        self.assertEqual(len(start.call_args.args[0]['entries']), 2)
+
     def test_self_update_in_separate_worker_preserves_running_module(self):
         original = ROOT / 'dist/GitHub Plugin Updater-zh_TW-release.zip'
         incoming = self.root / 'updater-next.zip'
@@ -166,7 +313,7 @@ class NativeTests(unittest.TestCase):
                     continue
                 data = src.read(name)
                 if name == '__init__.py':
-                    data = data.replace(b'version = (0, 1)', b'version = (0, 2)')
+                    data = data.replace(('version = ' + repr(tuple(plugin.version))).encode(), b'version = (0, 2)')
                 dst.writestr(name, data)
         stamp = core.identity(original)
         stamp['sha256'] = core.payload_digest(incoming)
@@ -179,13 +326,18 @@ class NativeTests(unittest.TestCase):
                      size=incoming.stat().st_size, observed_sha256=old['sha256'])
         job = self.root / 'self-job.json'; report = self.root / 'self-result.json'
         job.write_text(json.dumps({'mode': 'install', 'entries': [entry]}), encoding='utf-8')
+        from calibre.utils.config import JSONConfig
+        preferences = JSONConfig('plugins/github_plugin_updater')
+        previous_backup = preferences.get('backup_dir')
+        custom_backup = self.root / 'custom-self-backup'
+        preferences['backup_dir'] = str(custom_backup)
         script = '''import sys
 from pathlib import Path
 import calibre.customize.ui
 from calibre_plugins.github_plugin_updater import core
 original_install=core.install
 data=Path(sys.argv[-3]).read_bytes()
-core.install=lambda entries,bindings,backup,original_install=original_install,data=data: original_install(entries,bindings,backup,get=lambda *args:data)
+core.install=lambda entries,bindings,backup,force=False,original_install=original_install,data=data: original_install(entries,bindings,backup,get=lambda *args:data,force=force)
 core.worker()
 '''
         try:
@@ -195,7 +347,8 @@ core.worker()
             result = json.loads(report.read_text(encoding='utf-8'))
             self.assertIn('installed', result, result)
             self.assertEqual(result['installed'], [name], result)
-            self.assertTrue(Path(result['backups'][0], 'previous.zip').is_file())
+            self.assertTrue(Path(result['backups'][0], name + '-' + '.'.join(map(str, plugin.version)) + '.zip').is_file())
+            self.assertEqual(Path(result['backups'][0]).parent, custom_backup)
             self.assertEqual(core.digest(Path(plugin_dir) / (name + '.zip')), entry['package_sha256'])
             from types import SimpleNamespace
             dialog = ui.UpdaterDialog(None)
@@ -213,6 +366,7 @@ core.worker()
             self.assertIn('重新啟動', dialog.status.text())
             dialog.close()
         finally:
+            preferences['backup_dir'] = previous_backup
             add_plugin(str(original))
 
 

@@ -43,7 +43,7 @@ class CoreTests(unittest.TestCase):
     def test_different_sha_newer_same_and_older(self):
         self.assertEqual(self.plan()['status'], '可更新')
         self.assertFalse(self.plan(version=[1, 1])['eligible'])
-        self.assertEqual(self.plan()['status'], '同版內容不符，請來源修正版號')
+        self.assertEqual(self.plan()['status'], '同版內容不同（可勾選重裝）')
         self.assertFalse(self.plan(version=[1, 0])['eligible'])
 
     def test_source_binding_and_explicit_switch(self):
@@ -125,6 +125,8 @@ class CoreTests(unittest.TestCase):
 
     def test_network_and_repository_boundaries(self):
         self.assertEqual(core.repository('https://github.com/Example/Plugins/'), REPO)
+        for suffix in ['/releases/tag/v1.2?x=1#assets', '/tree/main', '/blob/main/README.md', '.git']:
+            self.assertEqual(core.repository('https://github.com/Example/Plugins' + suffix), REPO)
         for value in ['https://evil.example/x/y', 'a/..', 'a/b/c', '']:
             with self.assertRaises(ValueError): core.repository(value)
         for value in ['http://github.com/x', 'https://evil.example/x', 'https://github.com@localhost/x', 'https://github.com:444/x']:

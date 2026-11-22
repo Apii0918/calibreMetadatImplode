@@ -7,6 +7,7 @@
       "name": "GitHub Plugin Updater",
       "version": [
         0,
+        1,
         1
       ],
       "minimum_calibre_version": [
@@ -21,9 +22,9 @@
       ],
       "id": "samlaio.github-plugin-updater",
       "asset": "GitHub Plugin Updater-zh_TW-release.zip",
-      "size": 28839,
-      "sha256": "695901a65158b9a8e96896031a9a108cce55320af8c3731dcaa0b336744546e5",
-      "package_sha256": "31632d534075fab58abe2704a9ab6766b81cc060b49e7e3156adb5d121fa67ef"
+      "size": 37243,
+      "sha256": "c9176474a4430dbc60a58b3095cdf3e6e1281086535fa604f8fa469ee0165514",
+      "package_sha256": "662b7b2752fc2cada832b03eaf831198af324919e70daf544bd11eab71346f4f"
     },
     {
       "name": "CrossPoint Reader",
