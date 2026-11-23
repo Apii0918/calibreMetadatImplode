@@ -24,7 +24,7 @@ class UpdaterDialog(QDialog):
     def __init__(self, gui):
         super().__init__(gui)
         self.gui = gui
-        self.setWindowTitle('GitHub 外掛更新器 0.3.2')
+        self.setWindowTitle('GitHub 外掛更新器 0.3.3')
         self.resize(1000, 650)
         self.prefs = JSONConfig('plugins/github_plugin_updater')
         self.rows, self.process, self.temporary = [], None, None

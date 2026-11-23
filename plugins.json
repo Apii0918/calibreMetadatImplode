@@ -8,7 +8,7 @@
       "version": [
         0,
         3,
-        2
+        3
       ],
       "minimum_calibre_version": [
         9,
@@ -22,9 +22,9 @@
       ],
       "id": "samlaio.github-plugin-updater",
       "asset": "GitHub Plugin Updater-zh_TW-release.zip",
-      "size": 49882,
-      "sha256": "fafcc9a8150bd354af08ebfc3c7f6ecc7eaafb7bebb457671f4c2d9a169a0973",
-      "package_sha256": "8bec5c041fe8d57c626780c25e3c5ec6ca947246498e5bb4e5f383d2d4f865ec"
+      "size": 49958,
+      "sha256": "8b28f03343d68333f630eb4b0a2f9a30d85f9accf08b30101b6a911527bf4bee",
+      "package_sha256": "d475783ba478d734355f3e29c6d23ebfa6535f79407fb4b4acc9df159e31a285"
     },
     {
       "name": "CrossPoint Reader",
@@ -32,7 +32,7 @@
         0,
         2,
         8,
-        1
+        2
       ],
       "minimum_calibre_version": [
         9,
@@ -46,9 +46,9 @@
       ],
       "id": "samlaio.crosspoint-reader",
       "asset": "CrossPoint Reader-zh_TW-release.zip",
-      "size": 47334,
-      "sha256": "7dd552b318b22f65434fa7ce65c875fcbb659fd766d5863d03eaaf3a7dd771c1",
-      "package_sha256": "c3f2a6ffb36c22ef9dd2f90bc7f2a3e9d6567d4eb02304d0fa4003de3c48c4e1"
+      "size": 53946,
+      "sha256": "a5e9b48c3cf70f3139ad0abf89bd18412ba083a750a4b96c412caec83e3875b1",
+      "package_sha256": "fc1d3d15387efadbd66a13383c2d7ff9375ea55589f53b95b0863fe5a626c463"
     },
     {
       "name": "Shortcuts Helper",

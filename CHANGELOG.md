@@ -33,6 +33,18 @@
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
 
+## [v1.3.32](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.32) — 2026-11-23
+
+### CrossPoint Reader 0.2.8.2
+
+- 2026-11-23 核對 17 支上游修訂外掛；CrossPoint Reader 同步上游 0.2.8 後續提交 `54f73d7`，其餘來源未發現待合併更新。
+- 新增 EPUB 拆分前後閱讀位置對照，保留 OPF 屬性、內文空白與寫入失敗回復；保留本地連線修正及正體中文翻譯。
+- 8 項位置對照、7 項連線及 4 項語言／設定／協定測試通過；Gutenberg 選用案例因來源網站維護而未驗證，未驗收實體閱讀器。
+
+### GitHub Plugin Updater 0.3.3
+
+- 未安裝項目的狀態統一顯示「未安裝」，移除括號補充文字。
+
 ## [v1.3.31](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.31) — 2026-11-22
 
 ### GitHub Plugin Updater 0.3.2

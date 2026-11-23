@@ -314,7 +314,7 @@ def plan(entry, installed, bindings, calibre_version, platform):
         row['status'] = entry['error']
         return row
     if current is None:
-        row['status'] = '未安裝（不自動新增）'
+        row['status'] = '未安裝'
         return row
     binding = bindings.get(entry['name'])
     expected = {'source': entry['source'], 'id': entry['id']}

@@ -29,7 +29,7 @@ class CrossPointDevice(DeviceConfig, DevicePlugin):
     description = tr("CrossPoint Reader wireless device")
     supported_platforms = ['windows', 'osx', 'linux']
     author = 'CrossPoint Reader'
-    version = (0, 2, 8, 1)
+    version = (0, 2, 8, 2)
     minimum_calibre_version = (9, 19, 0)
 
     # Invalid USB vendor info to avoid USB scans matching.
