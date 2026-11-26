@@ -33,6 +33,14 @@
 | Diaps Editing Toolbag | v1.3.25 | 2026-11-22 | 0.5.0.1 |
 | Plugin Backup | v1.3.25 | 2026-11-22 | 0.1 |
 
+## [v1.3.33](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.33) — 2026-11-26
+
+### 上游核對與重新發行
+
+- 重新核對 17 支上游修訂外掛；GitHub 來源的最新提交與版號均與前次基準一致。
+- Columns Helper 2.1.1、Shortcuts Helper 1.1.0 與 Markdown Output 1.0.3 官方安裝包的 SHA-256 與既有來源紀錄相同。
+- 各外掛沿用目前版號與本地修訂；更新根目錄 README 的上游核對日期，重新打包並核對 26 個安裝包與 plugins.json。
+
 ## [v1.3.32](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.32) — 2026-11-23
 
 ### CrossPoint Reader 0.2.8.2
