@@ -9,9 +9,9 @@
 | 項目 | 說明 |
 | --- | --- |
 | 專案來源 | [SamLaio/calibreMetadatImplode](https://github.com/SamLaio/calibreMetadatImplode)，本倉庫為整合與修訂來源；各外掛的原作者及授權保留於各自目錄。 |
-| 整合發行版號 | **[v1.3.33（2026-11-26）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.33)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
+| 整合發行版號 | **[v1.3.32（2026-11-23）](https://github.com/SamLaio/calibreMetadatImplode/releases/tag/v1.3.32)**。這是整套發行附件的版號，與各外掛在 calibre 顯示的版號分開管理。 |
 | 專案層修改 | 將外掛整理為各自的 `src/`，使用 `build_release.py` 統一輸出二十六個獨立安裝包到 `dist/`；排除隱藏檔、快取及 `.po` 翻譯來源。Columns Helper、CrossPoint Reader、Diaps Editing Toolbag、Extract ISBN、Generate Cover、Goodreads Sync、Hardcover Sync 、Manage Series 與 Shortcuts Helper 的翻譯在打包時分別編譯。 |
-| 本次變更 | 2026-11-26 重新核對 17 支上游修訂外掛，最新提交、版號與三個官方安裝包均與前次基準一致；重新驗證並發行 26 個安裝包與版本清單。 |
+| 本次變更 | CrossPoint Reader 0.2.8.2 同步上游 EPUB 閱讀位置對照與拆分修正； GitHub Plugin Updater 0.3.3 將未安裝項目的狀態簡化為「未安裝」；保留自動備份開關、GitHub Token 與限流提示。 |
 
 ## 各外掛簡介、來源與版號
 
@@ -19,7 +19,7 @@
 
 文件核對日期：**2026-11-22**。二十六支外掛的名稱、作者、版號、安裝包與本地說明已對照目前程式；上游採表列固定基準，歷次上游更新與整合紀錄見 [CHANGELOG](./CHANGELOG.md)。
 
-2026-11-26 重新核對 17 支上游修訂外掛的官方索引、提交與版號，均與前次基準一致；Columns Helper、Shortcuts Helper 與 Markdown Output 官方安裝包 SHA-256 亦與既有來源紀錄相同。
+2026-11-23 核對 17 支上游修訂外掛的官方索引、版本與來源；CrossPoint Reader 同步上游 0.2.8 後續提交，其餘來源未發現待合併更新。
 
 ### 自研及獨立重寫外掛
 
